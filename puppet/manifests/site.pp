@@ -1,4 +1,7 @@
 node 'monitor' {
+  package { 'tmux':
+    ensure => installed,
+  }
   class { 'ntp': }
   class { 'nginx': }
   nginx::resource::vhost { 'monitor.berlin.freifunk.net':
