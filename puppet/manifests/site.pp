@@ -1,0 +1,3 @@
+node 'monitor' {
+  include ntp
+}
