@@ -6,3 +6,5 @@ mod 'puppetlabs/ntp'
 
 mod 'nginx',
   :git => 'https://github.com/jfryman/puppet-nginx.git'
+mod 'collectd',
+  :git => 'https://github.com/pdxcat/puppet-module-collectd'

@@ -18,7 +18,16 @@ GIT
       puppetlabs/concat (>= 1.0.0)
       puppetlabs/stdlib (>= 0.1.6)
 
+GIT
+  remote: https://github.com/pdxcat/puppet-module-collectd
+  ref: master
+  sha: acffe2dcf2a8d822992817cb7c06f493e45ec8df
+  specs:
+    collectd (1.0.1)
+      puppetlabs/stdlib (>= 3.0.0)
+
 DEPENDENCIES
+  collectd (>= 0)
   nginx (>= 0)
   puppetlabs/apt (>= 0)
   puppetlabs/ntp (>= 0)
