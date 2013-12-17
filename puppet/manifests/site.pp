@@ -5,4 +5,12 @@ node 'monitor' {
     ensure => present,
     www_root => '/srv/www/monitor.berlin.freifunk.net',
   }
+  class { '::collectd':
+    purge        => true,
+    recurse      => true,
+    purge_config => true,
+  }
+  class { 'collectd::plugin::network':
+    listen => $ipaddress,
+  }
 }
