@@ -16,4 +16,8 @@ node 'monitor' {
   class { 'collectd::plugin::network':
     listen => $ipaddress,
   }
+  class { 'php-fpm': }
+  php-fpm::pool { 'monitor.berlin.freifunk.net':
+    listen => '/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
+  }
 }
