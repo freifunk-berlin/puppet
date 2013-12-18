@@ -1,5 +1,5 @@
 node 'monitor' {
-  package { ['tmux', 'htop', 'dstat']:
+  package { ['tmux', 'htop', 'dstat', 'rrdtool', 'php5']:
     ensure => installed,
   }
   class { 'ntp': }
