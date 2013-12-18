@@ -5,8 +5,9 @@ node 'monitor' {
   class { 'ntp': }
   class { 'nginx': }
   nginx::resource::vhost { 'monitor.berlin.freifunk.net':
-    ensure => present,
-    www_root => '/srv/www/monitor.berlin.freifunk.net',
+    ensure      => present,
+    www_root    => '/srv/www/monitor.berlin.freifunk.net',
+    index_files => ['index.php'],
   }
   class { '::collectd':
     purge        => true,
