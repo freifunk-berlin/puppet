@@ -27,6 +27,5 @@ node 'monitor' {
   class { 'php-fpm': }
   php-fpm::pool { 'monitor.berlin.freifunk.net':
     listen  => '/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
-    require => Class['php-fpm'], #TODO this should be done by the module
   }
 }
