@@ -29,4 +29,11 @@ node 'monitor' {
   php-fpm::pool { 'monitor.berlin.freifunk.net':
     listen  => '/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
   }
+
+  file { ['/srv/www', '/srv/www/monitor.berlin.freifunk.net']:
+    ensure  => directory,
+    owner   => 'www-data',
+    require => Class['nginx'],
+  }
+
 }
