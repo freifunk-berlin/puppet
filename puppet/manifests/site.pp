@@ -1,5 +1,5 @@
 node 'monitor' {
-  package { 'tmux':
+  package { ['tmux', 'htop', 'dstat']:
     ensure => installed,
   }
   class { 'ntp': }
