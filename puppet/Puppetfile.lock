@@ -9,6 +9,13 @@ FORGE
     puppetlabs/stdlib (4.1.0)
 
 GIT
+  remote: https://github.com/booo/puppet-php-fpm.git
+  ref: master
+  sha: a232b935e54dbcb49a17a34d1d389ffae90e1cdb
+  specs:
+    php-fpm (0.0.1)
+
+GIT
   remote: https://github.com/jfryman/puppet-nginx.git
   ref: master
   sha: 1233413bc2142a1adeab73e5ab63ce15fc962c1f
@@ -29,6 +36,7 @@ GIT
 DEPENDENCIES
   collectd (>= 0)
   nginx (>= 0)
+  php-fpm (>= 0)
   puppetlabs/apt (>= 0)
   puppetlabs/ntp (>= 0)
   puppetlabs/stdlib (>= 0)
