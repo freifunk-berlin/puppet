@@ -7,6 +7,7 @@ mod 'puppetlabs/ntp'
 mod 'nginx',
   :git => 'https://github.com/jfryman/puppet-nginx.git'
 mod 'collectd',
-  :git => 'https://github.com/pdxcat/puppet-module-collectd'
+  #:git => 'https://github.com/pdxcat/puppet-module-collectd'
+  :git => 'https://github.com/booo/puppet-module-collectd'
 mod 'php-fpm',
   :git => 'https://github.com/booo/puppet-php-fpm.git'

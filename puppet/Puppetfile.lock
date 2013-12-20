@@ -9,6 +9,14 @@ FORGE
     puppetlabs/stdlib (4.1.0)
 
 GIT
+  remote: https://github.com/booo/puppet-module-collectd
+  ref: master
+  sha: aa7f57a91799def726656d4a0585c1d4fa87490b
+  specs:
+    collectd (1.0.1)
+      puppetlabs/stdlib (>= 3.0.0)
+
+GIT
   remote: https://github.com/booo/puppet-php-fpm.git
   ref: master
   sha: a232b935e54dbcb49a17a34d1d389ffae90e1cdb
@@ -24,14 +32,6 @@ GIT
       puppetlabs/apt (>= 1.0.0)
       puppetlabs/concat (>= 1.0.0)
       puppetlabs/stdlib (>= 0.1.6)
-
-GIT
-  remote: https://github.com/pdxcat/puppet-module-collectd
-  ref: master
-  sha: acffe2dcf2a8d822992817cb7c06f493e45ec8df
-  specs:
-    collectd (1.0.1)
-      puppetlabs/stdlib (>= 3.0.0)
 
 DEPENDENCIES
   collectd (>= 0)
