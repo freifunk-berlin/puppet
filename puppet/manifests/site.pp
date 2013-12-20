@@ -2,6 +2,9 @@ node 'monitor' {
   package { ['tmux', 'htop', 'dstat', 'rrdtool', 'php5']:
     ensure => installed,
   }
+
+  class { 'apt::unattended_upgrades': }
+
   class { 'ntp': }
   class { '::collectd':
     purge        => true,
