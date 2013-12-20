@@ -11,6 +11,7 @@ node 'monitor' {
   class { 'collectd::plugin::network':
     listen => $ipaddress,
   }
+  class { 'collectd::plugin::rrdtool': }
   class { 'nginx': }
   nginx::resource::vhost { 'monitor.berlin.freifunk.net':
     ensure      => present,
