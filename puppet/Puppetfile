@@ -11,3 +11,5 @@ mod 'collectd',
   :git => 'https://github.com/booo/puppet-module-collectd'
 mod 'php-fpm',
   :git => 'https://github.com/booo/puppet-php-fpm.git'
+mod 'sysctl',
+  :git => 'https://github.com/thias/puppet-sysctl'

@@ -33,6 +33,13 @@ GIT
       puppetlabs/concat (>= 1.0.0)
       puppetlabs/stdlib (>= 0.1.6)
 
+GIT
+  remote: https://github.com/thias/puppet-sysctl
+  ref: master
+  sha: b57ae16e18a5b37540b54769f789f92ac955cebd
+  specs:
+    sysctl (0.3.0)
+
 DEPENDENCIES
   collectd (>= 0)
   nginx (>= 0)
@@ -40,4 +47,5 @@ DEPENDENCIES
   puppetlabs/apt (>= 0)
   puppetlabs/ntp (>= 0)
   puppetlabs/stdlib (>= 0)
+  sysctl (>= 0)
 
