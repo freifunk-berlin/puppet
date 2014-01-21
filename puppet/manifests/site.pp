@@ -49,4 +49,10 @@ node 'monitor' {
     require => Class['nginx'],
   }
 
+  # sysctl configuration
+  # disable ipv6 auto-configuration
+  sysctl { 'net.ipv6.conf.all.autoconf': value => '0' }
+  sysctl { 'net.ipv6.conf.all.accept_ra': value => '0' }
+  sysctl { 'net.ipv6.conf.all.use_tempaddr': value => '0' }
+
 }
