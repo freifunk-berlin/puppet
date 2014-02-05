@@ -23,6 +23,11 @@ node 'monitor' {
     datadir       => '/var/lib/collectd/rrd',
   }
 
+  # rrdcached configuration
+  class { 'rrdcached':
+    restrict_writes => true,
+  }
+
   # nginx configuration
   class { 'nginx': }
   nginx::resource::vhost { 'monitor.berlin.freifunk.net':
