@@ -18,9 +18,12 @@ node 'monitor' {
   class { 'collectd::plugin::network':
     listen => $ipaddress,
   }
-  class { 'collectd::plugin::rrdtool': }
+  class { 'collectd::plugin::rrdcached':
+    daemonaddress => 'unix:/var/run/rrdcached.sock',
+    datadir       => '/var/lib/collectd/rrd',
+  }
 
-  # nginx configuration 
+  # nginx configuration
   class { 'nginx': }
   nginx::resource::vhost { 'monitor.berlin.freifunk.net':
     ensure      => present,
