@@ -9,6 +9,8 @@ mod 'nginx',
 mod 'collectd',
   #:git => 'https://github.com/pdxcat/puppet-module-collectd'
   :git => 'https://github.com/booo/puppet-module-collectd'
+mod 'rrdcached',
+  :git => 'https://github.com/booo/puppet-rrdcached.git'
 mod 'php-fpm',
   :git => 'https://github.com/booo/puppet-php-fpm.git'
 mod 'sysctl',
