@@ -27,7 +27,7 @@ node 'monitor' {
   class { 'rrdcached':
     restrict_writes => true,
     jump_dir        => '/var/lib/collectd/rrd',
-    timeout         => 60,
+    timeout         => 600,
     delay           => 60,
   }
 
