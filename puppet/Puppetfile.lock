@@ -33,6 +33,13 @@ GIT
     rrdcached (0.0.1)
 
 GIT
+  remote: https://github.com/freifunk/berlin-puppet-files
+  ref: master
+  sha: bbc8bf72f6f5a913b504bc95e4984a57993247a1
+  specs:
+    files (0.0.1)
+
+GIT
   remote: https://github.com/jfryman/puppet-nginx.git
   ref: master
   sha: 047b88d270cd869a27acbde2834f6c3193b9618b
@@ -51,6 +58,7 @@ GIT
 
 DEPENDENCIES
   collectd (>= 0)
+  files (>= 0)
   nginx (>= 0)
   php-fpm (>= 0)
   puppetlabs/apt (>= 0)
