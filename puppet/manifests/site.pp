@@ -54,7 +54,7 @@ node 'monitor' {
   }
 
   # root directory for monitor.berlin.freifunk.net
-  file { ['/srv/www', '/srv/www/monitor.berlin.freifunk.net']:
+  file { ['/srv/www']:
     ensure  => directory,
     owner   => 'www-data',
     require => Class['nginx'],
@@ -66,4 +66,12 @@ node 'monitor' {
   sysctl { 'net.ipv6.conf.all.accept_ra': value => '0' }
   sysctl { 'net.ipv6.conf.all.use_tempaddr': value => '0' }
 
+  # Collectd Graph Panel (patched by Patrick) https://github.com/stargieg/CGP.git
+  vcsrepo { '/srv/www/monitor.berlin.freifunk.net':
+    ensure   => latest,
+    provider => git,
+    owner    => 'www-data',
+    source   => 'https://github.com/stargieg/CGP.git',
+    require  => File['/srv/www']
+  }
 }
