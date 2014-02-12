@@ -3,10 +3,12 @@ FORGE
   specs:
     puppetlabs/apt (1.4.0)
       puppetlabs/stdlib (>= 2.2.1)
-    puppetlabs/concat (1.0.0-rc1)
-    puppetlabs/ntp (3.0.0-rc1)
+    puppetlabs/concat (1.1.0-rc1)
+      puppetlabs/stdlib (>= 3.0.0)
+    puppetlabs/ntp (3.0.1)
       puppetlabs/stdlib (>= 0.1.6)
     puppetlabs/stdlib (4.1.0)
+    puppetlabs/vcsrepo (0.2.0)
 
 GIT
   remote: https://github.com/booo/puppet-module-collectd
@@ -19,16 +21,23 @@ GIT
 GIT
   remote: https://github.com/booo/puppet-php-fpm.git
   ref: master
-  sha: a232b935e54dbcb49a17a34d1d389ffae90e1cdb
+  sha: b576359e2ffb8f8d2e006f421b0f8b6fe3b22b0f
   specs:
     php-fpm (0.0.1)
 
 GIT
+  remote: https://github.com/booo/puppet-rrdcached.git
+  ref: master
+  sha: b5d887c6b7696dc4eee5277b6de352412f3bc1bd
+  specs:
+    rrdcached (0.0.1)
+
+GIT
   remote: https://github.com/jfryman/puppet-nginx.git
   ref: master
-  sha: 1233413bc2142a1adeab73e5ab63ce15fc962c1f
+  sha: 047b88d270cd869a27acbde2834f6c3193b9618b
   specs:
-    nginx (0.0.5)
+    nginx (0.0.7)
       puppetlabs/apt (>= 1.0.0)
       puppetlabs/concat (>= 1.0.0)
       puppetlabs/stdlib (>= 0.1.6)
@@ -47,5 +56,7 @@ DEPENDENCIES
   puppetlabs/apt (>= 0)
   puppetlabs/ntp (>= 0)
   puppetlabs/stdlib (>= 0)
+  puppetlabs/vcsrepo (>= 0)
+  rrdcached (>= 0)
   sysctl (>= 0)
 
