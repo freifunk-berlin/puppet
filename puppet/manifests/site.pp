@@ -20,6 +20,11 @@ node 'monitor' {
     purge        => true,
     recurse      => true,
     purge_config => true,
+    typesdb      => [
+      '/usr/share/collectd/types.db',
+      '/usr/share/collectd/iwinfo_types.db',
+      '/usr/share/collectd/kmodem_types.db'
+    ]
   }
   class { 'collectd::plugin::network':
     listen => $ipaddress,
