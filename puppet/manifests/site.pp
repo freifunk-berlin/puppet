@@ -45,12 +45,15 @@ node 'monitor' {
     index_files => ['index.php'],
   }
   nginx::resource::location { 'php':
-    ensure   => present,
-    www_root => '/srv/www/monitor.berlin.freifunk.net',
-    location => '~ [^/]\.php(/|$)',
-    vhost    => 'monitor.berlin.freifunk.net',
-    fastcgi  => 'unix:/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
-
+    ensure               => present,
+    www_root             => '/srv/www/monitor.berlin.freifunk.net',
+    location             => '~ [^/]\.php(/|$)',
+    vhost                => 'monitor.berlin.freifunk.net',
+    fastcgi              => 'unix:/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
+    fastcgi_split_path   => '^(.+?\.php)(/.*)$',
+    location_cfg_prepend => {
+      fastcgi_param => 'PATH_INFO $fastcgi_path_info',
+    }
   }
 
   # php-fpm configuration (nginx backend)
