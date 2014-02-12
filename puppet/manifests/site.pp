@@ -76,6 +76,24 @@ node 'monitor' {
     provider => git,
     owner    => 'www-data',
     source   => 'https://github.com/stargieg/CGP.git',
-    require  => File['/srv/www']
+    require  => File['/srv/www'],
+  }
+
+  file { '/srv/www/monitor.berlin.freifunk.net/conf/config.local.php':
+    ensure => present,
+    source => 'puppet:///modules/files/config.local.php',
+    owner  => 'www-data',
+  }
+
+  # type dbs for cgp
+  file { '/usr/share/collectd/iwinfo_types.db':
+    ensure  => present,
+    source  => 'puppet:///modules/files/iwinfo_types.db',
+    require => Class['collectd'],
+  }
+  file { '/usr/share/collectd/kmodem_types.db':
+    ensure => present,
+    source => 'puppet:///modules/files/kmodem_types.db',
+    require => Class['collectd'],
   }
 }
