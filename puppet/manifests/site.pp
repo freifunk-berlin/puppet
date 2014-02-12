@@ -4,6 +4,12 @@ node 'monitor' {
     ensure => installed,
   }
 
+  # sysctl configuration
+  # disable ipv6 auto-configuration
+  sysctl { 'net.ipv6.conf.all.autoconf': value => '0' }
+  sysctl { 'net.ipv6.conf.all.accept_ra': value => '0' }
+  sysctl { 'net.ipv6.conf.all.use_tempaddr': value => '0' }
+
   # install security updates
   class { 'apt::unattended_upgrades': }
 
@@ -59,12 +65,6 @@ node 'monitor' {
     owner   => 'www-data',
     require => Class['nginx'],
   }
-
-  # sysctl configuration
-  # disable ipv6 auto-configuration
-  sysctl { 'net.ipv6.conf.all.autoconf': value => '0' }
-  sysctl { 'net.ipv6.conf.all.accept_ra': value => '0' }
-  sysctl { 'net.ipv6.conf.all.use_tempaddr': value => '0' }
 
   # Collectd Graph Panel (patched by Patrick) https://github.com/stargieg/CGP.git
   vcsrepo { '/srv/www/monitor.berlin.freifunk.net':
