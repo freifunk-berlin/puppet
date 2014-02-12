@@ -28,7 +28,9 @@ node 'monitor' {
     daemonaddress => 'unix:/var/run/rrdcached.sock',
     datadir       => '/var/lib/collectd/rrd',
   }
-  class { 'collectd::plugin::unixsock': }
+  class { 'collectd::plugin::unixsock':
+    socketperms => '0666',
+  }
 
   # rrdcached configuration
   class { 'rrdcached':
