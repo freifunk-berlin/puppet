@@ -1,11 +1,11 @@
 FORGE
   remote: http://forge.puppetlabs.com
   specs:
-    puppetlabs/apt (1.4.0)
+    puppetlabs/apt (1.4.1)
       puppetlabs/stdlib (>= 2.2.1)
     puppetlabs/concat (1.1.0-rc1)
       puppetlabs/stdlib (>= 3.0.0)
-    puppetlabs/ntp (3.0.1)
+    puppetlabs/ntp (3.0.2)
       puppetlabs/stdlib (>= 0.1.6)
     puppetlabs/stdlib (4.1.0)
     puppetlabs/vcsrepo (0.2.0)
@@ -35,14 +35,14 @@ GIT
 GIT
   remote: https://github.com/freifunk/berlin-puppet-files
   ref: master
-  sha: fad87b0a445f2f00f4f5a7ce9fb2bc08822df81b
+  sha: 53d617d3d60ed8ad898e4a2b35db86e674d55324
   specs:
     files (0.0.1)
 
 GIT
   remote: https://github.com/jfryman/puppet-nginx.git
   ref: master
-  sha: 7c99c703fa466510a0c22eacf46d38d6449c7d73
+  sha: 7cf6dac978fe08e061ed9201284c7a5bf22af2a3
   specs:
     nginx (0.0.7)
       puppetlabs/apt (>= 1.0.0)
