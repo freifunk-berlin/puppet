@@ -46,7 +46,10 @@ node 'monitor' {
   }
 
   # nginx configuration
-  class { 'nginx': }
+  class { 'nginx':
+    confd_purge => true,
+    vhost_purge => true,
+  }
   nginx::resource::vhost { 'monitor.berlin.freifunk.net':
     ensure      => present,
     www_root    => '/srv/www/monitor.berlin.freifunk.net',
