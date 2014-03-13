@@ -52,6 +52,7 @@ node 'monitor' {
   }
   nginx::resource::vhost { 'monitor.berlin.freifunk.net':
     ensure      => present,
+    ipv6_enable => true,
     www_root    => '/srv/www/monitor.berlin.freifunk.net',
     index_files => ['index.php'],
   }
