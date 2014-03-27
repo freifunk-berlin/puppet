@@ -47,14 +47,18 @@ node 'monitor' {
 
   # nginx configuration
   class { 'nginx':
-    confd_purge => true,
-    vhost_purge => true,
+    confd_purge     => true,
+    vhost_purge     => true,
+    http_access_log => '/dev/null',
+    nginx_error_log => '/dev/null',
   }
   nginx::resource::vhost { 'monitor.berlin.freifunk.net':
     ensure      => present,
     ipv6_enable => true,
     www_root    => '/srv/www/monitor.berlin.freifunk.net',
     index_files => ['index.php'],
+    access_log  => '/dev/null',
+    error_log   => '/dev/null',
   }
   nginx::resource::location { 'php':
     ensure               => present,
