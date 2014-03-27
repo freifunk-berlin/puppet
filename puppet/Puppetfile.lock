@@ -21,7 +21,7 @@ GIT
 GIT
   remote: https://github.com/booo/puppet-php-fpm.git
   ref: master
-  sha: b576359e2ffb8f8d2e006f421b0f8b6fe3b22b0f
+  sha: c66320061def838fe8b224c7dcd0228c1c522970
   specs:
     php-fpm (0.0.1)
 
@@ -35,16 +35,16 @@ GIT
 GIT
   remote: https://github.com/freifunk/berlin-puppet-files
   ref: master
-  sha: f4fce83f21e25e1a09f5938601e745f069800cbb
+  sha: 7bc5251960b1b9a6b43c1c55c1461b08c6cbc16b
   specs:
     files (0.0.1)
 
 GIT
   remote: https://github.com/jfryman/puppet-nginx.git
   ref: master
-  sha: 5c36913dcda630f5244e0ecc885e3b436973d45a
+  sha: ac0f4ca9403e7a65500fe9713a2dd1b936e080ec
   specs:
-    nginx (0.0.7)
+    nginx (0.0.8)
       puppetlabs/apt (>= 1.0.0)
       puppetlabs/concat (>= 1.0.0)
       puppetlabs/stdlib (>= 0.1.6)
@@ -52,9 +52,9 @@ GIT
 GIT
   remote: https://github.com/thias/puppet-sysctl
   ref: master
-  sha: b57ae16e18a5b37540b54769f789f92ac955cebd
+  sha: c49fcd15e2319e0e31d5303fe30a6ced277c1abb
   specs:
-    sysctl (0.3.0)
+    sysctl (0.3.1)
 
 DEPENDENCIES
   collectd (>= 0)
