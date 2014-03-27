@@ -28,7 +28,6 @@ node 'monitor' {
   }
   class { 'collectd::plugin::network':
     listen => $ipaddress,
-    listen => $ipaddress6,
   }
   class { 'collectd::plugin::rrdcached':
     daemonaddress => 'unix:/var/run/rrdcached.sock',
