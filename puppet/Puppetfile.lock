@@ -21,9 +21,10 @@ GIT
 GIT
   remote: https://github.com/booo/puppet-php-fpm.git
   ref: master
-  sha: c66320061def838fe8b224c7dcd0228c1c522970
+  sha: 00f9f876d9208c98b4c562a3231afb6d522279d5
   specs:
     php-fpm (0.0.1)
+      puppetlabs/stdlib (>= 4.1.0)
 
 GIT
   remote: https://github.com/booo/puppet-rrdcached.git
@@ -35,16 +36,16 @@ GIT
 GIT
   remote: https://github.com/freifunk/berlin-puppet-files
   ref: master
-  sha: 7bc5251960b1b9a6b43c1c55c1461b08c6cbc16b
+  sha: b2503b759d84d2bf983c45d42a53c248583efbef
   specs:
     files (0.0.1)
 
 GIT
   remote: https://github.com/jfryman/puppet-nginx.git
   ref: master
-  sha: ac0f4ca9403e7a65500fe9713a2dd1b936e080ec
+  sha: 5e5f9d2ec72205ddc3b17a9b024e62a07174b53f
   specs:
-    nginx (0.0.8)
+    nginx (0.0.9)
       puppetlabs/apt (>= 1.0.0)
       puppetlabs/concat (>= 1.0.0)
       puppetlabs/stdlib (>= 0.1.6)
