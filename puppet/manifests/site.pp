@@ -1,5 +1,16 @@
 node 'monitor' {
 
+  # update packages before we install any
+  exec { "apt-update":
+    command => "/usr/bin/apt-get update"
+  }
+  Exec["apt-update"] -> Package <| |>
+
+  # do not install recommended packages
+  Package {
+    install_options => ['--no-install-recommends'],
+  }
+
   package { ['tmux', 'htop', 'dstat', 'rrdtool', 'php5', 'git']:
     ensure => installed,
   }
