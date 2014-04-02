@@ -1,6 +1,6 @@
 node 'monitor' {
 
-  package { ['tmux', 'htop', 'dstat', 'rrdtool', 'php5']:
+  package { ['tmux', 'htop', 'dstat', 'rrdtool', 'php5', 'git']:
     ensure => installed,
   }
 
@@ -91,7 +91,10 @@ node 'monitor' {
     provider => git,
     owner    => 'www-data',
     source   => 'https://github.com/stargieg/CGP.git',
-    require  => File['/srv/www'],
+    require  => [
+      File['/srv/www'],
+      Package['git']
+    ]
   }
 
   file { '/srv/www/monitor.berlin.freifunk.net/conf/config.local.php':
