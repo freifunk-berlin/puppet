@@ -36,14 +36,14 @@ GIT
 GIT
   remote: https://github.com/freifunk/berlin-puppet-files
   ref: master
-  sha: b2503b759d84d2bf983c45d42a53c248583efbef
+  sha: c7feb8809db5e9e358b50b707ee04ba31525bce6
   specs:
     files (0.0.1)
 
 GIT
   remote: https://github.com/jfryman/puppet-nginx.git
   ref: master
-  sha: 5e5f9d2ec72205ddc3b17a9b024e62a07174b53f
+  sha: 4d816c990a1d48199edd324070256fad8307cf8c
   specs:
     nginx (0.0.9)
       puppetlabs/apt (>= 1.0.0)
