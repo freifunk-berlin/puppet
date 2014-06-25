@@ -14,7 +14,9 @@ Use `./scripts/puppet-apply.sh` to start a puppet run.
 
 To update the puppet modules use `librarian-puppet`. Make sure you are in the `puppet` directory:
 
+```
   cd puppet
   librarian-puppet update
   git add Puppetfile.lock
   git commit -m "update puppet modules"
+```
