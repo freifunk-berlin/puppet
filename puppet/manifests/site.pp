@@ -1,4 +1,4 @@
-node 'monitor' {
+node 'base_node' {
 
   # update packages before we install any
   exec { "apt-update":
@@ -11,9 +11,14 @@ node 'monitor' {
     install_options => ['--no-install-recommends'],
   }
 
-  package { ['tmux', 'htop', 'dstat', 'rrdtool', 'php5', 'git']:
+  package { ['tmux', 'htop', 'dstat', 'git']:
     ensure => installed,
   }
+
+  # install security updates
+  class { 'apt::unattended_upgrades': }
+
+  class { 'ntp': }
 
   # sysctl configuration
   # disable ipv6 auto-configuration
@@ -21,10 +26,13 @@ node 'monitor' {
   sysctl { 'net.ipv6.conf.all.accept_ra': value => '0' }
   sysctl { 'net.ipv6.conf.all.use_tempaddr': value => '0' }
 
-  # install security updates
-  class { 'apt::unattended_upgrades': }
+}
 
-  class { 'ntp': }
+node 'monitor' inherits base_node {
+
+  package { ['rrdtool', 'php5']:
+    ensure => installed,
+  }
 
   # collectd configuration (server)
   class { '::collectd':
@@ -126,3 +134,5 @@ node 'monitor' {
     require => Class['collectd'],
   }
 }
+
+node 'firmware' inherits base_node {}
