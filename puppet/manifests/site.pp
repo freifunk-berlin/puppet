@@ -136,3 +136,4 @@ node 'monitor' inherits base_node {
 }
 
 node 'firmware' inherits base_node {}
+node 'ip.berlin.freifunk.net' inherits base_node {}
