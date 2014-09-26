@@ -136,4 +136,28 @@ node 'monitor' inherits base_node {
 }
 
 node 'firmware' inherits base_node {}
-node 'ip.berlin.freifunk.net' inherits base_node {}
+node 'ip.berlin.freifunk.net' inherits base_node {
+	class { '::collectd':
+	        purge => true,
+	        recurse => true,
+	        purge_config => true,
+	}
+	class {'collectd::plugin::cpu':}
+	class {'collectd::plugin::df':}
+	class {'collectd::plugin::disk':
+	        disks => ['vda'],
+	        ignoreselected => false,
+	}
+	#class {'collectd::plugin::entropy'}
+	class {'collectd::plugin::interface':
+	        interfaces => ['eth0'],
+	        ignoreselected => false,
+	}
+	class {'collectd::plugin::load':}
+	class {'collectd::plugin::memory':}
+	class {'collectd::plugin::network':
+	        server => 'monitor.berlin.freifunk.net',
+	        }
+	class {'collectd::plugin::processes':}
+	class {'collectd::plugin::swap':}
+}
