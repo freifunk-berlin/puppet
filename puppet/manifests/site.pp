@@ -153,7 +153,6 @@ node 'ip.berlin.freifunk.net' {
 	        disks => ['vda'],
 	        ignoreselected => false,
 	}
-	#class {'collectd::plugin::entropy'}
 	class {'collectd::plugin::interface':
 	        interfaces => ['eth0'],
 	        ignoreselected => false,
