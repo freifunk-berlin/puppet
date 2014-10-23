@@ -152,16 +152,16 @@ node 'firmware' {
     ipv6_enable => true,
     access_log  => '/dev/null',
     error_log   => '/dev/null',
-    proxy => 'http://buildbot',
+    proxy       => 'http://buildbot',
   }
   nginx::resource::location { '/buildbot':
-    ensure => present,
-    vhost  => 'buildbot.berlin.freifunk.net',
-    www_root    => '/var/www',
+    ensure    => present,
+    vhost     => 'buildbot.berlin.freifunk.net',
+    www_root  => '/var/www',
     autoindex => 'on',
   }
   nginx::resource::upstream { 'buildbot':
-    ensure => present,
+    ensure  => present,
     members => ['localhost:8010'],
   }
 }
@@ -169,25 +169,25 @@ node 'firmware' {
 node 'ip.berlin.freifunk.net' {
   class { 'base_node': }
   class { '::collectd':
-          purge => true,
-          recurse => true,
-          purge_config => true,
+    purge        => true,
+    recurse      => true,
+    purge_config => true,
   }
   class {'collectd::plugin::cpu':}
   class {'collectd::plugin::df':}
   class {'collectd::plugin::disk':
-          disks => ['vda'],
-          ignoreselected => false,
+    disks => ['vda'],
+    ignoreselected => false,
   }
   class {'collectd::plugin::interface':
-          interfaces => ['eth0'],
-          ignoreselected => false,
+    interfaces     => ['eth0'],
+    ignoreselected => false,
   }
   class {'collectd::plugin::load':}
   class {'collectd::plugin::memory':}
   class {'collectd::plugin::network':
-          server => 'monitor.berlin.freifunk.net',
-          }
+    server => 'monitor.berlin.freifunk.net',
+  }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
 }
