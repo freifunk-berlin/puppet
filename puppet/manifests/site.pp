@@ -164,6 +164,15 @@ node 'firmware' {
     ensure  => present,
     members => ['localhost:8010'],
   }
+
+  file { [
+    '/usr/local/src/www/htdocs/buildbot',
+    '/usr/local/src/www/htdocs/buildbot/unstable',
+    '/usr/local/src/www/htdocs/buildbot/stable',
+  ]:
+    ensure  => directory,
+    owner   => 'buildbot',
+  }
 }
 
 node 'ip.berlin.freifunk.net' {
