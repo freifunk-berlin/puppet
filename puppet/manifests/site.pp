@@ -139,7 +139,33 @@ node 'monitor' {
 
 node 'firmware' {
   class { 'base_node': }
+
+  # nginx configuration
+  class { 'nginx':
+    confd_purge     => true,
+    vhost_purge     => true,
+    http_access_log => '/dev/null',
+    nginx_error_log => '/dev/null',
+  }
+  nginx::resource::vhost { 'buildbot.berlin.freifunk.net':
+    ensure      => present,
+    ipv6_enable => true,
+    access_log  => '/dev/null',
+    error_log   => '/dev/null',
+    proxy => 'http://buildbot',
+  }
+  nginx::resource::location { '/buildbot':
+    ensure => present,
+    vhost  => 'buildbot.berlin.freifunk.net',
+    www_root    => '/var/www',
+    autoindex => 'on',
+  }
+  nginx::resource::upstream { 'buildbot':
+    ensure => present,
+    members => ['localhost:8010'],
+  }
 }
+
 node 'ip.berlin.freifunk.net' {
   class { 'base_node': }
   class { '::collectd':
