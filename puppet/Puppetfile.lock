@@ -1,14 +1,15 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
-    puppetlabs/apt (1.5.0)
-      puppetlabs/stdlib (>= 2.2.1)
-    puppetlabs/concat (1.1.0)
-      puppetlabs/stdlib (>= 4.0.0)
-    puppetlabs/ntp (3.1.1)
-      puppetlabs/stdlib (>= 4.0.0)
-    puppetlabs/stdlib (4.2.2)
-    puppetlabs/vcsrepo (1.0.1)
+    puppetlabs-apt (1.6.0)
+      puppetlabs-stdlib (>= 2.2.1)
+    puppetlabs-concat (1.1.1)
+      puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
+    puppetlabs-ntp (3.2.1)
+      puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
+    puppetlabs-stdlib (4.3.2)
+    puppetlabs-vcsrepo (1.1.0)
+    ripienaar-module_data (0.0.3)
 
 GIT
   remote: https://github.com/booo/puppet-module-collectd
@@ -16,15 +17,15 @@ GIT
   sha: aa7f57a91799def726656d4a0585c1d4fa87490b
   specs:
     collectd (1.0.1)
-      puppetlabs/stdlib (>= 3.0.0)
+      puppetlabs-stdlib (>= 3.0.0)
 
 GIT
   remote: https://github.com/booo/puppet-php-fpm.git
   ref: master
-  sha: 9aa836f82d46d6907a8b8c97f422c793aff4056a
+  sha: 04743f7d69da8989b876df73be904c6d97081e7f
   specs:
     php-fpm (0.0.1)
-      puppetlabs/stdlib (>= 4.1.0)
+      puppetlabs-stdlib (>= 4.1.0)
 
 GIT
   remote: https://github.com/booo/puppet-rrdcached.git
@@ -36,36 +37,37 @@ GIT
 GIT
   remote: https://github.com/freifunk/berlin-puppet-files
   ref: master
-  sha: 2395e0c06c99964f242a0c112803666660b2e566
+  sha: b97a061613c5909a841aa54b5689eb84016e6704
   specs:
     files (0.0.1)
 
 GIT
   remote: https://github.com/jfryman/puppet-nginx.git
   ref: master
-  sha: 74855ff1ee7518d9743d9461e1249af23aeda975
+  sha: db15848deb3c1cd8ed15a313a6f12e6a75867eb2
   specs:
-    nginx (0.0.9)
-      puppetlabs/apt (>= 1.0.0)
-      puppetlabs/concat (>= 1.0.0)
-      puppetlabs/stdlib (>= 0.1.6)
+    nginx (0.1.1)
+      puppetlabs-apt (>= 1.0.0)
+      puppetlabs-concat (>= 1.1.0)
+      puppetlabs-stdlib (>= 3.0.0)
+      ripienaar-module_data (>= 0.0.3)
 
 GIT
   remote: https://github.com/thias/puppet-sysctl
   ref: master
-  sha: 59e5f641f0b10b0805e1602932c09f0cadc4ec82
+  sha: 2653e544cfddff8282c3393b8162ee713f6a927a
   specs:
-    sysctl (0.3.1)
+    sysctl (1.0.0)
 
 DEPENDENCIES
   collectd (>= 0)
   files (>= 0)
   nginx (>= 0)
   php-fpm (>= 0)
-  puppetlabs/apt (>= 0)
-  puppetlabs/ntp (>= 0)
-  puppetlabs/stdlib (>= 0)
-  puppetlabs/vcsrepo (>= 0)
+  puppetlabs-apt (>= 0)
+  puppetlabs-ntp (>= 0)
+  puppetlabs-stdlib (>= 0)
+  puppetlabs-vcsrepo (>= 0)
   rrdcached (>= 0)
   sysctl (>= 0)
 
