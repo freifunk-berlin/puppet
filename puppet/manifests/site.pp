@@ -142,26 +142,26 @@ node 'firmware' {
 }
 node 'ip.berlin.freifunk.net' {
   class { 'base_node': }
-	class { '::collectd':
-	        purge => true,
-	        recurse => true,
-	        purge_config => true,
-	}
-	class {'collectd::plugin::cpu':}
-	class {'collectd::plugin::df':}
-	class {'collectd::plugin::disk':
-	        disks => ['vda'],
-	        ignoreselected => false,
-	}
-	class {'collectd::plugin::interface':
-	        interfaces => ['eth0'],
-	        ignoreselected => false,
-	}
-	class {'collectd::plugin::load':}
-	class {'collectd::plugin::memory':}
-	class {'collectd::plugin::network':
-	        server => 'monitor.berlin.freifunk.net',
-	        }
-	class {'collectd::plugin::processes':}
-	class {'collectd::plugin::swap':}
+  class { '::collectd':
+          purge => true,
+          recurse => true,
+          purge_config => true,
+  }
+  class {'collectd::plugin::cpu':}
+  class {'collectd::plugin::df':}
+  class {'collectd::plugin::disk':
+          disks => ['vda'],
+          ignoreselected => false,
+  }
+  class {'collectd::plugin::interface':
+          interfaces => ['eth0'],
+          ignoreselected => false,
+  }
+  class {'collectd::plugin::load':}
+  class {'collectd::plugin::memory':}
+  class {'collectd::plugin::network':
+          server => 'monitor.berlin.freifunk.net',
+          }
+  class {'collectd::plugin::processes':}
+  class {'collectd::plugin::swap':}
 }
