@@ -1,4 +1,4 @@
-node 'base_node' {
+class base_node() {
 
   # update packages before we install any
   exec { "apt-update":
@@ -28,7 +28,9 @@ node 'base_node' {
 
 }
 
-node 'monitor' inherits base_node {
+node 'monitor' {
+
+  class { 'base_node': }
 
   package { ['rrdtool', 'php5']:
     ensure => installed,
@@ -135,8 +137,11 @@ node 'monitor' inherits base_node {
   }
 }
 
-node 'firmware' inherits base_node {}
-node 'ip.berlin.freifunk.net' inherits base_node {
+node 'firmware' {
+  class { 'base_node': }
+}
+node 'ip.berlin.freifunk.net' {
+  class { 'base_node': }
 	class { '::collectd':
 	        purge => true,
 	        recurse => true,
