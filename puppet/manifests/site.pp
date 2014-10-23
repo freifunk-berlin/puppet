@@ -157,7 +157,7 @@ node 'firmware' {
   nginx::resource::location { '/buildbot':
     ensure    => present,
     vhost     => 'buildbot.berlin.freifunk.net',
-    www_root  => '/var/www',
+    www_root  => '/usr/local/src/www/htdocs',
     autoindex => 'on',
   }
   nginx::resource::upstream { 'buildbot':
