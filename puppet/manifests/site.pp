@@ -159,6 +159,7 @@ node 'buildbot.berlin.freifunk.net' {
   }
   nginx::resource::location { '/buildbot':
     ensure    => present,
+    ssl       => true,
     vhost     => 'buildbot.berlin.freifunk.net',
     www_root  => '/usr/local/src/www/htdocs',
     autoindex => 'on',
