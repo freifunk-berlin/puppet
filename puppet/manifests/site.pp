@@ -137,7 +137,7 @@ node 'monitor' {
   }
 }
 
-node 'firmware' {
+node 'buildbot.berlin.freifunk.net' {
   class { 'base_node': }
 
   # nginx configuration
