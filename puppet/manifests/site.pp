@@ -184,7 +184,7 @@ node 'buildbot.berlin.freifunk.net' {
   }
 }
 
-node 'ip.berlin.freifunk.net' {
+node 'config.berlin.freifunk.net' {
   class { 'base_node': }
   class { '::collectd':
     purge        => true,
