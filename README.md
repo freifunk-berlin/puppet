@@ -38,3 +38,15 @@ and execute the update there as well (librarian-puppet update).
 
 Once the modules are updated on the remote machine start a puppet run. Please
 follow the instructions in the **Execute puppet** section.
+
+## Certificates and private Keys
+
+If you need a private certificate or private key that is part of the deployment
+process please ask http://github.com/booo for help or contact the mailing list
+(berlin@berlin.freifunk.net). We keep offline backups of the keys.
+
+Copy certs and keys to `/etc/ssl/{certs, private}`.
+
+Additional information can be found in the wiki:
+
+http://wiki.freifunk.net/StartSSL
