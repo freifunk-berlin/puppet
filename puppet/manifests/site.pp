@@ -153,6 +153,9 @@ node 'buildbot.berlin.freifunk.net' {
     access_log  => '/dev/null',
     error_log   => '/dev/null',
     proxy       => 'http://buildbot',
+    ssl         => true,
+    ssl_cert    => "/etc/ssl/certs/buildbot.berlin.freifunk.net.cert",
+    ssl_key     => "/etc/ssl/private/buildbot.berlin.freifunk.net.key",
   }
   nginx::resource::location { '/buildbot':
     ensure    => present,
