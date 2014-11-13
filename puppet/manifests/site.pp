@@ -208,4 +208,38 @@ node 'config.berlin.freifunk.net' {
   }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
+
+  # nginx configuration
+  class { 'nginx':
+    confd_purge     => true,
+    vhost_purge     => true,
+    http_access_log => '/dev/null',
+    nginx_error_log => '/dev/null',
+  }
+  nginx::resource::vhost { 'config.berlin.freifunk.net':
+    ensure      => present,
+    ipv6_enable => true,
+    access_log  => '/dev/null',
+    error_log   => '/dev/null',
+    ssl         => true,
+    ssl_cert    => "/etc/ssl/certs/config.berlin.freifunk.net.cert",
+    ssl_key     => "/etc/ssl/private/config.berlin.freifunk.net.key",
+    www_root    => '/var/www/nipap-wizard/app/static',
+    try_files   => ['$uri', '@nipap-wizard'],
+  }
+  nginx::resource::location { '/static':
+    ensure   => present,
+    ssl      => true,
+    vhost    => 'config.berlin.freifunk.net',
+    www_root => '/var/www/nipap-wizard/app',
+  }
+  nginx::resource::location { '@nipap-wizard':
+    ensure              => present,
+    ssl                 => true,
+    vhost               => 'config.berlin.freifunk.net',
+    location_custom_cfg => {
+      'include'         => 'uwsgi_params',
+      'uwsgi_pass'      => 'unix:/run/uwsgi/app/nipap-wizard/socket',
+    },
+  }
 }
