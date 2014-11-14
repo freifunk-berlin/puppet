@@ -216,6 +216,16 @@ node 'config.berlin.freifunk.net' {
     http_access_log => '/dev/null',
     nginx_error_log => '/dev/null',
   }
+  nginx::resource::vhost { 'ip.berlin.freifunk.net':
+    access_log           => '/dev/null',
+    error_log            => '/dev/null',
+    use_default_location => false,
+    index_files          => [],
+    location_custom_cfg  => {},
+    vhost_cfg_append => {
+      'return' => '301 https://config.berlin.freifunk.net',
+    }
+  }
   nginx::resource::vhost { 'config.berlin.freifunk.net':
     ensure      => present,
     ipv6_enable => true,
