@@ -1,5 +1,7 @@
 class base_node() {
 
+  class { 'apt': }
+
   # update packages before we install any
   exec { "apt-update":
     command => "/usr/bin/apt-get update"
@@ -252,4 +254,23 @@ node 'config.berlin.freifunk.net' {
       'uwsgi_pass'      => 'unix:/run/uwsgi/app/nipap-wizard/socket',
     },
   }
+}
+
+node 'vpn03b' {
+  class { 'base_node': }
+  apt::source { 'sven_ola':
+    comment     => 'sven-olas repo for openvpn and other stuff',
+    location    => 'http://sven-ola.dyndns.org/repo',
+    release     => 'squeeze',
+    repos       => 'main',
+    pin         => '500',
+    include_deb => true,
+    include_src => false,
+    key         => 'AF1714D11903D0B2',
+  }
+  package { 'freifunk-openvpn':
+    ensure => present,
+    require => Apt::Source['sven_ola'],
+  }
+  sysctl { 'net.ipv4.ip_forward': value => '1' }
 }
