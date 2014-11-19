@@ -272,5 +272,26 @@ node 'vpn03b' {
     ensure => present,
     require => Apt::Source['sven_ola'],
   }
+  file { '/etc/rc.local':
+    ensure  => present,
+    content => template('puppet:///modules/files/rc.local.erb'),
+  }
+  file { '/etc/cron.daily/roulette':
+    ensure  => present,
+    content => template('puppet:///modules/files/roulette.erb'),
+  }
+  file { '/etc/openvpn/openvpn-learn-address':
+    ensure  => present,
+    content => template('puppet:///modules/files/openvpn-learn-address.erb'),
+  }
+  file { '/etc/openvpn/server-tcp.conf':
+    ensure  => present,
+    content => template('puppet:///modules/files/server-tcp.conf.erb'),
+  }
+  file { '/etc/openvpn/server-udp.conf':
+    ensure  => present,
+    content => template('puppet:///modules/files/server-udp.conf.erb'),
+  }
+
   sysctl { 'net.ipv4.ip_forward': value => '1' }
 }
