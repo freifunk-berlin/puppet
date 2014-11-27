@@ -292,6 +292,23 @@ node 'vpn03b' {
     ensure  => present,
     content => template('files/server-udp.conf.erb'),
   }
+  class { '::collectd':
+    purge        => true,
+    recurse      => true,
+    purge_config => true,
+  }
+  class {'collectd::plugin::cpu':}
+  class {'collectd::plugin::interface':
+    interfaces     => ['eth0'],
+    ignoreselected => false,
+  }
+  class {'collectd::plugin::load':}
+  class {'collectd::plugin::memory':}
+  class {'collectd::plugin::network':
+    server => 'monitor.berlin.freifunk.net',
+  }
+  class {'collectd::plugin::processes':}
+  class {'collectd::plugin::swap':}
 
   sysctl { 'net.ipv4.ip_forward': value => '1' }
 }
