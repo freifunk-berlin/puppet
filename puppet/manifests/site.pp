@@ -261,7 +261,7 @@ node 'vpn03b' {
   apt::source { 'sven_ola':
     comment     => 'sven-olas repo for openvpn and other stuff',
     location    => 'http://sven-ola.dyndns.org/repo',
-    release     => 'squeeze',
+    release     => 'trusty',
     repos       => 'main',
     pin         => '500',
     include_deb => true,
