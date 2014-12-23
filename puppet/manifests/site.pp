@@ -254,6 +254,75 @@ node 'config.berlin.freifunk.net' {
       'uwsgi_pass'      => 'unix:/run/uwsgi/app/nipap-wizard/socket',
     },
   }
+
+  package { ['uwsgi-plugin-python', 'libpq-dev']:
+    ensure => present,
+  }
+
+  # uwsgi configuration
+  class { 'uwsgi':
+    install_pip        => false,
+    install_python_dev => false,
+    package_provider   => 'apt',
+  }
+  uwsgi::app{ 'nipap-wizard':
+    ensure              => present,
+    uid                 => 'www-data',
+    gid                 => 'www-data',
+    application_options => {
+      plugins           => 'python',
+      socket            => '/run/uwsgi/app/nipap-wizard/socket',
+      master            => 'true',
+      processes         => '2',
+      pythonpath        => '/var/www/nipap-wizard/env/lib/python2.7/site-packages/',
+      chdir             => '/var/www/nipap-wizard',
+      module            => 'manage:app',
+    }
+  }
+
+  # clone nipap-wizard
+  vcsrepo { '/var/www/nipap-wizard':
+    ensure   => latest,
+    provider => git,
+    owner    => 'www-data',
+    source   => 'https://github.com/freifunk-berlin/nipap-wizard.git',
+    require  => [
+      Package['git']
+    ]
+  }
+
+  class { 'python' :
+    virtualenv => true,
+    dev    => true, # needed by psycopg2
+  }
+  python::virtualenv { '/var/www/nipap-wizard/env':
+    ensure       => present,
+    requirements => '/var/www/nipap-wizard/requirements.txt',
+    owner        => 'www-data',
+    group        => 'www-data',
+    cwd          => '/var/www/nipap-wizard',
+    venv_dir     => '/var/www/nipap-wizard/env',
+    systempkgs   => true,
+    require      => [
+      Class['python'],
+      Vcsrepo['/var/www/nipap-wizard']
+    ]
+  }
+  #python::requirements { '/var/www/nipap-wizard/requirements.txt':
+  #  virtualenv => '/var/www/nipap-wizard/env',
+  #  owner      => 'www-data',
+  #  group      => 'www-data',
+  #}
+
+  class { 'postgresql::server': }
+  postgresql::server::db { 'wizard':
+    user => 'wizard',
+    password => postgresql_password('wizard', 'foo'),
+  }
+
+  #TODO:
+  #  * install python-ipaddress
+  #  * install python-psycopg2
 }
 
 node 'vpn03b' {
