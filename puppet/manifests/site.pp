@@ -255,7 +255,17 @@ node 'config.berlin.freifunk.net' {
     },
   }
 
-  package { ['uwsgi-plugin-python', 'libpq-dev']:
+  package { [
+    'libpq-dev',
+    'python-flask',
+    'python-flask-migrate',
+    'python-flask-script',
+    'python-flask-sqlalchemy',
+    'python-flaskext.wtf',
+    'python-psycopg2',
+    'uwsgi-plugin-python',
+    'python-pynipap'
+  ]:
     ensure => present,
   }
 
@@ -305,14 +315,19 @@ node 'config.berlin.freifunk.net' {
     systempkgs   => true,
     require      => [
       Class['python'],
+      Package[
+        'libpq-dev',
+        'python-flask',
+        'python-flask-migrate',
+        'python-flask-script',
+        'python-flask-sqlalchemy',
+        'python-flaskext.wtf',
+        'python-psycopg2',
+        'python-pynipap'
+      ],
       Vcsrepo['/var/www/nipap-wizard']
     ]
   }
-  #python::requirements { '/var/www/nipap-wizard/requirements.txt':
-  #  virtualenv => '/var/www/nipap-wizard/env',
-  #  owner      => 'www-data',
-  #  group      => 'www-data',
-  #}
 
   class { 'postgresql::server': }
   postgresql::server::db { 'wizard':
