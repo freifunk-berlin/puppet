@@ -7,8 +7,20 @@ FORGE
       puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
     puppetlabs-ntp (3.3.0)
       puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
+    puppetlabs-postgresql (4.1.0)
+      puppetlabs-apt (< 2.0.0, >= 1.1.0)
+      puppetlabs-concat (< 2.0.0, >= 1.1.0)
+      puppetlabs-stdlib (~> 4.0)
     puppetlabs-stdlib (4.4.0)
     puppetlabs-vcsrepo (1.2.0)
+
+GIT
+  remote: https://github.com/Engage/puppet-uwsgi
+  ref: master
+  sha: 9181001b4738721bd771995270fef13b3251d6c4
+  specs:
+    uwsgi (1.2.0)
+      puppetlabs-stdlib (>= 3.2.0)
 
 GIT
   remote: https://github.com/booo/puppet-module-collectd
@@ -51,6 +63,14 @@ GIT
       puppetlabs-stdlib (>= 3.0.0)
 
 GIT
+  remote: https://github.com/stankevich/puppet-python
+  ref: master
+  sha: 0180e46b107e304b9b9650c459784800b5b00a73
+  specs:
+    python (1.8.0)
+      puppetlabs-stdlib (>= 4.0.0)
+
+GIT
   remote: https://github.com/thias/puppet-sysctl
   ref: master
   sha: 2653e544cfddff8282c3393b8162ee713f6a927a
@@ -64,8 +84,11 @@ DEPENDENCIES
   php-fpm (>= 0)
   puppetlabs-apt (>= 0)
   puppetlabs-ntp (>= 0)
+  puppetlabs-postgresql (>= 0)
   puppetlabs-stdlib (>= 0)
   puppetlabs-vcsrepo (>= 0)
+  python (>= 0)
   rrdcached (>= 0)
   sysctl (>= 0)
+  uwsgi (>= 0)
 
