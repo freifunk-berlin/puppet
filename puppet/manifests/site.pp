@@ -305,7 +305,7 @@ node 'config.berlin.freifunk.net' {
 
   # clone nipap-wizard
   vcsrepo { '/var/www/nipap-wizard':
-    ensure   => latest,
+    ensure   => present,
     provider => git,
     owner    => 'www-data',
     source   => 'https://github.com/freifunk-berlin/nipap-wizard.git',
