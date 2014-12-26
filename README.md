@@ -24,7 +24,7 @@ manager for puppet modules. Make sure you are in the `puppet` directory:
 
 ## Common use cases
 
-### Update config.local-php of CGP (monitor.berlin.*)
+### Update config.local.php of CGP (monitor.berlin.*)
 
 To update the index of our [monitoring site](http://monitor.berlin.freifunk.net)
 you should first clone the [berlin-puppet-files](https://github.com/freifunk/berlin-puppet-files)
@@ -45,8 +45,15 @@ If you need a private certificate or private key that is part of the deployment
 process please ask http://github.com/booo for help or contact the mailing list
 (berlin@berlin.freifunk.net). We keep offline backups of the keys.
 
+Make sure you [add the intermediate
+certs](http://www.westphahl.net/blog/2012/01/03/setting-up-https-with-nginx-and-startssl/)
+to the cert on deployment.
+
+Check your ssl deployment with [ssllabs](https://www.ssllabs.com/ssltest/index.html).
+
 Copy certs and keys to `/etc/ssl/{certs, private}`.
 
 Additional information can be found in the wiki:
 
 http://wiki.freifunk.net/StartSSL
+
