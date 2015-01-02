@@ -343,14 +343,6 @@ node 'config.berlin.freifunk.net' {
   }
 
   class { 'postgresql::server': }
-  postgresql::server::db { 'wizard':
-    user => 'wizard',
-    password => postgresql_password('wizard', 'foo'),
-  }
-
-  #TODO:
-  #  * install python-ipaddress
-  #  * install python-psycopg2
 }
 
 node 'vpn03b' {
