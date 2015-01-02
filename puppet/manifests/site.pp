@@ -254,6 +254,95 @@ node 'config.berlin.freifunk.net' {
       'uwsgi_pass'      => 'unix:/run/uwsgi/app/nipap-wizard/socket',
     },
   }
+
+  apt::key { 'nipap':
+    key        => '4481633C2094AABD',
+    key_source => 'https://spritelink.github.io/NIPAP/nipap.gpg.key',
+  }
+  apt::source { 'nipap':
+    location => 'http://spritelink.github.io/NIPAP/repos/apt',
+    release  => 'stable',
+    repos    => 'main extra',
+    key      => '4481633C2094AABD',
+    require  => Apt::Key['nipap'],
+  }
+
+  package { [
+    'libpq-dev',
+    'python-flask',
+    'python-flask-migrate',
+    'python-flask-script',
+    'python-flask-sqlalchemy',
+    'python-flaskext.wtf',
+    'python-psycopg2',
+    'uwsgi-plugin-python',
+    'python-pynipap'
+  ]:
+    ensure  => present,
+    require => Apt::Source['nipap'],
+  }
+
+  # uwsgi configuration
+  class { 'uwsgi':
+    install_pip        => false,
+    install_python_dev => false,
+    package_provider   => 'apt',
+  }
+  uwsgi::app{ 'nipap-wizard':
+    ensure              => present,
+    uid                 => 'www-data',
+    gid                 => 'www-data',
+    application_options => {
+      plugins           => 'python',
+      socket            => '/run/uwsgi/app/nipap-wizard/socket',
+      master            => 'true',
+      processes         => '2',
+      pythonpath        => '/var/www/nipap-wizard/env/lib/python2.7/site-packages/',
+      chdir             => '/var/www/nipap-wizard',
+      module            => 'manage:app',
+    }
+  }
+
+  # clone nipap-wizard
+  vcsrepo { '/var/www/nipap-wizard':
+    ensure   => present,
+    provider => git,
+    owner    => 'www-data',
+    source   => 'https://github.com/freifunk-berlin/nipap-wizard.git',
+    require  => [
+      Package['git']
+    ]
+  }
+
+  class { 'python' :
+    virtualenv => true,
+    dev    => true, # needed by psycopg2
+  }
+  python::virtualenv { '/var/www/nipap-wizard/env':
+    ensure       => present,
+    requirements => '/var/www/nipap-wizard/requirements.txt',
+    owner        => 'www-data',
+    group        => 'www-data',
+    cwd          => '/var/www/nipap-wizard',
+    venv_dir     => '/var/www/nipap-wizard/env',
+    systempkgs   => true,
+    require      => [
+      Class['python'],
+      Package[
+        'libpq-dev',
+        'python-flask',
+        'python-flask-migrate',
+        'python-flask-script',
+        'python-flask-sqlalchemy',
+        'python-flaskext.wtf',
+        'python-psycopg2',
+        'python-pynipap'
+      ],
+      Vcsrepo['/var/www/nipap-wizard']
+    ]
+  }
+
+  class { 'postgresql::server': }
 }
 
 node 'vpn03b' {
