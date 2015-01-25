@@ -57,3 +57,7 @@ Additional information can be found in the wiki:
 
 http://wiki.freifunk.net/StartSSL
 
+## Security
+
+Please try to deploy secure configurations. Take a look at the
+[bettercrypto](https://bettercrypto.org/) project for reference.
