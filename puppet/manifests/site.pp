@@ -30,6 +30,80 @@ class base_node() {
 
 }
 
+node 'berlin.freifunk.net' {
+
+  class { 'base_node': }
+
+  # nginx configuration
+  class { 'nginx':
+    confd_purge     => true,
+    vhost_purge     => true,
+    http_access_log => '/dev/null',
+    nginx_error_log => '/dev/null',
+  }
+  nginx::resource::vhost { 'berlin.freifunk.net':
+    access_log           => '/dev/null',
+    error_log            => '/dev/null',
+    use_default_location => false,
+    index_files          => [],
+    location_custom_cfg  => {},
+    vhost_cfg_append => {
+      'return' => '301 https://berlin.freifunk.net',
+    }
+  }
+  nginx::resource::vhost { 'sslberlin.freifunk.net':
+    ensure      => present,
+    ipv6_enable => true,
+    access_log  => '/dev/null',
+    error_log   => '/dev/null',
+    ssl         => true,
+    ssl_cert    => "/etc/ssl/certs/berlin.freifunk.net.cert",
+    ssl_key     => "/etc/ssl/private/berlin.freifunk.net.key",
+    www_root    => '/var/www/berlin.freifunk.net',
+  }
+
+  file { ['/srv/www']:
+    ensure  => directory,
+    owner   => 'www-data',
+    require => Class['nginx'],
+  }
+
+  vcsrepo { '/usr/src/berlin.freifunk.net':
+    ensure   => present,
+    provider => git,
+    owner    => 'www-data',
+    source   => 'https://github.com/freifunk-berlin/berlin.freifunk.net.git',
+    require  => [
+      Package['git']
+    ]
+  }
+
+  # install python
+  class { 'python' :
+    virtualenv => true,
+  }
+
+  # create virtual env and install python requirements for berlin.freifunk.net
+  python::virtualenv { '/usr/src/berlin.freifunk.net/env':
+    ensure       => present,
+    requirements => '/usr/src/berlin.freifunk.net/requirements.txt',
+    owner        => 'www-data',
+    group        => 'www-data',
+    cwd          => '/usr/src/berlin.freifunk.net',
+    venv_dir     => '/usr/src/berlin.freifunk.net/env',
+    systempkgs   => true,
+    require      => [
+      Class['python'],
+      Vcsrepo['/usr/src/berlin.freifunk.net']
+    ]
+  }
+
+  cron { 'berlin.freifunk.net':
+    command => '/usr/src/berlin.freifunk.net/bin/cron_pull.sh /usr/src/berlin.freifunk.net /srv/www/berlin.freifunk.net',
+    user    => 'www-data',
+  }
+}
+
 node 'monitor' {
 
   class { 'base_node': }
