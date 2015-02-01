@@ -37,6 +37,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define "berlin" do |web|
+    hostname = "berlin.freifunk.net"
+    web.vm.host_name = hostname
+    web.vm.provision "shell", path: "./scripts/ssl.sh", args: hostname
+
+    web.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "site.pp"
+      puppet.module_path = "modules"
+    end
+  end
+
   config.vm.provider :virtualbox do |vb|
     # Don't boot with headless mode
     #vb.gui = true
