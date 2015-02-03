@@ -1,12 +1,56 @@
 # berlin.freifunk.net puppet deployment scripts
 
-## Install
+Puppet is a configuration management tool. Please take a look at the [puppet
+documentation](https://docs.puppetlabs.com/) before you start.
+
+## Tools
+
+We use [vagrant](https://www.vagrantup.com/) and
+[virtualbox](https://www.virtualbox.org/) for local testing.
+
+We use [librarian-puppet](http://librarian-puppet.com/) to manage the puppet
+modules in the `puppet/modules` directory.
+
+## Local development and testing
+
+Make sure you have installed vagrant, virtualbox and librarian-puppet.
+
+Change to the `puppet` directory and install the puppet modules with
+librarian-puppet from the `Puppetfile`:
+
+```
+cd puppet
+librarian-puppet install
+```
+
+Once you installed the the puppet modules you can use vagrant to start a virtual
+machine (vm). For example you could start the monitor vm:
+
+```
+vagrant up monitor
+```
+
+To stop a maschine use the `halt` command, e.g.:
+
+```
+vagrant halt monitor
+```
+
+If you start a machine for the first time vagrant will start all provisioners
+too. If you want to reprovision the puppet configuration you can use the
+`provision` command, e.g.:
+
+```
+vagrant provision monitor
+```
+
+## Server deployment
 
 Copy `./scripts/install.sh` into the home directory of the root user. Run the
 script. The script will install all necessary packages and will run puppet once.
 Make sure the hostname of the machine is correct once you run puppet.
 
-## Execute puppet
+### Execute puppet
 
 Use `./scripts/puppet-apply.sh` to start a puppet run.
 
