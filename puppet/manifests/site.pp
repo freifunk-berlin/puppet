@@ -13,7 +13,18 @@ class base_node() {
     install_options => ['--no-install-recommends'],
   }
 
-  package { ['tmux', 'htop', 'dstat', 'git']:
+  # list of base packages we deploy on every node
+  package { [
+    'byobu',
+    'dstat',
+    'git',
+    'htop',
+    'iputils-tracepath',
+    'mtr',
+    'screen',
+    'tcpdump',
+    'tmux'
+  ]:
     ensure => installed,
   }
 
