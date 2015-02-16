@@ -412,3 +412,48 @@ node 'vpn03b' {
 
   sysctl { 'net.ipv4.ip_forward': value => '1' }
 }
+
+node 'ftp.olsr' {
+  class { 'base_node': }
+
+  # vsftpd configuration
+  class { 'vsftpd':
+    anonymous_enable        => 'YES',
+    anon_upload_enable      => 'YES',
+    anon_mkdir_write_enable => 'YES',
+    chown_uploads           => 'YES',
+    chown_username          => 'ftp',
+    nopriv_user             => 'ftp',
+    write_enable            => 'YES',
+    ftpd_banner             => 'meshed ftp server',
+    directives              => {
+      no_anon_password      => 'YES',
+      chown_upload_mode     => '0644',
+    }
+  }
+  file { '/srv/ftp/public':
+    ensure  => directory,
+    owner   => 'ftp',
+    require => Class['vsftpd'],
+  }
+  file { '/etc/vsftpd.user_list':
+    ensure => present,
+  }
+
+  # nginx configuration
+  class { 'nginx':
+    confd_purge     => true,
+    vhost_purge     => true,
+    http_access_log => '/dev/null',
+    nginx_error_log => '/dev/null',
+  }
+  nginx::resource::vhost { 'ftp.olsr':
+    ensure      => present,
+    ipv6_enable => true,
+    access_log  => '/dev/null',
+    error_log   => '/dev/null',
+    www_root    => '/srv/ftp/public',
+    autoindex   => 'on',
+    index_files => [],
+  }
+}
