@@ -358,39 +358,10 @@ node 'config.berlin.freifunk.net' {
 
 node 'vpn03b' {
   class { 'base_node': }
-  apt::source { 'sven_ola':
-    comment     => 'sven-olas repo for openvpn and other stuff',
-    location    => 'http://sven-ola.dyndns.org/repo',
-    release     => 'trusty',
-    repos       => 'main',
-    pin         => '500',
-    include_deb => true,
-    include_src => false,
-    key         => 'AF1714D11903D0B2',
-  }
-  package { 'freifunk-openvpn':
-    ensure => present,
-    require => Apt::Source['sven_ola'],
-  }
-  file { '/etc/rc.local':
-    ensure  => present,
-    content => template('files/rc.local.erb'),
-  }
-  file { '/etc/cron.daily/roulette':
-    ensure  => present,
-    content => template('files/roulette.erb'),
-  }
-  file { '/etc/openvpn/openvpn-learn-address':
-    ensure  => present,
-    content => template('files/openvpn-learn-address.erb'),
-  }
-  file { '/etc/openvpn/server-tcp.conf':
-    ensure  => present,
-    content => template('files/server-tcp.conf.erb'),
-  }
-  file { '/etc/openvpn/server-udp.conf':
-    ensure  => present,
-    content => template('files/server-udp.conf.erb'),
+  class { 'freifunk-openvpn':
+    inet_add => '77.87.49',
+    inet_min => '1',
+    inet_max => '62',
   }
   class { '::collectd':
     purge        => true,
@@ -409,6 +380,4 @@ node 'vpn03b' {
   }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
-
-  sysctl { 'net.ipv4.ip_forward': value => '1' }
 }
