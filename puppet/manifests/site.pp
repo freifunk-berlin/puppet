@@ -361,7 +361,7 @@ node 'vpn03b' {
   class { 'vpn03':
     inet_add => '77.87.49',
     inet_min => '1',
-    inet_max => '62',
+    inet_max => '30',
   }
   class { '::collectd':
     purge        => true,
