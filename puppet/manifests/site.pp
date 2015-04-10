@@ -358,7 +358,7 @@ node 'config.berlin.freifunk.net' {
 
 node 'vpn03b' {
   class { 'base_node': }
-  class { 'freifunk-openvpn':
+  class { 'vpn03':
     inet_add => '77.87.49',
     inet_min => '1',
     inet_max => '62',
