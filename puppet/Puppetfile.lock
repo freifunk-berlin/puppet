@@ -46,11 +46,11 @@ GIT
     rrdcached (0.0.1)
 
 GIT
-  remote: https://github.com/freifunk-berlin/puppet-freifunk-openvpn
+  remote: https://github.com/freifunk-berlin/puppet-vpn03
   ref: master
-  sha: 46b71218727c3a75567f22b17dbb0862980c959d
+  sha: ae527be97c1c56317ec995f8bf508669983b9f2a
   specs:
-    freifunk-openvpn (0.0.1)
+    vpn03 (0.0.1)
 
 GIT
   remote: https://github.com/freifunk/berlin-puppet-files
@@ -87,7 +87,6 @@ GIT
 DEPENDENCIES
   collectd (>= 0)
   files (>= 0)
-  freifunk-openvpn (>= 0)
   nginx (>= 0)
   php-fpm (>= 0)
   puppetlabs-apt (>= 0)
@@ -99,4 +98,5 @@ DEPENDENCIES
   rrdcached (>= 0)
   sysctl (>= 0)
   uwsgi (>= 0)
+  vpn03 (>= 0)
 

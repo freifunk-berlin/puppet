@@ -19,8 +19,8 @@ mod 'sysctl',
   :git => 'https://github.com/thias/puppet-sysctl'
 mod 'files',
   :git => 'https://github.com/freifunk/berlin-puppet-files'
-mod 'freifunk-openvpn',
-  :git => 'https://github.com/freifunk-berlin/puppet-freifunk-openvpn'
+mod 'vpn03',
+  :git => 'https://github.com/freifunk-berlin/puppet-vpn03'
 mod 'uwsgi',
   :git => 'https://github.com/Engage/puppet-uwsgi'
 mod 'python',
