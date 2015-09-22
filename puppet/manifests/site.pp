@@ -29,7 +29,7 @@ class base_node() {
   }
 
   # install security updates
-  class { 'apt::unattended_upgrades': }
+  class { 'unattended_upgrades': }
 
   class { 'ntp': }
 
