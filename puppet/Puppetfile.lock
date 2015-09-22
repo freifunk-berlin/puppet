@@ -1,25 +1,26 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
-    puppetlabs-apt (1.7.0)
-      puppetlabs-stdlib (>= 2.2.1)
-    puppetlabs-concat (1.1.2)
+    puppetlabs-apt (2.1.1)
+      puppetlabs-stdlib (< 5.0.0, >= 4.5.0)
+    puppetlabs-concat (1.2.4)
       puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
-    puppetlabs-ntp (3.3.0)
-      puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
-    puppetlabs-postgresql (4.1.0)
-      puppetlabs-apt (< 2.0.0, >= 1.1.0)
+    puppetlabs-ntp (4.1.0)
+      puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
+    puppetlabs-postgresql (4.6.0)
+      puppetlabs-apt (< 3.0.0, >= 1.8.0)
       puppetlabs-concat (< 2.0.0, >= 1.1.0)
       puppetlabs-stdlib (~> 4.0)
-    puppetlabs-stdlib (4.4.0)
-    puppetlabs-vcsrepo (1.2.0)
+    puppetlabs-stdlib (4.9.0)
+    puppetlabs-vcsrepo (1.3.1)
+    stahnma-epel (1.1.1)
 
 GIT
   remote: https://github.com/Engage/puppet-uwsgi
   ref: master
-  sha: 9181001b4738721bd771995270fef13b3251d6c4
+  sha: e3436e701c339a6cc0d4f29a449a1758f61fbe81
   specs:
-    uwsgi (1.2.0)
+    uwsgi (1.3.0)
       puppetlabs-stdlib (>= 3.2.0)
 
 GIT
@@ -27,8 +28,7 @@ GIT
   ref: master
   sha: aa7f57a91799def726656d4a0585c1d4fa87490b
   specs:
-    collectd (1.0.1)
-      puppetlabs-stdlib (>= 3.0.0)
+    collectd (0.0.1)
 
 GIT
   remote: https://github.com/booo/puppet-php-fpm.git
@@ -36,7 +36,6 @@ GIT
   sha: 04743f7d69da8989b876df73be904c6d97081e7f
   specs:
     php-fpm (0.0.1)
-      puppetlabs-stdlib (>= 4.1.0)
 
 GIT
   remote: https://github.com/booo/puppet-rrdcached.git
@@ -62,27 +61,28 @@ GIT
 GIT
   remote: https://github.com/jfryman/puppet-nginx.git
   ref: master
-  sha: 515f4ed52ea87b6834486e031cb77bed52a2672a
+  sha: 1860f92d296026d2ff9f520e43aa446d4756c645
   specs:
-    nginx (0.2.1)
-      puppetlabs-apt (>= 1.0.0)
-      puppetlabs-concat (>= 1.1.0)
-      puppetlabs-stdlib (>= 3.0.0)
+    nginx (0.2.7)
+      puppetlabs-apt (< 3.0.0, >= 1.8.0)
+      puppetlabs-concat (< 2.0.0, >= 1.1.1)
+      puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
 
 GIT
   remote: https://github.com/stankevich/puppet-python
   ref: master
-  sha: 0180e46b107e304b9b9650c459784800b5b00a73
+  sha: d657e28134f095c6b7d6f750f67c3ff8a8f842c5
   specs:
-    python (1.8.0)
-      puppetlabs-stdlib (>= 4.0.0)
+    python (1.9.8)
+      puppetlabs-stdlib (< 6.0.0, >= 4.6.0)
+      stahnma-epel (< 2.0.0, >= 1.0.1)
 
 GIT
   remote: https://github.com/thias/puppet-sysctl
   ref: master
-  sha: 2653e544cfddff8282c3393b8162ee713f6a927a
+  sha: 38df36e8d8fab7d6a2f755e3f5fbf62f1d792a9f
   specs:
-    sysctl (1.0.0)
+    sysctl (1.0.2)
 
 DEPENDENCIES
   collectd (>= 0)
