@@ -5,6 +5,7 @@ mod 'puppetlabs/apt'
 mod 'puppetlabs/ntp'
 mod 'puppetlabs/vcsrepo'
 mod 'puppetlabs/postgresql'
+mod 'puppet/unattended_upgrades'
 
 mod 'nginx',
   :git => 'https://github.com/jfryman/puppet-nginx.git'
