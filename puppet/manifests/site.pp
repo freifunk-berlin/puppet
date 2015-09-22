@@ -356,6 +356,32 @@ node 'config.berlin.freifunk.net' {
   class { 'postgresql::server': }
 }
 
+node 'vpn03a' {
+  class { 'base_node': }
+  class { 'vpn03':
+    inet_add => '77.87.48',
+    inet_min => '128',
+    inet_max => '191',
+  }
+  class { '::collectd':
+    purge        => true,
+    recurse      => true,
+    purge_config => true,
+  }
+  class {'collectd::plugin::cpu':}
+  class {'collectd::plugin::interface':
+    interfaces     => ['eth0'],
+    ignoreselected => false,
+  }
+  class {'collectd::plugin::load':}
+  class {'collectd::plugin::memory':}
+  class {'collectd::plugin::network':
+    server => 'monitor.berlin.freifunk.net',
+  }
+  class {'collectd::plugin::processes':}
+  class {'collectd::plugin::swap':}
+}
+
 node 'vpn03b' {
   class { 'base_node': }
   class { 'vpn03':
