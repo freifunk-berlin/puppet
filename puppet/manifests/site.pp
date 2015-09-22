@@ -250,19 +250,24 @@ node 'config.berlin.freifunk.net' {
     www_root    => '/var/www/nipap-wizard/app/static',
     try_files   => ['$uri', '@nipap-wizard'],
   }
-  nginx::resource::location { '/static':
-    ensure   => present,
-    ssl      => true,
-    vhost    => 'config.berlin.freifunk.net',
-    www_root => '/var/www/nipap-wizard/app',
+  nginx::resource::vhost { 'ca.berlin.freifunk.net':
+    ensure      => present,
+    ipv6_enable => true,
+    access_log  => '/dev/null',
+    error_log   => '/dev/null',
+    #ssl         => true,
+    #ssl_cert    => "/etc/ssl/certs/ca.berlin.freifunk.net.cert",
+    #ssl_key     => "/etc/ssl/private/ca.berlin.freifunk.net.key",
+    www_root    => '/var/www/ca.berlin.freifunk.net/', # TODO check this
+    try_files   => ['$uri', '@ca.berlin.freifunk.net'],
   }
-  nginx::resource::location { '@nipap-wizard':
+  nginx::resource::location { '@ca.berlin.freifunk.net':
     ensure              => present,
     ssl                 => true,
-    vhost               => 'config.berlin.freifunk.net',
+    vhost               => 'ca.berlin.freifunk.net',
     location_custom_cfg => {
       'include'         => 'uwsgi_params',
-      'uwsgi_pass'      => 'unix:/run/uwsgi/app/nipap-wizard/socket',
+      'uwsgi_pass'      => 'unix:/run/uwsgi/app/ca.berlin.freifunk.net/socket',
     },
   }
 
@@ -313,6 +318,20 @@ node 'config.berlin.freifunk.net' {
       module            => 'manage:app',
     }
   }
+  uwsgi::app{ 'ca.berlin.freifunk.net':
+    ensure              => present,
+    uid                 => 'www-data',
+    gid                 => 'www-data',
+    application_options => {
+      plugins           => 'python',
+      socket            => '/run/uwsgi/app/ca.berlin.freifunk.net/socket',
+      master            => 'true',
+      processes         => '2',
+      pythonpath        => '/var/www/ca.berlin.freifunk.net/env/lib/python2.7/site-packages/',
+      chdir             => '/var/www/ca.berlin.freifunk.net',
+      module            => 'manage:app',
+    }
+  }
 
   # clone nipap-wizard
   vcsrepo { '/var/www/nipap-wizard':
@@ -320,6 +339,16 @@ node 'config.berlin.freifunk.net' {
     provider => git,
     owner    => 'www-data',
     source   => 'https://github.com/freifunk-berlin/nipap-wizard.git',
+    require  => [
+      Package['git']
+    ]
+  }
+  # clone ca.berlin.freifunk.net
+  vcsrepo { '/var/www/ca.berlin.freifunk.net':
+    ensure   => present,
+    provider => git,
+    owner    => 'www-data',
+    source   => 'https://github.com/freifunk-berlin/ca.berlin.freifunk.net.git',
     require  => [
       Package['git']
     ]
@@ -350,6 +379,29 @@ node 'config.berlin.freifunk.net' {
         'python-pynipap'
       ],
       Vcsrepo['/var/www/nipap-wizard']
+    ]
+  }
+  python::virtualenv { '/var/www/ca.berlin.freifunk.net/env':
+    ensure       => present,
+    requirements => '/var/www/ca.berlin.freifunk.net/requirements.txt',
+    owner        => 'www-data',
+    group        => 'www-data',
+    cwd          => '/var/www/ca.berlin.freifunk.net',
+    venv_dir     => '/var/www/ca.berlin.freifunk.net/env',
+    systempkgs   => true,
+    require      => [
+      Class['python'],
+      Package[
+        'libpq-dev',
+        'python-flask',
+        'python-flask-migrate',
+        'python-flask-script',
+        'python-flask-sqlalchemy',
+        'python-flaskext.wtf',
+        'python-psycopg2',
+        'python-pynipap'
+      ],
+      Vcsrepo['/var/www/ca.berlin.freifunk.net']
     ]
   }
 
