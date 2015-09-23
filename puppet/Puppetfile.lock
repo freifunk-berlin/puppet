@@ -1,9 +1,6 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
-    puppet-unattended_upgrades (1.0.3)
-      puppetlabs-apt (< 3.0.0, >= 2.0.0)
-      puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
     puppetlabs-apt (2.1.1)
       puppetlabs-stdlib (< 5.0.0, >= 4.5.0)
     puppetlabs-concat (1.2.4)
@@ -72,6 +69,15 @@ GIT
       puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
 
 GIT
+  remote: https://github.com/puppet-community/puppet-unattended_upgrades
+  ref: master
+  sha: 87f195af653ea2e23ce1816d557d250f8d6b86c4
+  specs:
+    unattended_upgrades (1.0.3)
+      puppetlabs-apt (< 3.0.0, >= 2.0.0)
+      puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
+
+GIT
   remote: https://github.com/stankevich/puppet-python
   ref: master
   sha: d657e28134f095c6b7d6f750f67c3ff8a8f842c5
@@ -92,7 +98,6 @@ DEPENDENCIES
   files (>= 0)
   nginx (>= 0)
   php-fpm (>= 0)
-  puppet-unattended_upgrades (>= 0)
   puppetlabs-apt (>= 0)
   puppetlabs-ntp (>= 0)
   puppetlabs-postgresql (>= 0)
@@ -101,6 +106,7 @@ DEPENDENCIES
   python (>= 0)
   rrdcached (>= 0)
   sysctl (>= 0)
+  unattended_upgrades (>= 0)
   uwsgi (>= 0)
   vpn03 (>= 0)
 
