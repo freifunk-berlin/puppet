@@ -24,6 +24,14 @@ GIT
       puppetlabs-stdlib (>= 3.2.0)
 
 GIT
+  remote: https://github.com/ULHPC/puppet-exim4
+  ref: production
+  sha: dac24d90f22edc9fad8c72c5047560212b847925
+  specs:
+    exim4 (0.1.2)
+      puppetlabs-stdlib (< 5.0.0, >= 4.2.2)
+
+GIT
   remote: https://github.com/booo/puppet-module-collectd
   ref: master
   sha: aa7f57a91799def726656d4a0585c1d4fa87490b
@@ -95,6 +103,7 @@ GIT
 
 DEPENDENCIES
   collectd (>= 0)
+  exim4 (>= 0)
   files (>= 0)
   nginx (>= 0)
   php-fpm (>= 0)
