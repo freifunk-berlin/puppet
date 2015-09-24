@@ -47,6 +47,14 @@ class base_node() {
     configtype => 'satellite',
     smarthost  => 'ssl.coulmann.de',
   }
+  # set mail alias for root
+  mailalias { 'root':
+    ensure    => present,
+    name      => 'root',
+    recipient => 'noc@berlin.freifunk.net',
+    target    => "/etc/email-addresses",
+  }
+
 
 }
 
