@@ -39,6 +39,12 @@ class base_node() {
   sysctl { 'net.ipv6.conf.all.accept_ra': value => '0' }
   sysctl { 'net.ipv6.conf.all.use_tempaddr': value => '0' }
 
+  # configure smart host mail setup
+  class { 'exim4':
+    configtype => 'satellite',
+    smarthost  => 'ssl.coulmann.de',
+  }
+
 }
 
 node 'monitor' {
