@@ -20,10 +20,13 @@ class base_node() {
     'git',
     'htop',
     'iputils-tracepath',
+    'man-db',
+    'mailutils',
     'mtr',
     'screen',
     'tcpdump',
-    'tmux'
+    'tmux',
+    'vim'
   ]:
     ensure => installed,
   }
