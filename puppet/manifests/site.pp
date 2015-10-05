@@ -258,12 +258,21 @@ node 'config.berlin.freifunk.net' {
     #ssl         => true,
     #ssl_cert    => "/etc/ssl/certs/ca.berlin.freifunk.net.cert",
     #ssl_key     => "/etc/ssl/private/ca.berlin.freifunk.net.key",
-    www_root    => '/var/www/ca.berlin.freifunk.net/', # TODO check this
+    www_root    => '/var/www/ca.berlin.freifunk.net/static', # TODO check this
     try_files   => ['$uri', '@ca.berlin.freifunk.net'],
+  }
+  nginx::resource::location { '@nipap-wizard':
+    ensure              => present,
+    ssl                 => true,
+    vhost               => 'config.berlin.freifunk.net',
+    location_custom_cfg => {
+      'include'         => 'uwsgi_params',
+      'uwsgi_pass'      => 'unix:/run/uwsgi/app/nipap-wizard/socket',
+    },
   }
   nginx::resource::location { '@ca.berlin.freifunk.net':
     ensure              => present,
-    ssl                 => true,
+    #ssl                 => true,
     vhost               => 'ca.berlin.freifunk.net',
     location_custom_cfg => {
       'include'         => 'uwsgi_params',
@@ -284,6 +293,7 @@ node 'config.berlin.freifunk.net' {
   }
 
   package { [
+    'libffi-dev',
     'libpq-dev',
     'python-flask',
     'python-flask-migrate',
@@ -392,6 +402,7 @@ node 'config.berlin.freifunk.net' {
     require      => [
       Class['python'],
       Package[
+        'libffi-dev',
         'libpq-dev',
         'python-flask',
         'python-flask-migrate',
