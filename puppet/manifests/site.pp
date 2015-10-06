@@ -77,8 +77,8 @@ node 'monitor' {
       '/usr/share/collectd/kmodem_types.db'
     ]
   }
-  class { 'collectd::plugin::network':
-    listen => '*',
+  collectd::plugin::network::listener{'*':
+    port => 25826,
   }
   class { 'collectd::plugin::rrdcached':
     daemonaddress => 'unix:/var/run/rrdcached.sock',
