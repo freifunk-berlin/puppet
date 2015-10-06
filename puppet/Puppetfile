@@ -10,8 +10,7 @@ mod 'puppet/unattended_upgrades'
 mod 'nginx',
   :git => 'https://github.com/jfryman/puppet-nginx.git'
 mod 'collectd',
-  #:git => 'https://github.com/pdxcat/puppet-module-collectd'
-  :git => 'https://github.com/booo/puppet-module-collectd'
+  :git => 'https://github.com/puppet-community/puppet-collectd'
 mod 'rrdcached',
   :git => 'https://github.com/booo/puppet-rrdcached.git'
 mod 'php-fpm',

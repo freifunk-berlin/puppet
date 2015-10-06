@@ -27,13 +27,6 @@ GIT
       puppetlabs-stdlib (>= 3.2.0)
 
 GIT
-  remote: https://github.com/booo/puppet-module-collectd
-  ref: master
-  sha: aa7f57a91799def726656d4a0585c1d4fa87490b
-  specs:
-    collectd (0.0.1)
-
-GIT
   remote: https://github.com/booo/puppet-php-fpm.git
   ref: master
   sha: 04743f7d69da8989b876df73be904c6d97081e7f
@@ -70,6 +63,15 @@ GIT
       puppetlabs-apt (< 3.0.0, >= 1.8.0)
       puppetlabs-concat (< 2.0.0, >= 1.1.1)
       puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
+
+GIT
+  remote: https://github.com/puppet-community/puppet-collectd
+  ref: master
+  sha: 78cd9ca3dc8129e2db774dd1f12c739c65d80188
+  specs:
+    collectd (4.2.0)
+      puppetlabs-concat (>= 1.0.4)
+      puppetlabs-stdlib (>= 3.2.0)
 
 GIT
   remote: https://github.com/stankevich/puppet-python
