@@ -233,9 +233,7 @@ node 'config.berlin.freifunk.net' {
   }
   class {'collectd::plugin::load':}
   class {'collectd::plugin::memory':}
-  class {'collectd::plugin::network':
-    server => 'monitor.berlin.freifunk.net',
-  }
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':}
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
 
@@ -455,9 +453,7 @@ node 'vpn03a' {
   }
   class {'collectd::plugin::load':}
   class {'collectd::plugin::memory':}
-  class {'collectd::plugin::network':
-    server => 'monitor.berlin.freifunk.net',
-  }
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':}
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
 }
@@ -481,9 +477,7 @@ node 'vpn03b' {
   }
   class {'collectd::plugin::load':}
   class {'collectd::plugin::memory':}
-  class {'collectd::plugin::network':
-    server => 'monitor.berlin.freifunk.net',
-  }
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':}
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
 }
@@ -507,9 +501,7 @@ node 'vpn03c' {
   }
   class {'collectd::plugin::load':}
   class {'collectd::plugin::memory':}
-  class {'collectd::plugin::network':
-    server => 'monitor.berlin.freifunk.net',
-  }
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':}
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
 }
