@@ -266,15 +266,17 @@ node 'config.berlin.freifunk.net' {
     try_files   => ['$uri', '@nipap-wizard'],
   }
   nginx::resource::vhost { 'ca.berlin.freifunk.net':
-    ensure      => present,
-    ipv6_enable => true,
-    access_log  => '/dev/null',
-    error_log   => '/dev/null',
-    #ssl         => true,
-    #ssl_cert    => "/etc/ssl/certs/ca.berlin.freifunk.net.cert",
-    #ssl_key     => "/etc/ssl/private/ca.berlin.freifunk.net.key",
-    www_root    => '/var/www/ca.berlin.freifunk.net/static', # TODO check this
-    try_files   => ['$uri', '@ca.berlin.freifunk.net'],
+    ensure              => present,
+    ipv6_enable         => true,
+    # fix for https://serverfault.com/questions/277653/nginx-name-based-virtual-hosts-on-ipv6
+    ipv6_listen_options => '',
+    access_log          => '/dev/null',
+    error_log           => '/dev/null',
+    #ssl                => true,
+    #ssl_cert           => "/etc/ssl/certs/ca.berlin.freifunk.net.cert",
+    #ssl_key            => "/etc/ssl/private/ca.berlin.freifunk.net.key",
+    www_root            => '/var/www/ca.berlin.freifunk.net/static', # TODO check this
+    try_files           => ['$uri', '@ca.berlin.freifunk.net'],
   }
   nginx::resource::location { '@nipap-wizard':
     ensure              => present,
