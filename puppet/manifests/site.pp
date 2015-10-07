@@ -278,6 +278,13 @@ node 'config.berlin.freifunk.net' {
     www_root            => '/var/www/ca.berlin.freifunk.net/static', # TODO check this
     try_files           => ['$uri', '@ca.berlin.freifunk.net'],
   }
+  nginx::resource::location { 'config.berlin.freifunk.net/static':
+    ensure   => present,
+    ssl      => true,
+    vhost    => 'config.berlin.freifunk.net',
+    www_root => '/var/www/nipap-wizard/app/static',
+    location => '/static',
+  }
   nginx::resource::location { '@nipap-wizard':
     ensure              => present,
     ssl                 => true,
