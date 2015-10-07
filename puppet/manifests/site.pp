@@ -136,12 +136,12 @@ node 'monitor' {
     require => Class['nginx'],
   }
 
-  # Collectd Graph Panel (patched by Patrick) https://github.com/stargieg/CGP.git
+  # Collectd Graph Panel
   vcsrepo { '/srv/www/monitor.berlin.freifunk.net':
     ensure   => latest,
     provider => git,
     owner    => 'www-data',
-    source   => 'https://github.com/stargieg/CGP.git',
+    source   => 'https://github.com/pommi/CGP/',
     require  => [
       File['/srv/www'],
       Package['git']
