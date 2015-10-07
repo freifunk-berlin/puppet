@@ -233,7 +233,9 @@ node 'config.berlin.freifunk.net' {
   }
   class {'collectd::plugin::load':}
   class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':}
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+    port => 25826,
+  }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
 
@@ -462,7 +464,14 @@ node 'vpn03a' {
   }
   class {'collectd::plugin::load':}
   class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':}
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+    port => 25826,
+  }
+  class { 'collectd::plugin::netlink':
+    interfaces        => ['eth0', 'tun-udp'],
+    verboseinterfaces => ['eth0', 'tun-udp'],
+    ignoreselected    => false,
+  }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
 }
@@ -486,7 +495,14 @@ node 'vpn03b' {
   }
   class {'collectd::plugin::load':}
   class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':}
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+    port => 25826,
+  }
+  class { 'collectd::plugin::netlink':
+    interfaces        => ['eth0', 'tun-udp'],
+    verboseinterfaces => ['eth0', 'tun-udp'],
+    ignoreselected    => false,
+  }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
 }
@@ -510,7 +526,14 @@ node 'vpn03c' {
   }
   class {'collectd::plugin::load':}
   class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':}
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+    port => 25826,
+  }
+  class { 'collectd::plugin::netlink':
+    interfaces        => ['eth0', 'tun-udp'],
+    verboseinterfaces => ['eth0', 'tun-udp'],
+    ignoreselected    => false,
+  }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
 }
