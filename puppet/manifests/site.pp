@@ -93,7 +93,7 @@ node 'monitor' {
     restrict_writes => true,
     jump_dir        => '/var/lib/collectd/rrd',
     timeout         => 600,
-    delay           => 60,
+    delay           => 120,
   }
 
   # nginx configuration
