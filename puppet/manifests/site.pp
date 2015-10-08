@@ -284,7 +284,7 @@ node 'config.berlin.freifunk.net' {
     ensure   => present,
     ssl      => true,
     vhost    => 'config.berlin.freifunk.net',
-    www_root => '/var/www/nipap-wizard/app/static',
+    www_root => '/var/www/nipap-wizard/app/',
     location => '/static',
   }
   nginx::resource::location { '@nipap-wizard':
