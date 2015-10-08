@@ -321,6 +321,7 @@ node 'config.berlin.freifunk.net' {
   package { [
     'libffi-dev',
     'libpq-dev',
+    'python3-dev',
     'python-flask',
     'python-flask-migrate',
     'python-flask-script',
@@ -363,7 +364,7 @@ node 'config.berlin.freifunk.net' {
       socket            => '/run/uwsgi/app/ca.berlin.freifunk.net/socket',
       master            => 'true',
       processes         => '2',
-      pythonpath        => '/var/www/ca.berlin.freifunk.net/env/lib/python2.7/site-packages/',
+      pythonpath        => '/var/www/ca.berlin.freifunk.net/env/lib/python3.4/site-packages/',
       chdir             => '/var/www/ca.berlin.freifunk.net',
       module            => 'manage:app',
     }
@@ -419,6 +420,8 @@ node 'config.berlin.freifunk.net' {
   }
   python::virtualenv { '/var/www/ca.berlin.freifunk.net/env':
     ensure       => present,
+    version      => '3',
+    virtualenv   => 'virtualenv',
     requirements => '/var/www/ca.berlin.freifunk.net/requirements.txt',
     owner        => 'www-data',
     group        => 'www-data',
@@ -436,7 +439,8 @@ node 'config.berlin.freifunk.net' {
         'python-flask-sqlalchemy',
         'python-flaskext.wtf',
         'python-psycopg2',
-        'python-pynipap'
+        'python-pynipap',
+        'python3-dev'
       ],
       Vcsrepo['/var/www/ca.berlin.freifunk.net']
     ]
