@@ -329,6 +329,7 @@ node 'config.berlin.freifunk.net' {
     'python-flaskext.wtf',
     'python-psycopg2',
     'uwsgi-plugin-python',
+    'uwsgi-plugin-python3',
     'python-pynipap'
   ]:
     ensure  => present,
@@ -360,7 +361,7 @@ node 'config.berlin.freifunk.net' {
     uid                 => 'www-data',
     gid                 => 'www-data',
     application_options => {
-      plugins           => 'python',
+      plugins           => 'python3',
       socket            => '/run/uwsgi/app/ca.berlin.freifunk.net/socket',
       master            => 'true',
       processes         => '2',
