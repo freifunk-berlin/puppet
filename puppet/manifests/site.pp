@@ -186,6 +186,7 @@ node 'buildbot.berlin.freifunk.net' {
     ssl         => true,
     ssl_cert    => "/etc/ssl/certs/buildbot.berlin.freifunk.net.cert",
     ssl_key     => "/etc/ssl/private/buildbot.berlin.freifunk.net.key",
+    ssl_dhparam => "/etc/ssl/private/buildbot.berlin.freifunk.net.dh",
   }
   nginx::resource::location { '/buildbot':
     ensure    => present,
@@ -264,6 +265,7 @@ node 'config.berlin.freifunk.net' {
     ssl         => true,
     ssl_cert    => "/etc/ssl/certs/config.berlin.freifunk.net.cert",
     ssl_key     => "/etc/ssl/private/config.berlin.freifunk.net.key",
+    ssl_dhparam => "/etc/ssl/private/config.berlin.freifunk.net.dh",
     www_root    => '/var/www/nipap-wizard/app/static',
     try_files   => ['$uri', '@nipap-wizard'],
   }
@@ -277,6 +279,7 @@ node 'config.berlin.freifunk.net' {
     #ssl                => true,
     #ssl_cert           => "/etc/ssl/certs/ca.berlin.freifunk.net.cert",
     #ssl_key            => "/etc/ssl/private/ca.berlin.freifunk.net.key",
+    #ssl_dhparam        => "/etc/ssl/private/ca.berlin.freifunk.net.dh",
     www_root            => '/var/www/ca.berlin.freifunk.net/static', # TODO check this
     try_files           => ['$uri', '@ca.berlin.freifunk.net'],
   }
