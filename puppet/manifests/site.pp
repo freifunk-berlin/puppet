@@ -276,10 +276,10 @@ node 'config.berlin.freifunk.net' {
     ipv6_listen_options => '',
     access_log          => '/dev/null',
     error_log           => '/dev/null',
-    #ssl                => true,
-    #ssl_cert           => "/etc/ssl/certs/ca.berlin.freifunk.net.cert",
-    #ssl_key            => "/etc/ssl/private/ca.berlin.freifunk.net.key",
-    #ssl_dhparam        => "/etc/ssl/private/ca.berlin.freifunk.net.dh",
+    ssl                 => true,
+    ssl_cert            => "/etc/ssl/certs/ca.berlin.freifunk.net.cert",
+    ssl_key             => "/etc/ssl/private/ca.berlin.freifunk.net.key",
+    ssl_dhparam         => "/etc/ssl/private/ca.berlin.freifunk.net.dh",
     www_root            => '/var/www/ca.berlin.freifunk.net/static', # TODO check this
     try_files           => ['$uri', '@ca.berlin.freifunk.net'],
   }
@@ -301,7 +301,7 @@ node 'config.berlin.freifunk.net' {
   }
   nginx::resource::location { '@ca.berlin.freifunk.net':
     ensure              => present,
-    #ssl                 => true,
+    ssl                 => true,
     vhost               => 'ca.berlin.freifunk.net',
     location_custom_cfg => {
       'include'         => 'uwsgi_params',
