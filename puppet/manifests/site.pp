@@ -43,17 +43,17 @@ class base_node() {
   sysctl { 'net.ipv6.conf.all.use_tempaddr': value => '0' }
 
   # configure smart host mail setup
-  class { 'exim4':
-    configtype => 'satellite',
-    smarthost  => 'ssl.coulmann.de',
-  }
-  # set mail alias for root
-  mailalias { 'root':
-    ensure    => present,
-    name      => 'root',
-    recipient => 'noc@berlin.freifunk.net',
-    target    => "/etc/email-addresses",
-  }
+  #class { 'exim4':
+  #  configtype => 'satellite',
+  #  smarthost  => 'ssl.coulmann.de',
+  #}
+  ## set mail alias for root
+  #mailalias { 'root':
+  #  ensure    => present,
+  #  name      => 'root',
+  #  recipient => 'noc@berlin.freifunk.net',
+  #  target    => "/etc/email-addresses",
+  #}
 
 
 }
