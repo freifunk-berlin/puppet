@@ -466,6 +466,7 @@ node 'vpn03a' {
     purge_config => true,
   }
   class {'collectd::plugin::cpu':}
+  class {'collectd::plugin::conntrack':}
   class {'collectd::plugin::interface':
     interfaces     => ['eth0'],
     ignoreselected => false,
@@ -496,6 +497,7 @@ node 'vpn03b' {
     recurse      => true,
     purge_config => true,
   }
+  class {'collectd::plugin::conntrack':}
   class {'collectd::plugin::cpu':}
   class {'collectd::plugin::interface':
     interfaces     => ['eth0'],
@@ -528,6 +530,7 @@ node 'vpn03c' {
     purge_config => true,
   }
   class {'collectd::plugin::cpu':}
+  class {'collectd::plugin::conntrack':}
   class {'collectd::plugin::interface':
     interfaces     => ['eth0'],
     ignoreselected => false,
