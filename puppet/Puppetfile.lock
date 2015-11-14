@@ -48,7 +48,7 @@ GIT
 GIT
   remote: https://github.com/freifunk-berlin/puppet-vpn03
   ref: master
-  sha: a9910a88df06f0d87570ace26fe51419df5354cf
+  sha: d002925fa49c45fa2105fe841117670d51811967
   specs:
     vpn03 (0.0.1)
 
