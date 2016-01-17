@@ -209,7 +209,7 @@ node 'buildbot.berlin.freifunk.net' {
     owner   => 'buildbot',
   }
   # add cron file that removes old buildbot firmware builds
-  file { '/etc/cron.hourly/buildbot-remove-old-builds.sh':
+  file { '/etc/cron.hourly/buildbot-remove-old-builds':
     ensure => present,
     source => 'puppet:///modules/files/buildbot-remove-old-builds.sh',
   }
