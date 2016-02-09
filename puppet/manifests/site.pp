@@ -548,3 +548,35 @@ node 'vpn03c' {
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
 }
+
+node 'vpn03e' {
+  class { 'base_node': }
+  class { 'vpn03':
+    inet_add => '77.87.50',
+    inet_min => '241',
+    inet_max => '254',
+  }
+  class { '::collectd':
+    purge        => true,
+    recurse      => true,
+    purge_config => true,
+  }
+  class {'collectd::plugin::cpu':}
+  class {'collectd::plugin::conntrack':}
+  class {'collectd::plugin::interface':
+    interfaces     => ['eth0'],
+    ignoreselected => false,
+  }
+  class {'collectd::plugin::load':}
+  class {'collectd::plugin::memory':}
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+    port => 25826,
+  }
+  class { 'collectd::plugin::netlink':
+    interfaces        => ['eth0', 'tun-udp'],
+    verboseinterfaces => ['eth0', 'tun-udp'],
+    ignoreselected    => false,
+  }
+  class {'collectd::plugin::processes':}
+  class {'collectd::plugin::swap':}
+}
