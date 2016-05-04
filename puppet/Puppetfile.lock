@@ -55,7 +55,7 @@ GIT
 GIT
   remote: https://github.com/freifunk/berlin-puppet-files
   ref: master
-  sha: efd59bdae303430909fb2a9b23bab178d25ae83b
+  sha: 758ef56c8b2daae64f8e19862243f53bcad96b91
   specs:
     files (0.0.1)
 
