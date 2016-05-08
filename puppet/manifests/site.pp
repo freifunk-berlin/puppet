@@ -616,7 +616,7 @@ node 'vpn03e' {
 node 'vpn03f' {
   class { 'base_node': }
   class { 'vpn03':
-    inet_add => '193.96.224.244',
+    inet_add => '193.96.224',
     inet_min => '243',
     inet_max => '244',
   }
