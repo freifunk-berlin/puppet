@@ -344,6 +344,9 @@ node 'config.berlin.freifunk.net' {
     install_pip        => false,
     install_python_dev => false,
     package_provider   => 'apt',
+    emperor_options    => {
+      hook-as-root     => 'exec:mkdir -p -m 775 /run/uwsgi/app; chown %u:www-data /run/uwsgi/app',
+    }
   }
   uwsgi::app{ 'nipap-wizard':
     ensure              => present,
@@ -357,6 +360,7 @@ node 'config.berlin.freifunk.net' {
       pythonpath        => '/var/www/nipap-wizard/env/lib/python2.7/site-packages/',
       chdir             => '/var/www/nipap-wizard',
       module            => 'manage:app',
+      hook-asap         => 'exec:mkdir -p /run/uwsgi/app/%n/',
     }
   }
   uwsgi::app{ 'ca.berlin.freifunk.net':
@@ -371,6 +375,7 @@ node 'config.berlin.freifunk.net' {
       pythonpath        => '/var/www/ca.berlin.freifunk.net/env/lib/python3.4/site-packages/',
       chdir             => '/var/www/ca.berlin.freifunk.net',
       module            => 'manage:app',
+      hook-asap         => 'exec:mkdir -p /run/uwsgi/app/%n/',
     }
   }
 
