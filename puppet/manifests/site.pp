@@ -495,8 +495,8 @@ node 'vpn03b' {
   class { 'vpn03':
     inet_dev => 'ens3',
     inet_add => '77.87.49',
-    inet_min => '1',
-    inet_max => '30',
+    inet_min => '249',
+    inet_max => '254',
   }
   class { '::collectd':
     purge        => true,
