@@ -493,6 +493,7 @@ node 'vpn03a' {
 node 'vpn03b' {
   class { 'base_node': }
   class { 'vpn03':
+    inet_dev => 'ens3',
     inet_add => '77.87.49',
     inet_min => '1',
     inet_max => '30',
@@ -525,6 +526,7 @@ node 'vpn03b' {
 node 'vpn03c' {
   class { 'base_node': }
   class { 'vpn03':
+    inet_dev => 'ens3',
     inet_add => '77.87.49',
     inet_min => '33',
     inet_max => '62',
