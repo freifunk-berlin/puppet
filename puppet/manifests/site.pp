@@ -528,8 +528,8 @@ node 'vpn03c' {
   class { 'vpn03':
     inet_dev => 'ens3',
     inet_add => '77.87.49',
-    inet_min => '33',
-    inet_max => '62',
+    inet_min => '241',
+    inet_max => '246',
   }
   class { '::collectd':
     purge        => true,
