@@ -515,8 +515,8 @@ node 'vpn03b' {
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
-    interfaces        => ['eth0', 'tun-udp'],
-    verboseinterfaces => ['eth0', 'tun-udp'],
+    interfaces        => ['ens3', 'tun-udp'],
+    verboseinterfaces => ['ens3', 'tun-udp'],
     ignoreselected    => false,
   }
   class {'collectd::plugin::processes':}
@@ -548,8 +548,8 @@ node 'vpn03c' {
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
-    interfaces        => ['eth0', 'tun-udp'],
-    verboseinterfaces => ['eth0', 'tun-udp'],
+    interfaces        => ['ens3', 'tun-udp'],
+    verboseinterfaces => ['ens3', 'tun-udp'],
     ignoreselected    => false,
   }
   class {'collectd::plugin::processes':}
