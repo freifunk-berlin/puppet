@@ -153,6 +153,13 @@ node 'monitor' {
     source => 'puppet:///modules/files/config.local.php',
     owner  => 'www-data',
   }
+  
+  # add assocs.json plugin for cgp
+  file { '/srv/www/monitor.berlin.freifunk.net/plugin/assocs.json':
+    ensure => present,
+    source => 'puppet:///modules/files/assocs.json',
+    owner  => 'www-data',
+  }
 
   # type dbs for cgp
   file { '/usr/share/collectd/iwinfo_types.db':
