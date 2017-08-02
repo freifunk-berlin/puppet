@@ -153,7 +153,7 @@ node 'monitor' {
     source => 'puppet:///modules/files/config.local.php',
     owner  => 'www-data',
   }
-  
+
   # add assocs.json plugin for cgp
   file { '/srv/www/monitor.berlin.freifunk.net/plugin/assocs.json':
     ensure => present,
@@ -653,6 +653,39 @@ node 'vpn03f' {
   class { 'collectd::plugin::netlink':
     interfaces        => ['eth0', 'tun-udp'],
     verboseinterfaces => ['eth0', 'tun-udp'],
+    ignoreselected    => false,
+  }
+  class {'collectd::plugin::processes':}
+  class {'collectd::plugin::swap':}
+}
+
+node 'vpn03g' {
+  class { 'base_node': }
+  class { 'vpn03':
+    inet_add => '185.197.132',
+    inet_min => '10',
+    inet_max => '10',
+    inet_dev => 'ens3',
+  }
+  class { '::collectd':
+    purge        => true,
+    recurse      => true,
+    purge_config => true,
+  }
+  class {'collectd::plugin::cpu':}
+  class {'collectd::plugin::conntrack':}
+  class {'collectd::plugin::interface':
+    interfaces     => ['ens3'],
+    ignoreselected => false,
+  }
+  class {'collectd::plugin::load':}
+  class {'collectd::plugin::memory':}
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+    port => 25826,
+  }
+  class { 'collectd::plugin::netlink':
+    interfaces        => ['ens3', 'tun-udp'],
+    verboseinterfaces => ['ens3', 'tun-udp'],
     ignoreselected    => false,
   }
   class {'collectd::plugin::processes':}
