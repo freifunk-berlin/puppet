@@ -690,4 +690,8 @@ node 'vpn03g' {
   }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
+  class { 'community-tunneldigger':
+    interface         => 'ens3',
+    address           => '185.197.132.10',
+  }
 }
