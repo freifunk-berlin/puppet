@@ -20,10 +20,10 @@ mod 'files',
   :git => 'https://github.com/freifunk/berlin-puppet-files'
 mod 'vpn03',
   :git => 'https://github.com/freifunk-berlin/puppet-vpn03'
-mod 'tunneldigger'
+mod 'tunneldigger',
   :git => 'https://github.com/freifunk-berlin/puppet-tunneldigger'
-mod 'community-tunneldigger'
-  :git => 'https://github.com/freifunk-berlin/puppet-community-tunneldigger'
+mod 'communitytunnel',
+  :git => 'https://github.com/freifunk-berlin/puppet-communitytunnel'
 mod 'uwsgi',
   :git => 'https://github.com/Engage/puppet-uwsgi'
 mod 'python',
