@@ -46,9 +46,23 @@ GIT
     rrdcached (0.0.1)
 
 GIT
+  remote: https://github.com/freifunk-berlin/puppet-communitytunnel
+  ref: master
+  sha: b4b40689f20a66927c408e167e1faa23a13bb4e7
+  specs:
+    communitytunnel (0.0.1)
+
+GIT
+  remote: https://github.com/freifunk-berlin/puppet-tunneldigger
+  ref: master
+  sha: 738ac51dbec4e43a5cc7f886245255c64dd26927
+  specs:
+    tunneldigger (0.0.1)
+
+GIT
   remote: https://github.com/freifunk-berlin/puppet-vpn03
   ref: master
-  sha: d11d9a64df3fc39d2a305fd5f8be3f2916572ba4
+  sha: 34e4231440bd847cf54c209e475329196d0c151c
   specs:
     vpn03 (0.0.1)
 
@@ -105,6 +119,7 @@ GIT
 
 DEPENDENCIES
   collectd (>= 0)
+  communitytunnel (>= 0)
   exim4 (>= 0)
   files (>= 0)
   nginx (>= 0)
@@ -117,6 +132,7 @@ DEPENDENCIES
   python (>= 0)
   rrdcached (>= 0)
   sysctl (>= 0)
+  tunneldigger (>= 0)
   unattended_upgrades (>= 0)
   uwsgi (>= 0)
   vpn03 (>= 0)
