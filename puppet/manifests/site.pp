@@ -699,7 +699,7 @@ node 'l105-bbbvpn' {
     interface        => 'eth0',
     mesh_address     => '10.230.38.205',
     mesh_interface   => 'eth1',
-    tunnel_address   => '10.36.193.1',
+    tunnel_address   => '10.36.193.1/24',
     dhcp_range       => '10.36.193.4,10.36.193.254,255.255.255.0,1h',
     name             => 'b.bbb-vpn',
   }
