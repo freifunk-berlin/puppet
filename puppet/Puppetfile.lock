@@ -48,7 +48,7 @@ GIT
 GIT
   remote: https://github.com/freifunk-berlin/puppet-bbbdigger
   ref: master
-  sha: 6570bb703d794adf6cadada5463516f1e5fd02e9
+  sha: dbf6927799d264d110a5efa7f1b1124b2c6b7e1f
   specs:
     bbbdigger (0.0.1)
 
