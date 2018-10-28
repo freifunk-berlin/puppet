@@ -55,14 +55,14 @@ GIT
 GIT
   remote: https://github.com/freifunk-berlin/puppet-communitytunnel
   ref: master
-  sha: 1db51d7318667841d73d411e2a9c92e15587c1da
+  sha: 42e3070632a66e756de1605913a86c97884360f0
   specs:
     communitytunnel (0.0.1)
 
 GIT
   remote: https://github.com/freifunk-berlin/puppet-tunneldigger
   ref: master
-  sha: 05b5fafeae44765253d2be35bdfd5154345e3d6a
+  sha: 7ebc1327b47ce7d34b1351186839f09d3fce08da
   specs:
     tunneldigger (0.0.1)
 
