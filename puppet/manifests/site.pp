@@ -94,6 +94,7 @@ node 'monitor' {
     jump_dir        => '/var/lib/collectd/rrd',
     timeout         => 600,
     delay           => 120,
+    maxwait         => 60,
   }
 
   # nginx configuration
