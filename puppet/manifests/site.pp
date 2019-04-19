@@ -578,7 +578,7 @@ node 'vpn03d' {
   class {'collectd::plugin::cpu':}
   class {'collectd::plugin::conntrack':}
   class {'collectd::plugin::interface':
-    interfaces     => ['eth0'],
+    interfaces     => ['eth0', 'diggerALL'],
     ignoreselected => false,
   }
   class {'collectd::plugin::load':}
@@ -587,12 +587,16 @@ node 'vpn03d' {
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
-    interfaces        => ['eth0', 'tun-udp'],
-    verboseinterfaces => ['eth0', 'tun-udp'],
+    interfaces        => ['eth0', 'tun-udp', 'diggerALL'],
+    verboseinterfaces => ['eth0', 'tun-udp', 'diggerALL'],
     ignoreselected    => false,
   }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
+  class { 'communitytunnel':
+    interface         => 'eth0',
+    address           => '185.66.195.250',
+  }
 }
 
 node 'vpn03e' {
@@ -642,7 +646,7 @@ node 'vpn03f' {
   class {'collectd::plugin::cpu':}
   class {'collectd::plugin::conntrack':}
   class {'collectd::plugin::interface':
-    interfaces     => ['eth0'],
+    interfaces     => ['eth0', 'diggerALL'],
     ignoreselected => false,
   }
   class {'collectd::plugin::load':}
@@ -651,12 +655,16 @@ node 'vpn03f' {
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
-    interfaces        => ['eth0', 'tun-udp'],
-    verboseinterfaces => ['eth0', 'tun-udp'],
+    interfaces        => ['eth0', 'tun-udp', 'diggerALL'],
+    verboseinterfaces => ['eth0', 'tun-udp', 'diggerALL'],
     ignoreselected    => false,
   }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
+  class { 'communitytunnel':
+    interface         => 'eth0',
+    address           => '193.96.224.243',
+  }
 }
 
 node 'vpn03g' {
@@ -675,7 +683,7 @@ node 'vpn03g' {
   class {'collectd::plugin::cpu':}
   class {'collectd::plugin::conntrack':}
   class {'collectd::plugin::interface':
-    interfaces     => ['ens3'],
+    interfaces     => ['ens3', 'diggerALL'],
     ignoreselected => false,
   }
   class {'collectd::plugin::load':}
@@ -684,8 +692,8 @@ node 'vpn03g' {
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
-    interfaces        => ['ens3', 'tun-udp'],
-    verboseinterfaces => ['ens3', 'tun-udp'],
+    interfaces        => ['ens3', 'tun-udp', 'diggerALL'],
+    verboseinterfaces => ['ens3', 'tun-udp', 'diggerALL'],
     ignoreselected    => false,
   }
   class {'collectd::plugin::processes':}
@@ -693,5 +701,41 @@ node 'vpn03g' {
   class { 'communitytunnel':
     interface         => 'ens3',
     address           => '185.197.132.10',
+  }
+}
+
+node 'vpn03h' {
+  class { 'base_node': }
+  class { 'vpn03':
+    inet_add => '185.183.158',
+    inet_min => '195',
+    inet_max => '195',
+  }
+  class { '::collectd':
+    purge        => true,
+    recurse      => true,
+    purge_config => true,
+  }
+  class {'collectd::plugin::cpu':}
+  class {'collectd::plugin::conntrack':}
+  class {'collectd::plugin::interface':
+    interfaces     => ['eth0', 'diggerALL'],
+    ignoreselected => false,
+  }
+  class {'collectd::plugin::load':}
+  class {'collectd::plugin::memory':}
+  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+    port => 25826,
+  }
+  class { 'collectd::plugin::netlink':
+    interfaces        => ['eth0', 'tun-udp', 'diggerALL'],
+    verboseinterfaces => ['eth0', 'tun-udp', 'diggerALL'],
+    ignoreselected    => false,
+  }
+  class {'collectd::plugin::processes':}
+  class {'collectd::plugin::swap':}
+  class { 'communitytunnel':
+    interface         => 'eth0',
+    address           => '185.183.158.195',
   }
 }
