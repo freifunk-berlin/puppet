@@ -92,9 +92,8 @@ node 'monitor' {
   class { 'rrdcached':
     restrict_writes => true,
     jump_dir        => '/var/lib/collectd/rrd',
-    timeout         => 600,
-    delay           => 120,
-    maxwait         => 60,
+    timeout         => 1800,
+    delay           => 600,
   }
 
   # nginx configuration
