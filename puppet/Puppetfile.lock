@@ -60,6 +60,20 @@ GIT
     rrdcached (0.0.1)
 
 GIT
+  remote: https://github.com/freifunk-berlin/puppet-bbbdigger
+  ref: master
+  sha: 6570bb703d794adf6cadada5463516f1e5fd02e9
+  specs:
+    bbbdigger (0.0.1)
+
+GIT
+  remote: https://github.com/freifunk-berlin/puppet-communitytunnel
+  ref: master
+  sha: 90eb87be58284c86d66b053a4e7cebca2a24968c
+  specs:
+    communitytunnel (0.0.1)
+
+GIT
   remote: https://github.com/freifunk-berlin/puppet-tunneldigger
   ref: master
   sha: 7ebc1327b47ce7d34b1351186839f09d3fce08da
@@ -118,6 +132,7 @@ GIT
     sysctl (1.0.2)
 
 DEPENDENCIES
+  bbbdigger (>= 0)
   collectd (>= 0)
   communitytunnel (>= 0)
   exim4 (>= 0)

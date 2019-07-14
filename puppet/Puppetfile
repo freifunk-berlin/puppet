@@ -24,6 +24,8 @@ mod 'tunneldigger',
   :git => 'https://github.com/freifunk-berlin/puppet-tunneldigger'
 mod 'communitytunnel',
   :git => 'https://github.com/freifunk-berlin/puppet-communitytunnel'
+mod 'bbbdigger',
+  :git => 'https://github.com/freifunk-berlin/puppet-bbbdigger'
 mod 'uwsgi',
   :git => 'https://github.com/Engage/puppet-uwsgi'
 mod 'python',
