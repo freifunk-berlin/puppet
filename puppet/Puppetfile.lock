@@ -55,7 +55,7 @@ GIT
 GIT
   remote: https://github.com/freifunk-berlin/puppet-rrdcached.git
   ref: master
-  sha: b3766698320ea808b2b55ad42aad27d4efc4787e
+  sha: 25a775c1ab9431862fa222c62ba82107942f7f1d
   specs:
     rrdcached (0.0.1)
 
