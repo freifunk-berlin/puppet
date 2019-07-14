@@ -691,4 +691,8 @@ node 'vpn03g' {
   }
   class {'collectd::plugin::processes':}
   class {'collectd::plugin::swap':}
+  class { 'communitytunnel':
+    interface         => 'ens3',
+    address           => '185.197.132.10',
+  }
 }
