@@ -39,18 +39,25 @@ GIT
     php-fpm (0.0.1)
 
 GIT
-  remote: https://github.com/booo/puppet-rrdcached.git
-  ref: master
-  sha: b5d887c6b7696dc4eee5277b6de352412f3bc1bd
-  specs:
-    rrdcached (0.0.1)
-
-GIT
   remote: https://github.com/freifunk-berlin/puppet-communitytunnel
   ref: master
   sha: 90eb87be58284c86d66b053a4e7cebca2a24968c
   specs:
     communitytunnel (0.0.1)
+
+GIT
+  remote: https://github.com/freifunk-berlin/puppet-files
+  ref: master
+  sha: d07aa6402b657b5b8911684315feeff95321b272
+  specs:
+    files (0.0.1)
+
+GIT
+  remote: https://github.com/freifunk-berlin/puppet-rrdcached.git
+  ref: master
+  sha: 7cd4bb1a19d5c2f859ad27156884546bb3529885
+  specs:
+    rrdcached (0.0.1)
 
 GIT
   remote: https://github.com/freifunk-berlin/puppet-tunneldigger
@@ -65,13 +72,6 @@ GIT
   sha: 34e4231440bd847cf54c209e475329196d0c151c
   specs:
     vpn03 (0.0.1)
-
-GIT
-  remote: https://github.com/freifunk/berlin-puppet-files
-  ref: master
-  sha: 758ef56c8b2daae64f8e19862243f53bcad96b91
-  specs:
-    files (0.0.1)
 
 GIT
   remote: https://github.com/jfryman/puppet-nginx.git
