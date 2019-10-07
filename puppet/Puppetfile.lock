@@ -41,7 +41,7 @@ GIT
 GIT
   remote: https://github.com/freifunk-berlin/puppet-communitytunnel
   ref: master
-  sha: 90eb87be58284c86d66b053a4e7cebca2a24968c
+  sha: 4c34b78c85d2f58efc1fb8ae060a799cec8f2c25
   specs:
     communitytunnel (0.0.1)
 
@@ -62,7 +62,7 @@ GIT
 GIT
   remote: https://github.com/freifunk-berlin/puppet-bbbdigger
   ref: master
-  sha: 6570bb703d794adf6cadada5463516f1e5fd02e9
+  sha: 3ee15a5804a8e6bc8b458b88f8e0bc797a531e4a
   specs:
     bbbdigger (0.0.1)
 
