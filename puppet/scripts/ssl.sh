@@ -7,6 +7,11 @@ if [ "${COMMON_NAME}x" = "x" ]; then
   exit 1
 fi
 
+if [ -f "/etc/ssl/private/${COMMON_NAME}.key" ]; then
+  echo "Cert already exists, skipping generating it"
+  exit 0
+fi
+
 SUB="
 C=DE
 ST=Berlin
