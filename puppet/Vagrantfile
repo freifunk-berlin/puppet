@@ -8,11 +8,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
 
+
+
   config.vm.box = "ubuntu/bionic64"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
+
+  # TODO: move forwarded ports to the machine definition so you can run multiple at a time
   config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :forwarded_port, guest: 443, host: 8443
 
@@ -55,6 +59,41 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+
+
+  config.vm.define "vpn03" do |vpn03|
+    hostname = "vpn03a.berlin.freifunk.net"
+    vpn03.vm.host_name = hostname
+    # the vpn02 module depends on packages only available for older OS releases
+
+    config.vm.box = "ubuntu/xenial64"
+
+    vpn03.vm.provision "shell",
+      inline: "apt-get update; apt-get install -y puppet "
+
+    vpn03.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "site.pp"
+      puppet.module_path = "modules"
+    end
+  end
+
+  config.vm.define "bbbvpn" do |bbbvpn|
+  # the bbbvpn module depends on packages only available for debian jessie and stretch
+    bbbvpn.vm.box = "debian/contrib-stretch64"
+    hostname = "l105-bbbvpn.berlin.freifunk.net"
+    bbbvpn.vm.host_name = hostname
+
+    bbbvpn.vm.provision "shell",
+      inline: "apt-get update; apt-get install -y puppet "
+
+    bbbvpn.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "site.pp"
+      puppet.module_path = "modules"
+    end
+  end
+
   config.vm.provider :virtualbox do |vb|
     # Don't boot with headless mode
     #vb.gui = true
@@ -63,4 +102,3 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--memory", "512"]
   end
 end
-
