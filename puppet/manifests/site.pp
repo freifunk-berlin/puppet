@@ -1,12 +1,12 @@
-class base_node() {
+class base_node () {
 
   class { 'apt': }
 
   # update packages before we install any
-  exec { "apt-update":
-    command => "/usr/bin/apt-get update"
+  exec { 'apt-update':
+    command => '/usr/bin/apt-get update'
   }
-  Exec["apt-update"] -> Package <| |>
+  Exec['apt-update'] -> Package <| |>
 
   # do not install recommended packages
   Package {
@@ -62,7 +62,7 @@ node 'monitor' {
 
   class { 'base_node': }
 
-  package { ['rrdtool', 'php5']:
+  package { ['rrdtool', 'php7.2']:
     ensure => installed,
   }
 
@@ -77,7 +77,7 @@ node 'monitor' {
       '/usr/share/collectd/kmodem_types.db'
     ]
   }
-  collectd::plugin::network::listener{'*':
+  collectd::plugin::network::listener { '*':
     port => 25826,
   }
   class { 'collectd::plugin::rrdcached':
@@ -124,9 +124,9 @@ node 'monitor' {
   }
 
   # php-fpm configuration (nginx backend)
-  class { 'php-fpm': }
-  php-fpm::pool { 'monitor.berlin.freifunk.net':
-    listen  => '/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
+  class { 'php_fpm': }
+  php_fpm::pool { 'monitor.berlin.freifunk.net':
+    listen => '/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
   }
 
   # root directory for monitor.berlin.freifunk.net
@@ -168,8 +168,8 @@ node 'monitor' {
     require => Class['collectd'],
   }
   file { '/usr/share/collectd/kmodem_types.db':
-    ensure => present,
-    source => 'puppet:///modules/files/kmodem_types.db',
+    ensure  => present,
+    source  => 'puppet:///modules/files/kmodem_types.db',
     require => Class['collectd'],
   }
 }
@@ -191,9 +191,9 @@ node 'buildbot.berlin.freifunk.net' {
     error_log   => '/dev/null',
     proxy       => 'http://buildbot',
     ssl         => true,
-    ssl_cert    => "/etc/ssl/certs/buildbot.berlin.freifunk.net.cert",
-    ssl_key     => "/etc/ssl/private/buildbot.berlin.freifunk.net.key",
-    ssl_dhparam => "/etc/ssl/private/buildbot.berlin.freifunk.net.dh",
+    ssl_cert    => '/etc/ssl/certs/buildbot.berlin.freifunk.net.cert',
+    ssl_key     => '/etc/ssl/private/buildbot.berlin.freifunk.net.key',
+    ssl_dhparam => '/etc/ssl/private/buildbot.berlin.freifunk.net.dh',
   }
   nginx::resource::location { '/buildbot':
     ensure    => present,
@@ -212,8 +212,8 @@ node 'buildbot.berlin.freifunk.net' {
     '/usr/local/src/www/htdocs/buildbot/unstable',
     '/usr/local/src/www/htdocs/buildbot/stable',
   ]:
-    ensure  => directory,
-    owner   => 'buildbot',
+    ensure => directory,
+    owner  => 'buildbot',
   }
   # add cron file that removes old buildbot firmware builds
   file { '/etc/cron.hourly/buildbot-remove-old-builds':
@@ -229,23 +229,23 @@ node 'config.berlin.freifunk.net' {
     recurse      => true,
     purge_config => true,
   }
-  class {'collectd::plugin::cpu':}
-  class {'collectd::plugin::df':}
-  class {'collectd::plugin::disk':
-    disks => ['vda'],
+  class { 'collectd::plugin::cpu': }
+  class { 'collectd::plugin::df': }
+  class { 'collectd::plugin::disk':
+    disks          => ['vda'],
     ignoreselected => false,
   }
-  class {'collectd::plugin::interface':
+  class { 'collectd::plugin::interface':
     interfaces     => ['eth0'],
     ignoreselected => false,
   }
-  class {'collectd::plugin::load':}
-  class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+  class { 'collectd::plugin::load': }
+  class { 'collectd::plugin::memory': }
+  collectd::plugin::network::server { 'monitor.berlin.freifunk.net':
     port => 25826,
   }
-  class {'collectd::plugin::processes':}
-  class {'collectd::plugin::swap':}
+  class { 'collectd::plugin::processes': }
+  class { 'collectd::plugin::swap': }
 
   # nginx configuration
   class { 'nginx':
@@ -260,7 +260,7 @@ node 'config.berlin.freifunk.net' {
     use_default_location => false,
     index_files          => [],
     location_custom_cfg  => {},
-    vhost_cfg_append => {
+    vhost_cfg_append     => {
       'return' => '301 https://config.berlin.freifunk.net',
     }
   }
@@ -270,9 +270,9 @@ node 'config.berlin.freifunk.net' {
     access_log  => '/dev/null',
     error_log   => '/dev/null',
     ssl         => true,
-    ssl_cert    => "/etc/ssl/certs/config.berlin.freifunk.net.cert",
-    ssl_key     => "/etc/ssl/private/config.berlin.freifunk.net.key",
-    ssl_dhparam => "/etc/ssl/private/config.berlin.freifunk.net.dh",
+    ssl_cert    => '/etc/ssl/certs/config.berlin.freifunk.net.cert',
+    ssl_key     => '/etc/ssl/private/config.berlin.freifunk.net.key',
+    ssl_dhparam => '/etc/ssl/private/config.berlin.freifunk.net.dh',
     www_root    => '/var/www/nipap-wizard/app/static',
     try_files   => ['$uri', '@nipap-wizard'],
   }
@@ -284,9 +284,9 @@ node 'config.berlin.freifunk.net' {
     access_log          => '/dev/null',
     error_log           => '/dev/null',
     ssl                 => true,
-    ssl_cert            => "/etc/ssl/certs/ca.berlin.freifunk.net.cert",
-    ssl_key             => "/etc/ssl/private/ca.berlin.freifunk.net.key",
-    ssl_dhparam         => "/etc/ssl/private/ca.berlin.freifunk.net.dh",
+    ssl_cert            => '/etc/ssl/certs/ca.berlin.freifunk.net.cert',
+    ssl_key             => '/etc/ssl/private/ca.berlin.freifunk.net.key',
+    ssl_dhparam         => '/etc/ssl/private/ca.berlin.freifunk.net.dh',
     www_root            => '/var/www/ca.berlin.freifunk.net/static', # TODO check this
     try_files           => ['$uri', '@ca.berlin.freifunk.net'],
   }
@@ -302,8 +302,8 @@ node 'config.berlin.freifunk.net' {
     ssl                 => true,
     vhost               => 'config.berlin.freifunk.net',
     location_custom_cfg => {
-      'include'         => 'uwsgi_params',
-      'uwsgi_pass'      => 'unix:/run/uwsgi/app/nipap-wizard/socket',
+      'include'    => 'uwsgi_params',
+      'uwsgi_pass' => 'unix:/run/uwsgi/app/nipap-wizard/socket',
     },
   }
   nginx::resource::location { '@ca.berlin.freifunk.net':
@@ -311,8 +311,8 @@ node 'config.berlin.freifunk.net' {
     ssl                 => true,
     vhost               => 'ca.berlin.freifunk.net',
     location_custom_cfg => {
-      'include'         => 'uwsgi_params',
-      'uwsgi_pass'      => 'unix:/run/uwsgi/app/ca.berlin.freifunk.net/socket',
+      'include'    => 'uwsgi_params',
+      'uwsgi_pass' => 'unix:/run/uwsgi/app/ca.berlin.freifunk.net/socket',
     },
   }
 
@@ -352,37 +352,37 @@ node 'config.berlin.freifunk.net' {
     install_python_dev => false,
     package_provider   => 'apt',
     emperor_options    => {
-      hook-as-root     => 'exec:mkdir -p -m 775 /run/uwsgi/app; chown %u:www-data /run/uwsgi/app',
+      hook-as-root => 'exec:mkdir -p -m 775 /run/uwsgi/app; chown %u:www-data /run/uwsgi/app',
     }
   }
-  uwsgi::app{ 'nipap-wizard':
+  uwsgi::app { 'nipap-wizard':
     ensure              => present,
     uid                 => 'www-data',
     gid                 => 'www-data',
     application_options => {
-      plugins           => 'python',
-      socket            => '/run/uwsgi/app/nipap-wizard/socket',
-      master            => 'true',
-      processes         => '2',
-      pythonpath        => '/var/www/nipap-wizard/env/lib/python2.7/site-packages/',
-      chdir             => '/var/www/nipap-wizard',
-      module            => 'manage:app',
-      hook-asap         => 'exec:mkdir -p /run/uwsgi/app/%n/',
+      plugins    => 'python',
+      socket     => '/run/uwsgi/app/nipap-wizard/socket',
+      master     => 'true',
+      processes  => '2',
+      pythonpath => '/var/www/nipap-wizard/env/lib/python2.7/site-packages/',
+      chdir      => '/var/www/nipap-wizard',
+      module     => 'manage:app',
+      hook-asap  => 'exec:mkdir -p /run/uwsgi/app/%n/',
     }
   }
-  uwsgi::app{ 'ca.berlin.freifunk.net':
+  uwsgi::app { 'ca.berlin.freifunk.net':
     ensure              => present,
     uid                 => 'www-data',
     gid                 => 'www-data',
     application_options => {
-      plugins           => 'python3',
-      socket            => '/run/uwsgi/app/ca.berlin.freifunk.net/socket',
-      master            => 'true',
-      processes         => '2',
-      pythonpath        => '/var/www/ca.berlin.freifunk.net/env/lib/python3.4/site-packages/',
-      chdir             => '/var/www/ca.berlin.freifunk.net',
-      module            => 'manage:app',
-      hook-asap         => 'exec:mkdir -p /run/uwsgi/app/%n/',
+      plugins    => 'python3',
+      socket     => '/run/uwsgi/app/ca.berlin.freifunk.net/socket',
+      master     => 'true',
+      processes  => '2',
+      pythonpath => '/var/www/ca.berlin.freifunk.net/env/lib/python3.4/site-packages/',
+      chdir      => '/var/www/ca.berlin.freifunk.net',
+      module     => 'manage:app',
+      hook-asap  => 'exec:mkdir -p /run/uwsgi/app/%n/',
     }
   }
 
@@ -407,9 +407,9 @@ node 'config.berlin.freifunk.net' {
     ]
   }
 
-  class { 'python' :
-    virtualenv => true,
-    dev    => true, # needed by psycopg2
+  class { 'python':
+    virtualenv => 'present',
+    dev        => true, # needed by psycopg2
   }
   python::virtualenv { '/var/www/nipap-wizard/env':
     ensure       => present,
@@ -477,15 +477,15 @@ node 'vpn03a' {
     recurse      => true,
     purge_config => true,
   }
-  class {'collectd::plugin::cpu':}
-  class {'collectd::plugin::conntrack':}
-  class {'collectd::plugin::interface':
+  class { 'collectd::plugin::cpu': }
+  class { 'collectd::plugin::conntrack': }
+  class { 'collectd::plugin::interface':
     interfaces     => ['eth0'],
     ignoreselected => false,
   }
-  class {'collectd::plugin::load':}
-  class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+  class { 'collectd::plugin::load': }
+  class { 'collectd::plugin::memory': }
+  collectd::plugin::network::server { 'monitor.berlin.freifunk.net':
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
@@ -493,8 +493,8 @@ node 'vpn03a' {
     verboseinterfaces => ['eth0', 'tun-udp'],
     ignoreselected    => false,
   }
-  class {'collectd::plugin::processes':}
-  class {'collectd::plugin::swap':}
+  class { 'collectd::plugin::processes': }
+  class { 'collectd::plugin::swap': }
 }
 
 node 'vpn03b' {
@@ -510,15 +510,15 @@ node 'vpn03b' {
     recurse      => true,
     purge_config => true,
   }
-  class {'collectd::plugin::conntrack':}
-  class {'collectd::plugin::cpu':}
-  class {'collectd::plugin::interface':
+  class { 'collectd::plugin::conntrack': }
+  class { 'collectd::plugin::cpu': }
+  class { 'collectd::plugin::interface':
     interfaces     => ['eth0'],
     ignoreselected => false,
   }
-  class {'collectd::plugin::load':}
-  class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+  class { 'collectd::plugin::load': }
+  class { 'collectd::plugin::memory': }
+  collectd::plugin::network::server { 'monitor.berlin.freifunk.net':
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
@@ -526,8 +526,8 @@ node 'vpn03b' {
     verboseinterfaces => ['ens3', 'tun-udp'],
     ignoreselected    => false,
   }
-  class {'collectd::plugin::processes':}
-  class {'collectd::plugin::swap':}
+  class { 'collectd::plugin::processes': }
+  class { 'collectd::plugin::swap': }
 }
 
 node 'vpn03c' {
@@ -543,15 +543,15 @@ node 'vpn03c' {
     recurse      => true,
     purge_config => true,
   }
-  class {'collectd::plugin::cpu':}
-  class {'collectd::plugin::conntrack':}
-  class {'collectd::plugin::interface':
+  class { 'collectd::plugin::cpu': }
+  class { 'collectd::plugin::conntrack': }
+  class { 'collectd::plugin::interface':
     interfaces     => ['eth0'],
     ignoreselected => false,
   }
-  class {'collectd::plugin::load':}
-  class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+  class { 'collectd::plugin::load': }
+  class { 'collectd::plugin::memory': }
+  collectd::plugin::network::server { 'monitor.berlin.freifunk.net':
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
@@ -559,8 +559,8 @@ node 'vpn03c' {
     verboseinterfaces => ['ens3', 'tun-udp'],
     ignoreselected    => false,
   }
-  class {'collectd::plugin::processes':}
-  class {'collectd::plugin::swap':}
+  class { 'collectd::plugin::processes': }
+  class { 'collectd::plugin::swap': }
 }
 
 node 'vpn03d' {
@@ -575,15 +575,15 @@ node 'vpn03d' {
     recurse      => true,
     purge_config => true,
   }
-  class {'collectd::plugin::cpu':}
-  class {'collectd::plugin::conntrack':}
-  class {'collectd::plugin::interface':
+  class { 'collectd::plugin::cpu': }
+  class { 'collectd::plugin::conntrack': }
+  class { 'collectd::plugin::interface':
     interfaces     => ['eth0'],
     ignoreselected => false,
   }
-  class {'collectd::plugin::load':}
-  class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+  class { 'collectd::plugin::load': }
+  class { 'collectd::plugin::memory': }
+  collectd::plugin::network::server { 'monitor.berlin.freifunk.net':
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
@@ -591,8 +591,8 @@ node 'vpn03d' {
     verboseinterfaces => ['eth0', 'tun-udp'],
     ignoreselected    => false,
   }
-  class {'collectd::plugin::processes':}
-  class {'collectd::plugin::swap':}
+  class { 'collectd::plugin::processes': }
+  class { 'collectd::plugin::swap': }
 }
 
 node 'vpn03e' {
@@ -607,15 +607,15 @@ node 'vpn03e' {
     recurse      => true,
     purge_config => true,
   }
-  class {'collectd::plugin::cpu':}
-  class {'collectd::plugin::conntrack':}
-  class {'collectd::plugin::interface':
+  class { 'collectd::plugin::cpu': }
+  class { 'collectd::plugin::conntrack': }
+  class { 'collectd::plugin::interface':
     interfaces     => ['eth0'],
     ignoreselected => false,
   }
-  class {'collectd::plugin::load':}
-  class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+  class { 'collectd::plugin::load': }
+  class { 'collectd::plugin::memory': }
+  collectd::plugin::network::server { 'monitor.berlin.freifunk.net':
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
@@ -623,8 +623,8 @@ node 'vpn03e' {
     verboseinterfaces => ['eth0', 'tun-udp'],
     ignoreselected    => false,
   }
-  class {'collectd::plugin::processes':}
-  class {'collectd::plugin::swap':}
+  class { 'collectd::plugin::processes': }
+  class { 'collectd::plugin::swap': }
 }
 
 node 'vpn03f' {
@@ -639,15 +639,15 @@ node 'vpn03f' {
     recurse      => true,
     purge_config => true,
   }
-  class {'collectd::plugin::cpu':}
-  class {'collectd::plugin::conntrack':}
-  class {'collectd::plugin::interface':
+  class { 'collectd::plugin::cpu': }
+  class { 'collectd::plugin::conntrack': }
+  class { 'collectd::plugin::interface':
     interfaces     => ['eth0'],
     ignoreselected => false,
   }
-  class {'collectd::plugin::load':}
-  class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+  class { 'collectd::plugin::load': }
+  class { 'collectd::plugin::memory': }
+  collectd::plugin::network::server { 'monitor.berlin.freifunk.net':
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
@@ -655,8 +655,8 @@ node 'vpn03f' {
     verboseinterfaces => ['eth0', 'tun-udp'],
     ignoreselected    => false,
   }
-  class {'collectd::plugin::processes':}
-  class {'collectd::plugin::swap':}
+  class { 'collectd::plugin::processes': }
+  class { 'collectd::plugin::swap': }
 }
 
 node 'vpn03g' {
@@ -672,15 +672,15 @@ node 'vpn03g' {
     recurse      => true,
     purge_config => true,
   }
-  class {'collectd::plugin::cpu':}
-  class {'collectd::plugin::conntrack':}
-  class {'collectd::plugin::interface':
+  class { 'collectd::plugin::cpu': }
+  class { 'collectd::plugin::conntrack': }
+  class { 'collectd::plugin::interface':
     interfaces     => ['ens3'],
     ignoreselected => false,
   }
-  class {'collectd::plugin::load':}
-  class {'collectd::plugin::memory':}
-  collectd::plugin::network::server {'monitor.berlin.freifunk.net':
+  class { 'collectd::plugin::load': }
+  class { 'collectd::plugin::memory': }
+  collectd::plugin::network::server { 'monitor.berlin.freifunk.net':
     port => 25826,
   }
   class { 'collectd::plugin::netlink':
@@ -688,23 +688,23 @@ node 'vpn03g' {
     verboseinterfaces => ['ens3', 'tun-udp'],
     ignoreselected    => false,
   }
-  class {'collectd::plugin::processes':}
-  class {'collectd::plugin::swap':}
+  class { 'collectd::plugin::processes': }
+  class { 'collectd::plugin::swap': }
   class { 'communitytunnel':
-    interface         => 'ens3',
-    address           => '185.197.132.10',
+    interface => 'ens3',
+    address   => '185.197.132.10',
   }
 }
 
 node 'l105-bbbvpn' {
   class { 'base_node': }
   class { 'bbbdigger':
-    address          => '77.87.49.11',
-    interface        => 'eth0',
-    mesh_address     => '10.230.38.205',
-    mesh_interface   => 'backbone',
-    tunnel_address   => '10.36.193.1/24',
-    dhcp_range       => '10.36.193.4,10.36.193.254,255.255.255.0,1h',
-    name             => 'b.bbb-vpn',
+    address        => '77.87.49.11',
+    interface      => 'eth0',
+    mesh_address   => '10.230.38.205',
+    mesh_interface => 'backbone',
+    tunnel_address => '10.36.193.1/24',
+    dhcp_range     => '10.36.193.4,10.36.193.254,255.255.255.0,1h',
+    bbbdigger_name => 'b.bbb-vpn',
   }
 }
