@@ -7,8 +7,8 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu/trusty64"
-  #config.vm.box = "ubuntu/trusty32"
+
+  config.vm.box = "ubuntu/bionic64"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -30,6 +30,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.host_name = hostname
     web.vm.provision "shell", path: "./scripts/ssl.sh", args: hostname
 
+    web.vm.provision "shell",
+      inline: "apt-get update; apt-get install -y puppet "
+
     web.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
       puppet.manifest_file  = "site.pp"
@@ -41,6 +44,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     hostname = "monitor.berlin.freifunk.net"
     monitor.vm.host_name = hostname
     monitor.vm.provision "shell", path: "./scripts/ssl.sh", args: hostname
+
+    monitor.vm.provision "shell",
+      inline: "apt-get update; apt-get install -y puppet "
 
     monitor.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
@@ -57,3 +63,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--memory", "512"]
   end
 end
+
