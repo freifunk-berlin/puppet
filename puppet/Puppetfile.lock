@@ -8,6 +8,9 @@ FORGE
       puppetlabs-apt (>= 1.8.0, < 3.0.0)
       puppetlabs-concat (>= 1.1.1, < 3.0.0)
       puppetlabs-stdlib (>= 4.2.0, < 5.0.0)
+    puppet-python (2.2.2)
+      puppetlabs-stdlib (>= 4.6.0, < 6.0.0)
+      stahnma-epel (>= 1.2.2, < 2.0.0)
     puppet-unattended_upgrades (1.1.1)
       puppetlabs-apt (>= 2.2.0, < 3.0.0)
       puppetlabs-stdlib (>= 4.6.0, < 5.0.0)
@@ -17,21 +20,22 @@ FORGE
       puppetlabs-stdlib (>= 3.2.0, < 5.0.0)
     puppetlabs-ntp (4.2.0)
       puppetlabs-stdlib (>= 4.6.0, < 5.0.0)
-    puppetlabs-postgresql (4.9.0)
-      puppetlabs-apt (>= 1.8.0, < 3.0.0)
-      puppetlabs-concat (>= 1.1.0, < 3.0.0)
-      puppetlabs-stdlib (~> 4.0)
+    puppetlabs-postgresql (5.12.1)
+      puppetlabs-apt (>= 2.0.0, < 7.0.0)
+      puppetlabs-concat (>= 1.1.0, < 6.0.0)
+      puppetlabs-stdlib (>= 4.13.1, < 6.0.0)
     puppetlabs-stdlib (4.25.1)
     puppetlabs-vcsrepo (1.5.0)
-    stahnma-epel (1.1.1)
+    stahnma-epel (1.3.1)
+      puppetlabs-stdlib (>= 3.0.0)
 
 GIT
   remote: https://github.com/Engage/puppet-uwsgi
-  ref: master
-  sha: e3436e701c339a6cc0d4f29a449a1758f61fbe81
+  ref: 66a478c3f5f694477d8fa626a2ada00bdfd3b662
+  sha: 66a478c3f5f694477d8fa626a2ada00bdfd3b662
   specs:
-    uwsgi (1.3.0)
-      puppetlabs-stdlib (>= 3.2.0)
+    uwsgi (1.3.2)
+      puppetlabs-stdlib (>= 3.2.0, < 5.0.0)
 
 GIT
   remote: https://github.com/ULHPC/puppet-exim4
@@ -77,13 +81,6 @@ GIT
     tunneldigger (0.0.1)
 
 GIT
-  remote: https://github.com/freifunk-berlin/puppet-vpn03
-  ref: master
-  sha: 34e4231440bd847cf54c209e475329196d0c151c
-  specs:
-    vpn03 (0.0.1)
-
-GIT
   remote: https://github.com/rtznprmpftl/puppet-php-fpm.git
   ref: puppet5_compat
   sha: 6e839dbe3db6fa66550c5272a7629df178e54224
@@ -92,13 +89,11 @@ GIT
       puppetlabs-stdlib (>= 4.1.0)
 
 GIT
-  remote: https://github.com/stankevich/puppet-python
+  remote: https://github.com/rtznprmpftl/puppet-vpn03
   ref: master
-  sha: 4bb83fa96356fe5170bf5de3269bace0f5689fec
+  sha: 34e4231440bd847cf54c209e475329196d0c151c
   specs:
-    python (1.9.8)
-      puppetlabs-stdlib (>= 4.6.0, < 6.0.0)
-      stahnma-epel (>= 1.0.1, < 2.0.0)
+    vpn03 (0.0.1)
 
 GIT
   remote: https://github.com/thias/puppet-sysctl
@@ -107,32 +102,21 @@ GIT
   specs:
     sysctl (1.0.2)
 
-GIT
-  remote: https://github.com/voxpupuli/puppet-nginx.git
-  ref: b58a3f4e0cd3888f63f9db0b2f5a33988cd538ca
-  sha: b58a3f4e0cd3888f63f9db0b2f5a33988cd538ca
-  specs:
-    nginx (0.3.0)
-      puppetlabs-apt (>= 1.8.0, < 3.0.0)
-      puppetlabs-concat (>= 1.1.1, < 3.0.0)
-      puppetlabs-stdlib (>= 4.2.0, < 5.0.0)
-
 DEPENDENCIES
   bbbdigger (>= 0)
   boo-php-fpm (>= 0)
   communitytunnel (>= 0)
   exim4 (>= 0)
   files (>= 0)
-  nginx (>= 0)
   puppet-collectd (= 4.3.0)
   puppet-nginx (= 0.4.0)
+  puppet-python (= 2.2.2)
   puppet-unattended_upgrades (= 1.1.1)
   puppetlabs-apt (= 2.4.0)
   puppetlabs-ntp (= 4.2.0)
-  puppetlabs-postgresql (= 4.9.0)
+  puppetlabs-postgresql (= 5.12.1)
   puppetlabs-stdlib (= 4.25.1)
   puppetlabs-vcsrepo (= 1.5.0)
-  python (>= 0)
   rrdcached (>= 0)
   sysctl (>= 0)
   tunneldigger (>= 0)

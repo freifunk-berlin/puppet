@@ -4,14 +4,12 @@ mod 'puppetlabs/stdlib', '4.25.1'
 mod 'puppetlabs/apt', '2.4.0'
 mod 'puppetlabs/ntp', '4.2.0'
 mod 'puppetlabs/vcsrepo', '1.5.0'
-mod 'puppetlabs/postgresql', '4.9.0'
+mod 'puppetlabs/postgresql', '5.12.1'
 mod 'puppet/collectd', '4.3.0' # 5.3.0
 mod 'puppet/nginx', '0.4.0' # 0.5.0
 mod 'puppet/unattended_upgrades', '1.1.1' #2.2.0
+mod 'puppet/python', '2.2.2'
 
-mod 'nginx',
-  :git => 'https://github.com/voxpupuli/puppet-nginx.git',
-  :ref => 'b58a3f4e0cd3888f63f9db0b2f5a33988cd538ca'
 mod 'rrdcached',
   :git => 'https://github.com/freifunk-berlin/puppet-rrdcached.git'
 mod 'boo-php-fpm',
@@ -22,17 +20,17 @@ mod 'sysctl',
 mod 'files',
   :git => 'https://github.com/freifunk-berlin/puppet-files'
 mod 'vpn03',
-  :git => 'https://github.com/freifunk-berlin/puppet-vpn03'
+  :git => 'https://github.com/rtznprmpftl/puppet-vpn03'
 mod 'tunneldigger',
   :git => 'https://github.com/freifunk-berlin/puppet-tunneldigger'
 mod 'communitytunnel',
   :git => 'https://github.com/freifunk-berlin/puppet-communitytunnel'
 mod 'bbbdigger',
   :git => 'https://github.com/freifunk-berlin/puppet-bbbdigger'
+# TODO: uwsgi module not compatible with systemd, no update available
 mod 'uwsgi',
-  :git => 'https://github.com/Engage/puppet-uwsgi'
-mod 'python',
-  :git => 'https://github.com/stankevich/puppet-python'
+  :git => 'https://github.com/Engage/puppet-uwsgi',
+  :ref => '66a478c3f5f694477d8fa626a2ada00bdfd3b662'
 mod 'exim4',
   :git => 'https://github.com/ULHPC/puppet-exim4',
   :ref => 'production'
