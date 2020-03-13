@@ -44,6 +44,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define "buildbot" do |buildbot|
+    hostname = "buildbot.berlin.freifunk.net"
+    buildbot.vm.host_name = hostname
+    buildbot.vm.box = "debian/contrib-buster64"
+
+    buildbot.vm.provision "shell", path: "./scripts/ssl.sh", args: hostname
+
+    buildbot.vm.provision "shell",
+      inline: "apt-get update; apt-get install -y puppet "
+
+    buildbot.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "site.pp"
+      puppet.module_path = "modules"
+    end
+  end
+
+
+
   config.vm.define "monitor" do |monitor|
     hostname = "monitor.berlin.freifunk.net"
     monitor.vm.host_name = hostname
@@ -64,9 +83,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "vpn03" do |vpn03|
     hostname = "vpn03a.berlin.freifunk.net"
     vpn03.vm.host_name = hostname
-    # the vpn02 module depends on packages only available for older OS releases
-
-    config.vm.box = "ubuntu/xenial64"
+    # the vpn03 module depends on packages only available for older OS releases
+    vpn03.vm.box = "ubuntu/xenial64"
 
     vpn03.vm.provision "shell",
       inline: "apt-get update; apt-get install -y puppet "
@@ -79,7 +97,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "bbbvpn" do |bbbvpn|
-  # the bbbvpn module depends on packages only available for debian jessie and stretch
+    # the bbbvpn module depends on packages only available for debian jessie and stretch
     bbbvpn.vm.box = "debian/contrib-stretch64"
     hostname = "l105-bbbvpn.berlin.freifunk.net"
     bbbvpn.vm.host_name = hostname
