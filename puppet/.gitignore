@@ -2,3 +2,5 @@ modules
 .tmp/
 *.swp
 .vagrant
+.librarian
+.idea
