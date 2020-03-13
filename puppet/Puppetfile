@@ -9,29 +9,32 @@ mod 'puppet/collectd', '4.3.0' # 5.3.0
 mod 'puppet/nginx', '0.4.0' # 0.5.0
 mod 'puppet/unattended_upgrades', '1.1.1' #2.2.0
 mod 'puppet/python', '2.2.2'
+mod 'thias/sysctl', '1.0.6'
 
+mod 'ff_base',
+  :git => 'https://github.com/rtznprmpftl/ff_base.git'
 mod 'rrdcached',
-  :git => 'https://github.com/freifunk-berlin/puppet-rrdcached.git'
+  :git => 'https://github.com/freifunk-berlin/puppet-rrdcached.git',
+  :ref => 'e7a8e84cfc149c39b4f58c9b3b5a234f3a7afc5b'
 mod 'boo-php-fpm',
   :git => 'https://github.com/rtznprmpftl/puppet-php-fpm.git',
   :ref => 'puppet5_compat'
-mod 'sysctl',
-  :git => 'https://github.com/thias/puppet-sysctl'
 mod 'files',
-  :git => 'https://github.com/freifunk-berlin/puppet-files'
+  :git => 'https://github.com/freifunk-berlin/puppet-files',
+  :ref => 'd07aa6402b657b5b8911684315feeff95321b272'
 mod 'vpn03',
   :git => 'https://github.com/rtznprmpftl/puppet-vpn03'
 mod 'tunneldigger',
-  :git => 'https://github.com/freifunk-berlin/puppet-tunneldigger'
+  :git => 'https://github.com/freifunk-berlin/puppet-tunneldigger',
+  :ref => '7ebc1327b47ce7d34b1351186839f09d3fce08da'
 mod 'communitytunnel',
-  :git => 'https://github.com/freifunk-berlin/puppet-communitytunnel'
+  :git => 'https://github.com/freifunk-berlin/puppet-communitytunnel',
+  :ref => '90eb87be58284c86d66b053a4e7cebca2a24968c'
 mod 'bbbdigger',
-  :git => 'https://github.com/freifunk-berlin/puppet-bbbdigger'
+  :git => 'https://github.com/freifunk-berlin/puppet-bbbdigger',
+  :ref => '3ee15a5804a8e6bc8b458b88f8e0bc797a531e4a'
+
 # TODO: uwsgi module not compatible with systemd, no update available
 mod 'uwsgi',
   :git => 'https://github.com/Engage/puppet-uwsgi',
   :ref => '66a478c3f5f694477d8fa626a2ada00bdfd3b662'
-mod 'exim4',
-  :git => 'https://github.com/ULHPC/puppet-exim4',
-  :ref => 'production'
-
