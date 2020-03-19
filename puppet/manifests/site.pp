@@ -1,68 +1,8 @@
-class base_node () {
-
-  class { 'apt': }
-
-  # update packages before we install any
-  exec { 'apt-update':
-    command => '/usr/bin/apt-get update'
-  }
-  Exec['apt-update'] -> Package <| |>
-
-  # do not install recommended packages
-  Package {
-    install_options => ['--no-install-recommends'],
-  }
-
-  # list of base packages we deploy on every node
-  package { [
-    'byobu',
-    'dstat',
-    'git',
-    'htop',
-    'iputils-tracepath',
-    'man-db',
-    'mailutils',
-    'mtr',
-    'screen',
-    'tcpdump',
-    'tmux',
-    'vim'
-  ]:
-    ensure => installed,
-  }
-
-  # install security updates
-  class { 'unattended_upgrades': }
-
-  class { 'ntp': }
-
-  # sysctl configuration
-  # disable ipv6 auto-configuration
-  sysctl { 'net.ipv6.conf.all.autoconf': value => '0' }
-  sysctl { 'net.ipv6.conf.all.accept_ra': value => '0' }
-  sysctl { 'net.ipv6.conf.all.use_tempaddr': value => '0' }
-
-  # configure smart host mail setup
-  #class { 'exim4':
-  #  configtype => 'satellite',
-  #  smarthost  => 'ssl.coulmann.de',
-  #}
-  ## set mail alias for root
-  #mailalias { 'root':
-  #  ensure    => present,
-  #  name      => 'root',
-  #  recipient => 'noc@berlin.freifunk.net',
-  #  target    => "/etc/email-addresses",
-  #}
-
-
-}
-
 node 'monitor' {
 
-  class { 'base_node': }
+  class { 'ff_base': }
 
-  package { ['rrdtool', 'php7.2']:
+  package { ['rrdtool']:
     ensure => installed,
   }
 
@@ -175,7 +115,34 @@ node 'monitor' {
 }
 
 node 'buildbot.berlin.freifunk.net' {
-  class { 'base_node': }
+  class { 'ff_base': }
+  class { 'ff_base::users_bb' : }
+
+  file { [
+    '/usr/local/src/www',
+    '/usr/local/src/www/htdocs',
+    '/usr/local/src/www/htdocs/buildbot',
+    '/usr/local/src/www/htdocs/buildbot/unstable',
+    '/usr/local/src/www/htdocs/buildbot/stable',
+  ]:
+    ensure  => directory,
+    owner   => 'buildbot',
+    recurse => true,
+    before  => Class['nginx']
+  }
+  class { letsencrypt:
+    unsafe_registration => true,
+    package_ensure => 'latest',
+  }
+
+  letsencrypt::certonly { 'buildbot.berlin.freifunk.net':
+    domains       => ['buildbot.berlin.freifunk.net'],
+    plugin        => 'webroot',
+    webroot_paths => ['/usr/local/src/www/htdocs' ],
+    manage_cron          => true,
+    cron_success_command => '/bin/systemctl reload nginx.service',
+  }
+
 
   # nginx configuration
   class { 'nginx':
@@ -195,6 +162,13 @@ node 'buildbot.berlin.freifunk.net' {
     ssl_key     => '/etc/ssl/private/buildbot.berlin.freifunk.net.key',
     ssl_dhparam => '/etc/ssl/private/buildbot.berlin.freifunk.net.dh',
   }
+  nginx::resource::location { '/.well-known':
+    ensure    => present,
+    ssl       => true,
+    vhost     => 'buildbot.berlin.freifunk.net',
+    www_root  => '/usr/local/src/www/htdocs',
+    autoindex => 'off',
+  }
   nginx::resource::location { '/buildbot':
     ensure    => present,
     ssl       => true,
@@ -207,14 +181,6 @@ node 'buildbot.berlin.freifunk.net' {
     members => ['localhost:8010'],
   }
 
-  file { [
-    '/usr/local/src/www/htdocs/buildbot',
-    '/usr/local/src/www/htdocs/buildbot/unstable',
-    '/usr/local/src/www/htdocs/buildbot/stable',
-  ]:
-    ensure => directory,
-    owner  => 'buildbot',
-  }
   # add cron file that removes old buildbot firmware builds
   file { '/etc/cron.hourly/buildbot-remove-old-builds':
     ensure => present,
@@ -223,7 +189,7 @@ node 'buildbot.berlin.freifunk.net' {
 }
 
 node 'config.berlin.freifunk.net' {
-  class { 'base_node': }
+  class { 'ff_base': }
   class { '::collectd':
     purge        => true,
     recurse      => true,
@@ -252,7 +218,7 @@ node 'config.berlin.freifunk.net' {
     confd_purge     => true,
     vhost_purge     => true,
     http_access_log => '/dev/null',
-    nginx_error_log => '/dev/null',
+    nginx_error_log => '/dev/null'
   }
   nginx::resource::vhost { 'ip.berlin.freifunk.net':
     access_log           => '/dev/null',
@@ -531,7 +497,7 @@ node 'vpn03b' {
 }
 
 node 'vpn03c' {
-  class { 'base_node': }
+  class { 'ff_base': }
   class { 'vpn03':
     inet_dev => 'ens3',
     inet_add => '77.87.49',
@@ -564,7 +530,7 @@ node 'vpn03c' {
 }
 
 node 'vpn03d' {
-  class { 'base_node': }
+  class { 'ff_base': }
   class { 'vpn03':
     inet_add => '185.66.195',
     inet_min => '250',
@@ -596,7 +562,7 @@ node 'vpn03d' {
 }
 
 node 'vpn03e' {
-  class { 'base_node': }
+  class { 'ff_base': }
   class { 'vpn03':
     inet_add => '77.87.50',
     inet_min => '241',
@@ -628,7 +594,7 @@ node 'vpn03e' {
 }
 
 node 'vpn03f' {
-  class { 'base_node': }
+  class { 'ff_base': }
   class { 'vpn03':
     inet_add => '193.96.224',
     inet_min => '243',
@@ -660,7 +626,7 @@ node 'vpn03f' {
 }
 
 node 'vpn03g' {
-  class { 'base_node': }
+  class { 'ff_base': }
   class { 'vpn03':
     inet_add => '185.197.132',
     inet_min => '10',
@@ -697,7 +663,7 @@ node 'vpn03g' {
 }
 
 node 'l105-bbbvpn' {
-  class { 'base_node': }
+  class { 'ff_base': }
   class { 'bbbdigger':
     address        => '77.87.49.11',
     interface      => 'eth0',
