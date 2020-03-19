@@ -1,154 +1,127 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
-    puppetlabs-apt (2.2.0)
-      puppetlabs-stdlib (< 5.0.0, >= 4.5.0)
+    puppet-collectd (4.3.0)
+      puppetlabs-concat (>= 1.0.4)
+      puppetlabs-stdlib (>= 3.2.0)
+    puppet-letsencrypt (5.0.0)
+      puppetlabs-inifile (>= 2.0.0, < 4.0.0)
+      puppetlabs-stdlib (>= 4.13.1, < 7.0.0)
+      puppetlabs-vcsrepo (>= 2.0.0, < 4.0.0)
+      stahnma-epel (>= 1.0.0, < 2.0.0)
+    puppet-nginx (0.5.0)
+      puppetlabs-apt (>= 1.8.0, < 3.0.0)
+      puppetlabs-concat (>= 1.1.1, < 3.0.0)
+      puppetlabs-stdlib (>= 4.2.0, < 5.0.0)
+    puppet-python (2.2.2)
+      puppetlabs-stdlib (>= 4.6.0, < 6.0.0)
+      stahnma-epel (>= 1.2.2, < 2.0.0)
+    puppet-unattended_upgrades (2.2.0)
+      puppetlabs-apt (>= 2.2.0, < 3.0.0)
+      puppetlabs-stdlib (>= 4.6.0, < 5.0.0)
+    puppetlabs-apt (2.4.0)
+      puppetlabs-stdlib (>= 4.13.0, < 5.0.0)
     puppetlabs-concat (1.2.4)
-      puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
-    puppetlabs-ntp (4.1.0)
-      puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
-    puppetlabs-postgresql (4.6.0)
-      puppetlabs-apt (< 3.0.0, >= 1.8.0)
-      puppetlabs-concat (< 2.0.0, >= 1.1.0)
-      puppetlabs-stdlib (~> 4.0)
-    puppetlabs-stdlib (4.9.0)
-    puppetlabs-vcsrepo (1.3.1)
-    stahnma-epel (1.1.1)
+      puppetlabs-stdlib (>= 3.2.0, < 5.0.0)
+    puppetlabs-inifile (3.1.0)
+      puppetlabs-translate (>= 1.0.0, < 3.0.0)
+    puppetlabs-ntp (4.2.0)
+      puppetlabs-stdlib (>= 4.6.0, < 5.0.0)
+    puppetlabs-postgresql (5.12.1)
+      puppetlabs-apt (>= 2.0.0, < 7.0.0)
+      puppetlabs-concat (>= 1.1.0, < 6.0.0)
+      puppetlabs-stdlib (>= 4.13.1, < 6.0.0)
+    puppetlabs-stdlib (4.25.1)
+    puppetlabs-translate (2.1.0)
+    puppetlabs-vcsrepo (3.1.0)
+    stahnma-epel (1.3.1)
+      puppetlabs-stdlib (>= 3.0.0)
+    thias-sysctl (1.0.6)
 
 GIT
   remote: https://github.com/Engage/puppet-uwsgi
-  ref: master
-  sha: e3436e701c339a6cc0d4f29a449a1758f61fbe81
+  ref: 66a478c3f5f694477d8fa626a2ada00bdfd3b662
+  sha: 66a478c3f5f694477d8fa626a2ada00bdfd3b662
   specs:
-    uwsgi (1.3.0)
-      puppetlabs-stdlib (>= 3.2.0)
+    uwsgi (1.3.2)
+      puppetlabs-stdlib (>= 3.2.0, < 5.0.0)
 
 GIT
-  remote: https://github.com/ULHPC/puppet-exim4
-  ref: production
-  sha: dac24d90f22edc9fad8c72c5047560212b847925
+  remote: https://github.com/freifunk-berlin/ff_base.git
+  ref: master
+  sha: f1079f8f2d9fda41e1e1e99ebc323b8ac63a211b
   specs:
-    exim4 (0.1.2)
-      puppetlabs-stdlib (< 5.0.0, >= 4.2.2)
+    ff_base (0.0.1)
 
 GIT
-  remote: https://github.com/booo/puppet-php-fpm.git
+  remote: https://github.com/freifunk-berlin/php_fpm.git
   ref: master
-  sha: 04743f7d69da8989b876df73be904c6d97081e7f
+  sha: 0fa7b28d9c0a97fda4b0ec39249c3e7eb076040a
   specs:
-    php-fpm (0.0.1)
-
-GIT
-  remote: https://github.com/freifunk-berlin/puppet-communitytunnel
-  ref: master
-  sha: 4c34b78c85d2f58efc1fb8ae060a799cec8f2c25
-  specs:
-    communitytunnel (0.0.1)
-
-GIT
-  remote: https://github.com/freifunk-berlin/puppet-files
-  ref: master
-  sha: d07aa6402b657b5b8911684315feeff95321b272
-  specs:
-    files (0.0.1)
-
-GIT
-  remote: https://github.com/freifunk-berlin/puppet-rrdcached.git
-  ref: master
-  sha: 25a775c1ab9431862fa222c62ba82107942f7f1d
-  specs:
-    rrdcached (0.0.1)
+    php_fpm (0.0.1)
+      puppetlabs-stdlib (>= 4.1.0)
 
 GIT
   remote: https://github.com/freifunk-berlin/puppet-bbbdigger
-  ref: master
+  ref: 3ee15a5804a8e6bc8b458b88f8e0bc797a531e4a
   sha: 3ee15a5804a8e6bc8b458b88f8e0bc797a531e4a
   specs:
     bbbdigger (0.0.1)
 
 GIT
   remote: https://github.com/freifunk-berlin/puppet-communitytunnel
-  ref: master
+  ref: 90eb87be58284c86d66b053a4e7cebca2a24968c
   sha: 90eb87be58284c86d66b053a4e7cebca2a24968c
   specs:
     communitytunnel (0.0.1)
 
 GIT
+  remote: https://github.com/freifunk-berlin/puppet-files
+  ref: d07aa6402b657b5b8911684315feeff95321b272
+  sha: d07aa6402b657b5b8911684315feeff95321b272
+  specs:
+    files (0.0.1)
+
+GIT
+  remote: https://github.com/freifunk-berlin/puppet-rrdcached.git
+  ref: e7a8e84cfc149c39b4f58c9b3b5a234f3a7afc5b
+  sha: e7a8e84cfc149c39b4f58c9b3b5a234f3a7afc5b
+  specs:
+    rrdcached (0.0.1)
+
+GIT
   remote: https://github.com/freifunk-berlin/puppet-tunneldigger
-  ref: master
+  ref: 7ebc1327b47ce7d34b1351186839f09d3fce08da
   sha: 7ebc1327b47ce7d34b1351186839f09d3fce08da
   specs:
     tunneldigger (0.0.1)
 
 GIT
-  remote: https://github.com/freifunk-berlin/puppet-vpn03
+  remote: https://github.com/rtznprmpftl/puppet-vpn03
   ref: master
   sha: 34e4231440bd847cf54c209e475329196d0c151c
   specs:
     vpn03 (0.0.1)
 
-GIT
-  remote: https://github.com/jfryman/puppet-nginx.git
-  ref: master
-  sha: 45159252476970295beeff6371beb6b5a63ad6d1
-  specs:
-    nginx (0.2.7)
-      puppetlabs-apt (< 3.0.0, >= 1.8.0)
-      puppetlabs-concat (< 2.0.0, >= 1.1.1)
-      puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
-
-GIT
-  remote: https://github.com/puppet-community/puppet-collectd
-  ref: master
-  sha: 78cd9ca3dc8129e2db774dd1f12c739c65d80188
-  specs:
-    collectd (4.2.0)
-      puppetlabs-concat (>= 1.0.4)
-      puppetlabs-stdlib (>= 3.2.0)
-
-GIT
-  remote: https://github.com/puppet-community/puppet-unattended_upgrades
-  ref: master
-  sha: 87f195af653ea2e23ce1816d557d250f8d6b86c4
-  specs:
-    unattended_upgrades (1.0.3)
-      puppetlabs-apt (< 3.0.0, >= 2.0.0)
-      puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
-
-GIT
-  remote: https://github.com/stankevich/puppet-python
-  ref: master
-  sha: 4bb83fa96356fe5170bf5de3269bace0f5689fec
-  specs:
-    python (1.9.8)
-      puppetlabs-stdlib (< 6.0.0, >= 4.6.0)
-      stahnma-epel (< 2.0.0, >= 1.0.1)
-
-GIT
-  remote: https://github.com/thias/puppet-sysctl
-  ref: master
-  sha: 38df36e8d8fab7d6a2f755e3f5fbf62f1d792a9f
-  specs:
-    sysctl (1.0.2)
-
 DEPENDENCIES
   bbbdigger (>= 0)
-  collectd (>= 0)
   communitytunnel (>= 0)
-  exim4 (>= 0)
+  ff_base (>= 0)
   files (>= 0)
-  nginx (>= 0)
-  php-fpm (>= 0)
-  puppetlabs-apt (>= 0)
-  puppetlabs-ntp (>= 0)
-  puppetlabs-postgresql (>= 0)
-  puppetlabs-stdlib (>= 0)
-  puppetlabs-vcsrepo (>= 0)
-  python (>= 0)
+  php_fpm (>= 0)
+  puppet-collectd (= 4.3.0)
+  puppet-letsencrypt (= 5.0.0)
+  puppet-nginx (= 0.5.0)
+  puppet-python (= 2.2.2)
+  puppet-unattended_upgrades (= 2.2.0)
+  puppetlabs-apt (= 2.4.0)
+  puppetlabs-ntp (= 4.2.0)
+  puppetlabs-postgresql (= 5.12.1)
+  puppetlabs-stdlib (= 4.25.1)
+  puppetlabs-vcsrepo (= 3.1.0)
   rrdcached (>= 0)
-  sysctl (>= 0)
+  thias-sysctl (= 1.0.6)
   tunneldigger (>= 0)
-  unattended_upgrades (>= 0)
   uwsgi (>= 0)
   vpn03 (>= 0)
 

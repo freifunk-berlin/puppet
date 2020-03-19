@@ -7,6 +7,10 @@ if [ "${COMMON_NAME}x" = "x" ]; then
   exit 1
 fi
 
+if [ -f "/etc/ssl/private/${COMMON_NAME}.key" ]; then
+    echo "Cert already exists, skipping generating it"
+  else
+
 SUB="
 C=DE
 ST=Berlin
@@ -27,3 +31,12 @@ openssl req -new \
 openssl x509 -req -days 365 -in "/tmp/${COMMON_NAME}.csr" \
    -signkey "/etc/ssl/private/${COMMON_NAME}.key" \
    -out "/etc/ssl/certs/${COMMON_NAME}.cert"
+
+fi
+
+if [ -f "/etc/ssl/private/${COMMON_NAME}.dh" ]; then
+    echo "DH Param already exists, skipping generating it"
+  else
+    # Only 1024 Bit to make the Box Provisioning faster
+    openssl dhparam -out "/etc/ssl/private/${COMMON_NAME}.dh" 1024
+fi

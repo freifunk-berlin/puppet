@@ -1,38 +1,41 @@
 forge "https://forgeapi.puppetlabs.com"
 
-mod 'puppetlabs/stdlib'
-mod 'puppetlabs/apt'
-mod 'puppetlabs/ntp'
-mod 'puppetlabs/vcsrepo'
-mod 'puppetlabs/postgresql'
+mod 'puppetlabs/stdlib', '4.25.1' #5.2.0
+mod 'puppetlabs/apt', '2.4.0'
+mod 'puppetlabs/ntp', '4.2.0'
+mod 'puppetlabs/vcsrepo', '3.1.0'
+mod 'puppetlabs/postgresql', '5.12.1'
+mod 'puppet/collectd', '4.3.0' # 5.3.0
+mod 'puppet/nginx', '0.5.0'
+mod 'puppet/unattended_upgrades', '2.2.0'
+mod 'puppet/python', '2.2.2'
+mod 'thias/sysctl', '1.0.6'
+mod 'puppet/letsencrypt', '5.0.0'
 
-mod 'nginx',
-  :git => 'https://github.com/jfryman/puppet-nginx.git'
-mod 'collectd',
-  :git => 'https://github.com/puppet-community/puppet-collectd'
+mod 'ff_base',
+  :git => 'https://github.com/freifunk-berlin/ff_base.git'
 mod 'rrdcached',
-  :git => 'https://github.com/freifunk-berlin/puppet-rrdcached.git'
-mod 'php-fpm',
-  :git => 'https://github.com/booo/puppet-php-fpm.git'
-mod 'sysctl',
-  :git => 'https://github.com/thias/puppet-sysctl'
+  :git => 'https://github.com/freifunk-berlin/puppet-rrdcached.git',
+  :ref => 'e7a8e84cfc149c39b4f58c9b3b5a234f3a7afc5b'
+mod 'php_fpm',
+  :git => 'https://github.com/freifunk-berlin/php_fpm.git',
+  :ref => 'master'
 mod 'files',
-  :git => 'https://github.com/freifunk-berlin/puppet-files'
+  :git => 'https://github.com/freifunk-berlin/puppet-files',
+  :ref => 'd07aa6402b657b5b8911684315feeff95321b272'
 mod 'vpn03',
-  :git => 'https://github.com/freifunk-berlin/puppet-vpn03'
+  :git => 'https://github.com/rtznprmpftl/puppet-vpn03'
 mod 'tunneldigger',
-  :git => 'https://github.com/freifunk-berlin/puppet-tunneldigger'
+  :git => 'https://github.com/freifunk-berlin/puppet-tunneldigger',
+  :ref => '7ebc1327b47ce7d34b1351186839f09d3fce08da'
 mod 'communitytunnel',
-  :git => 'https://github.com/freifunk-berlin/puppet-communitytunnel'
+  :git => 'https://github.com/freifunk-berlin/puppet-communitytunnel',
+  :ref => '90eb87be58284c86d66b053a4e7cebca2a24968c'
 mod 'bbbdigger',
-  :git => 'https://github.com/freifunk-berlin/puppet-bbbdigger'
-mod 'uwsgi',
-  :git => 'https://github.com/Engage/puppet-uwsgi'
-mod 'python',
-  :git => 'https://github.com/stankevich/puppet-python'
-mod 'unattended_upgrades',
-  :git => 'https://github.com/puppet-community/puppet-unattended_upgrades'
-mod 'exim4',
-  :git => 'https://github.com/ULHPC/puppet-exim4',
-  :ref => 'production'
+  :git => 'https://github.com/freifunk-berlin/puppet-bbbdigger',
+  :ref => '3ee15a5804a8e6bc8b458b88f8e0bc797a531e4a'
 
+# TODO: uwsgi module not compatible with systemd, no update available
+mod 'uwsgi',
+  :git => 'https://github.com/Engage/puppet-uwsgi',
+  :ref => '66a478c3f5f694477d8fa626a2ada00bdfd3b662'
