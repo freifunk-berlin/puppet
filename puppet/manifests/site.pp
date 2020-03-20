@@ -39,11 +39,11 @@ node 'monitor' {
   # nginx configuration
   class { 'nginx':
     confd_purge     => true,
-    vhost_purge     => true,
+    server_purge    => true,
     http_access_log => '/dev/null',
     nginx_error_log => '/dev/null',
   }
-  nginx::resource::vhost { 'monitor.berlin.freifunk.net':
+  nginx::resource::server { 'monitor.berlin.freifunk.net':
     ensure      => present,
     ipv6_enable => true,
     www_root    => '/srv/www/monitor.berlin.freifunk.net',
@@ -55,7 +55,7 @@ node 'monitor' {
     ensure               => present,
     www_root             => '/srv/www/monitor.berlin.freifunk.net',
     location             => '~ [^/]\.php(/|$)',
-    vhost                => 'monitor.berlin.freifunk.net',
+    server               => 'monitor.berlin.freifunk.net',
     fastcgi              => 'unix:/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
     fastcgi_split_path   => '^(.+?\.php)(/.*)$',
     location_cfg_prepend => {
@@ -130,18 +130,18 @@ node 'buildbot.berlin.freifunk.net' {
     recurse => true,
     before  => Class['nginx']
   }
-  class { letsencrypt:
+  class { 'letsencrypt':
     unsafe_registration => true,
-    package_ensure => 'latest',
+    package_ensure      => 'latest',
   }
 
   letsencrypt::certonly { 'buildbot.berlin.freifunk.net':
-    domains       => [
+    domains              => [
       'buildbot.berlin.freifunk.net',
       'firmware.berlin.freifunk.net',
     ],
-    plugin        => 'webroot',
-    webroot_paths => [
+    plugin               => 'webroot',
+    webroot_paths        => [
       '/usr/local/src/www/htdocs',
       '/usr/local/src/www/htdocs/buildbot',
     ],
@@ -153,25 +153,25 @@ node 'buildbot.berlin.freifunk.net' {
   # nginx configuration
   class { 'nginx':
     confd_purge     => true,
-    vhost_purge     => true,
+    server_purge    => true,
     http_access_log => '/dev/null',
     nginx_error_log => '/dev/null',
   }
-  nginx::resource::vhost { 'firmware.berlin.freifunk.net':
-    ensure      => present,
-    ipv6_enable => true,
+  nginx::resource::server { 'firmware.berlin.freifunk.net':
+    ensure              => present,
+    ipv6_enable         => true,
     # fix for https://serverfault.com/questions/277653/nginx-name-based-virtual-hosts-on-ipv6
     ipv6_listen_options => '',
-    access_log  => '/dev/null',
-    error_log   => '/dev/null',
-    ssl         => true,
-    ssl_cert    => '/etc/letsencrypt/live/firmware.berlin.freifunk.net/fullchain.pem',
-    ssl_key     => '/etc/letsencrypt/live/firmware.berlin.freifunk.net/privkey.pem',
-    ssl_dhparam => '/etc/ssl/private/buildbot.berlin.freifunk.net.dh',
-    www_root    => '/usr/local/src/www/htdocs/buildbot',
-    autoindex   => on,
+    access_log          => '/dev/null',
+    error_log           => '/dev/null',
+    ssl                 => true,
+    ssl_cert            => '/etc/letsencrypt/live/firmware.berlin.freifunk.net/fullchain.pem',
+    ssl_key             => '/etc/letsencrypt/live/firmware.berlin.freifunk.net/privkey.pem',
+    ssl_dhparam         => '/etc/ssl/private/buildbot.berlin.freifunk.net.dh',
+    www_root            => '/usr/local/src/www/htdocs/buildbot',
+    autoindex           => on,
   }
-  nginx::resource::vhost { 'buildbot.berlin.freifunk.net':
+  nginx::resource::server { 'buildbot.berlin.freifunk.net':
     ensure      => present,
     ipv6_enable => true,
     access_log  => '/dev/null',
@@ -185,21 +185,21 @@ node 'buildbot.berlin.freifunk.net' {
   nginx::resource::location { '/.well-known':
     ensure    => present,
     ssl       => true,
-    vhost     => 'buildbot.berlin.freifunk.net',
+    server    => 'buildbot.berlin.freifunk.net',
     www_root  => '/usr/local/src/www/htdocs',
     autoindex => 'off',
   }
   nginx::resource::location { '/buildbot':
     ensure    => present,
     ssl       => true,
-    vhost     => 'buildbot.berlin.freifunk.net',
+    server    => 'buildbot.berlin.freifunk.net',
     www_root  => '/usr/local/src/www/htdocs',
     autoindex => 'on',
   }
   nginx::resource::location { '/ws':
     ensure             => present,
     ssl                => true,
-    vhost              => 'buildbot.berlin.freifunk.net',
+    server             => 'buildbot.berlin.freifunk.net',
     proxy              => 'http://buildbot',
     proxy_http_version => '1.1',
     proxy_set_header   => [
@@ -209,9 +209,14 @@ node 'buildbot.berlin.freifunk.net' {
   }
   nginx::resource::upstream { 'buildbot':
     ensure  => present,
-    members => ['localhost:8010'],
-  }
+    members => {'localhost:8010' =>  {
+        server => 'localhost',
+        port   => 8010,
+      },
 
+    }
+
+  }
   # add cron file that removes old buildbot firmware builds
   file { '/etc/cron.hourly/buildbot-remove-old-builds':
     ensure => present,
@@ -247,21 +252,21 @@ node 'config.berlin.freifunk.net' {
   # nginx configuration
   class { 'nginx':
     confd_purge     => true,
-    vhost_purge     => true,
+    server_purge    => true,
     http_access_log => '/dev/null',
     nginx_error_log => '/dev/null'
   }
-  nginx::resource::vhost { 'ip.berlin.freifunk.net':
+  nginx::resource::server { 'ip.berlin.freifunk.net':
     access_log           => '/dev/null',
     error_log            => '/dev/null',
     use_default_location => false,
     index_files          => [],
     location_custom_cfg  => {},
-    vhost_cfg_append     => {
+    server_cfg_append    => {
       'return' => '301 https://config.berlin.freifunk.net',
     }
   }
-  nginx::resource::vhost { 'config.berlin.freifunk.net':
+  nginx::resource::server { 'config.berlin.freifunk.net':
     ensure      => present,
     ipv6_enable => true,
     access_log  => '/dev/null',
@@ -273,7 +278,7 @@ node 'config.berlin.freifunk.net' {
     www_root    => '/var/www/nipap-wizard/app/static',
     try_files   => ['$uri', '@nipap-wizard'],
   }
-  nginx::resource::vhost { 'ca.berlin.freifunk.net':
+  nginx::resource::server { 'ca.berlin.freifunk.net':
     ensure              => present,
     ipv6_enable         => true,
     # fix for https://serverfault.com/questions/277653/nginx-name-based-virtual-hosts-on-ipv6
@@ -290,14 +295,14 @@ node 'config.berlin.freifunk.net' {
   nginx::resource::location { 'config.berlin.freifunk.net/static':
     ensure   => present,
     ssl      => true,
-    vhost    => 'config.berlin.freifunk.net',
+    server   => 'config.berlin.freifunk.net',
     www_root => '/var/www/nipap-wizard/app/',
     location => '/static',
   }
   nginx::resource::location { '@nipap-wizard':
     ensure              => present,
     ssl                 => true,
-    vhost               => 'config.berlin.freifunk.net',
+    server              => 'config.berlin.freifunk.net',
     location_custom_cfg => {
       'include'    => 'uwsgi_params',
       'uwsgi_pass' => 'unix:/run/uwsgi/app/nipap-wizard/socket',
@@ -306,7 +311,7 @@ node 'config.berlin.freifunk.net' {
   nginx::resource::location { '@ca.berlin.freifunk.net':
     ensure              => present,
     ssl                 => true,
-    vhost               => 'ca.berlin.freifunk.net',
+    server              => 'ca.berlin.freifunk.net',
     location_custom_cfg => {
       'include'    => 'uwsgi_params',
       'uwsgi_pass' => 'unix:/run/uwsgi/app/ca.berlin.freifunk.net/socket',
