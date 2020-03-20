@@ -8,9 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
 
-
-
-  config.vm.box = "ubuntu/bionic64"
+  config.vm.box = "debian/contrib-buster64"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -32,6 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "config" do |web|
     hostname = "config.berlin.freifunk.net"
     web.vm.host_name = hostname
+
     web.vm.provision "shell", path: "./scripts/ssl.sh", args: hostname
 
     web.vm.provision "shell",
@@ -47,7 +46,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "buildbot" do |buildbot|
     hostname = "buildbot.berlin.freifunk.net"
     buildbot.vm.host_name = hostname
-    buildbot.vm.box = "debian/contrib-buster64"
 
     buildbot.vm.provision "shell", path: "./scripts/ssl.sh", args: hostname
 
@@ -66,6 +64,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "monitor" do |monitor|
     hostname = "monitor.berlin.freifunk.net"
     monitor.vm.host_name = hostname
+
     monitor.vm.provision "shell", path: "./scripts/ssl.sh", args: hostname
 
     monitor.vm.provision "shell",
@@ -83,6 +82,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "vpn03" do |vpn03|
     hostname = "vpn03a.berlin.freifunk.net"
     vpn03.vm.host_name = hostname
+
     # the vpn03 module depends on packages only available for older OS releases
     vpn03.vm.box = "ubuntu/xenial64"
 
@@ -115,8 +115,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
     # Don't boot with headless mode
     #vb.gui = true
-
-    # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "512"]
+    vb.memory = 512
+    vb.cpus = 2
   end
 end
