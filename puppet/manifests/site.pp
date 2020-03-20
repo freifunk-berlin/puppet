@@ -238,6 +238,7 @@ node 'buildbot.berlin.freifunk.net' {
   }
   python::virtualenv { '/usr/local/src/buildbot/masters/master/env':
     ensure       => present,
+    version      => '3',
     owner        => 'buildbot',
     group        => 'buildbot',
     cwd          => '/usr/local/src/buildbot/masters/master',
