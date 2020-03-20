@@ -1,13 +1,7 @@
-aptitude install git
+#!/usr/bin/env bash
+apt-get update
+apt-get -y install puppet-common rubygems  build-essential ruby-dev git
 git clone https://github.com/freifunk/berlin-puppet.git
-cd /tmp
-wget http://apt.puppetlabs.com/puppetlabs-release-$(lsb_release -cs).deb
-dpkg -i puppetlabs-release-$(lsb_release -cs).deb
-cd ~
-aptitude update
-aptitude install puppet-common #standalone mode, no agent foo
-aptitude install rubygems
-aptitude install build-essential ruby-dev
 gem install librarian-puppet --no-ri --no-rdoc -V
 cd berlin-puppet/puppet
 librarian-puppet install --verbose
