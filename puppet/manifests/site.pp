@@ -136,9 +136,15 @@ node 'buildbot.berlin.freifunk.net' {
   }
 
   letsencrypt::certonly { 'buildbot.berlin.freifunk.net':
-    domains       => ['buildbot.berlin.freifunk.net'],
+    domains       => [
+      'buildbot.berlin.freifunk.net',
+      'firmware.berlin.freifunk.net',
+    ],
     plugin        => 'webroot',
-    webroot_paths => ['/usr/local/src/www/htdocs' ],
+    webroot_paths => [
+      '/usr/local/src/www/htdocs',
+      '/usr/local/src/www/htdocs/buildbot',
+    ],
     manage_cron          => true,
     cron_success_command => '/bin/systemctl reload nginx.service',
   }
@@ -150,6 +156,20 @@ node 'buildbot.berlin.freifunk.net' {
     vhost_purge     => true,
     http_access_log => '/dev/null',
     nginx_error_log => '/dev/null',
+  }
+  nginx::resource::vhost { 'firmware.berlin.freifunk.net':
+    ensure      => present,
+    ipv6_enable => true,
+    # fix for https://serverfault.com/questions/277653/nginx-name-based-virtual-hosts-on-ipv6
+    ipv6_listen_options => '',
+    access_log  => '/dev/null',
+    error_log   => '/dev/null',
+    ssl         => true,
+    ssl_cert    => '/etc/letsencrypt/live/firmware.berlin.freifunk.net/fullchain.pem',
+    ssl_key     => '/etc/letsencrypt/live/firmware.berlin.freifunk.net/privkey.pem',
+    ssl_dhparam => '/etc/ssl/private/buildbot.berlin.freifunk.net.dh',
+    www_root    => '/usr/local/src/www/htdocs/buildbot',
+    autoindex   => on,
   }
   nginx::resource::vhost { 'buildbot.berlin.freifunk.net':
     ensure      => present,
