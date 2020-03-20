@@ -176,6 +176,17 @@ node 'buildbot.berlin.freifunk.net' {
     www_root  => '/usr/local/src/www/htdocs',
     autoindex => 'on',
   }
+  nginx::resource::location { '/ws':
+    ensure             => present,
+    ssl                => true,
+    vhost              => 'buildbot.berlin.freifunk.net',
+    proxy              => 'http://buildbot',
+    proxy_http_version => '1.1',
+    proxy_set_header   => [
+      'Upgrade $http_upgrade',
+      'Connection upgrade',
+    ],
+  }
   nginx::resource::upstream { 'buildbot':
     ensure  => present,
     members => ['localhost:8010'],
