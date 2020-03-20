@@ -217,6 +217,32 @@ node 'buildbot.berlin.freifunk.net' {
     ensure => present,
     source => 'puppet:///modules/files/buildbot-remove-old-builds.sh',
   }
+
+  vcsrepo { '/usr/local/src/buildbot':
+    ensure   => latest,
+    provider => git,
+    owner    => 'buildbot',
+    source   => 'https://github.com/freifunk-berlin/buildbot',
+    require  => [
+      Package['git']
+    ]
+  }
+
+  class { 'python':
+    virtualenv => 'present',
+  }
+  python::virtualenv { '/usr/local/src/buildbot/masters/master/env':
+    ensure       => present,
+    owner        => 'buildbot',
+    group        => 'buildbot',
+    cwd          => '/usr/local/src/buildbot/masters/master',
+    venv_dir     => '/usr/local/src/buildbot/masters/master/env',
+    requirements => '/usr/local/src/buildbot/masters/master/requirements.txt',
+    require      => [
+      Class['python'],
+      Vcsrepo['/usr/local/src/buildbot']
+    ]
+  }
 }
 
 node 'config.berlin.freifunk.net' {
