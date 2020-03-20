@@ -97,6 +97,14 @@ GIT
     tunneldigger (0.0.1)
 
 GIT
+  remote: https://github.com/freifunk-berlin/puppet-uwsgi
+  ref: master
+  sha: d8c4c13d334c48c13c2a4413d76faa9d7ec030f9
+  specs:
+    uwsgi (1.3.2)
+      puppetlabs-stdlib (>= 3.2.0)
+
+GIT
   remote: https://github.com/rtznprmpftl/puppet-vpn03
   ref: master
   sha: 34e4231440bd847cf54c209e475329196d0c151c
@@ -123,5 +131,6 @@ DEPENDENCIES
   rrdcached (>= 0)
   thias-sysctl (= 1.0.6)
   tunneldigger (>= 0)
+  uwsgi (>= 0)
   vpn03 (>= 0)
 

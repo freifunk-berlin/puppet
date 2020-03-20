@@ -346,8 +346,8 @@ node 'config.berlin.freifunk.net' {
   }
 
   apt::key { 'nipap':
-    key        => '4481633C2094AABD',
-    key_source => 'https://spritelink.github.io/NIPAP/nipap.gpg.key',
+    id       => '4481633C2094AABD',
+    source   => 'https://spritelink.github.io/NIPAP/nipap.gpg.key',
   }
   apt::source { 'nipap':
     location => 'http://spritelink.github.io/NIPAP/repos/apt',
@@ -438,7 +438,7 @@ node 'config.berlin.freifunk.net' {
 
   class { 'python':
     virtualenv => 'present',
-    dev        => true, # needed by psycopg2
+    dev        => 'present', # needed by psycopg2
   }
   python::virtualenv { '/var/www/nipap-wizard/env':
     ensure       => present,

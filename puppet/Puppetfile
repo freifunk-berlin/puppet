@@ -37,6 +37,6 @@ mod 'bbbdigger',
   :ref => '3ee15a5804a8e6bc8b458b88f8e0bc797a531e4a'
 
 # TODO: uwsgi module not compatible with systemd, no update available
-#mod 'uwsgi',
-#  :git => 'https://github.com/Engage/puppet-uwsgi',
-#  :ref => '66a478c3f5f694477d8fa626a2ada00bdfd3b662'
+mod 'uwsgi',
+  :git => 'https://github.com/freifunk-berlin/puppet-uwsgi'
+
