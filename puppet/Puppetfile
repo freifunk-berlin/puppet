@@ -1,17 +1,17 @@
 forge "https://forgeapi.puppetlabs.com"
 
-mod 'puppetlabs/stdlib', '4.25.1' #5.2.0
-mod 'puppetlabs/apt', '2.4.0'  # wait for nginx update
+mod 'puppetlabs/stdlib', '5.2.0'
+mod 'puppetlabs/apt', '6.0.0'
 mod 'puppetlabs/ntp', '8.2.0'
 mod 'puppetlabs/vcsrepo', '3.1.0'
 mod 'puppetlabs/postgresql', '6.4.0'
-mod 'puppet/collectd', '5.1.0' # 5.3.0
-mod 'puppet/nginx', '0.5.0'
+mod 'puppet/collectd', '11.3.0'
+mod 'puppet/nginx', '1.1.0'
 mod 'puppet/unattended_upgrades', '4.0.0'
 mod 'puppet/python', '4.0.0'
 mod 'thias/sysctl', '1.0.6'
 mod 'puppet/letsencrypt', '5.0.0'
-#mod 'puppetlabs/accounts', '3.2.0'
+mod 'puppetlabs/accounts', '6.1.0'
 
 mod 'ff_base',
   :git => 'https://github.com/freifunk-berlin/ff_base.git'
@@ -37,6 +37,6 @@ mod 'bbbdigger',
   :ref => '3ee15a5804a8e6bc8b458b88f8e0bc797a531e4a'
 
 # TODO: uwsgi module not compatible with systemd, no update available
-mod 'uwsgi',
-  :git => 'https://github.com/Engage/puppet-uwsgi',
-  :ref => '66a478c3f5f694477d8fa626a2ada00bdfd3b662'
+#mod 'uwsgi',
+#  :git => 'https://github.com/Engage/puppet-uwsgi',
+#  :ref => '66a478c3f5f694477d8fa626a2ada00bdfd3b662'
