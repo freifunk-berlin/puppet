@@ -116,7 +116,7 @@ node 'monitor' {
 
 node 'buildbot.berlin.freifunk.net' {
   class { 'ff_base': }
-  class { 'ff_base::users_bb' : }
+  class { 'ff_base::buildbot' : }
 
   file { [
     '/usr/local/src/www',
@@ -217,12 +217,6 @@ node 'buildbot.berlin.freifunk.net' {
     }
 
   }
-  # add cron file that removes old buildbot firmware builds
-  file { '/etc/cron.hourly/buildbot-remove-old-builds':
-    ensure => present,
-    source => 'puppet:///modules/files/buildbot-remove-old-builds.sh',
-  }
-
   vcsrepo { '/usr/local/src/buildbot':
     ensure   => latest,
     provider => git,
@@ -346,8 +340,8 @@ node 'config.berlin.freifunk.net' {
   }
 
   apt::key { 'nipap':
-    id       => '4481633C2094AABD',
-    source   => 'https://spritelink.github.io/NIPAP/nipap.gpg.key',
+    id     => '4481633C2094AABD',
+    source => 'https://spritelink.github.io/NIPAP/nipap.gpg.key',
   }
   apt::source { 'nipap':
     location => 'http://spritelink.github.io/NIPAP/repos/apt',
