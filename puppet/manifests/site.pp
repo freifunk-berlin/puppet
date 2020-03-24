@@ -118,6 +118,29 @@ node 'buildbot.berlin.freifunk.net' {
   class { 'ff_base': }
   class { 'ff_base::buildbot' : }
 
+  class { '::collectd':
+    purge        => true,
+    recurse      => true,
+    purge_config => true,
+  }
+  class { 'collectd::plugin::cpu': }
+  class { 'collectd::plugin::df': }
+  class { 'collectd::plugin::disk':
+    disks          => ['vda','vdb'],
+    ignoreselected => false,
+  }
+  class { 'collectd::plugin::interface':
+    interfaces     => ['ens3'],
+    ignoreselected => false,
+  }
+  class { 'collectd::plugin::load': }
+  class { 'collectd::plugin::memory': }
+  collectd::plugin::network::server { 'monitor.berlin.freifunk.net':
+    port => 25826,
+  }
+  class { 'collectd::plugin::processes': }
+  class { 'collectd::plugin::swap': }
+
   file { [
     '/usr/local/src/www',
     '/usr/local/src/www/htdocs',
@@ -126,7 +149,8 @@ node 'buildbot.berlin.freifunk.net' {
     '/usr/local/src/www/htdocs/buildbot/stable',
   ]:
     ensure  => directory,
-    owner   => 'buildbot',
+    owner   => 'www-data',
+    group   => 'buildbot',
     recurse => true,
     before  => Class['nginx']
   }
@@ -148,7 +172,6 @@ node 'buildbot.berlin.freifunk.net' {
     manage_cron          => true,
     cron_success_command => '/bin/systemctl reload nginx.service',
   }
-
 
   # nginx configuration
   class { 'nginx':
