@@ -1,7 +1,7 @@
 forge "https://forgeapi.puppetlabs.com"
 
 mod 'puppetlabs/stdlib', '5.2.0'
-mod 'puppetlabs/apt', '6.0.0'
+mod 'puppetlabs/apt', '6.3.0'
 mod 'puppetlabs/ntp', '8.2.0'
 mod 'puppetlabs/vcsrepo', '3.1.0'
 mod 'puppetlabs/postgresql', '6.4.0'
