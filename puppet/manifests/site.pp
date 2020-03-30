@@ -316,9 +316,9 @@ node 'config.berlin.freifunk.net' {
     access_log  => '/dev/null',
     error_log   => '/dev/null',
     ssl         => true,
-    ssl_cert    => '/etc/ssl/certs/config.berlin.freifunk.net.cert',
-    ssl_key     => '/etc/ssl/private/config.berlin.freifunk.net.key',
-    ssl_dhparam => '/etc/ssl/private/config.berlin.freifunk.net.dh',
+    ssl_cert            => '/etc/letsencrypt/live/config.berlin.freifunk.net/fullchain.pem',
+    ssl_key             => '/etc/letsencrypt/live/config.berlin.freifunk.net/privkey.pem',
+    ssl_dhparam         => '/etc/ssl/private/config.berlin.freifunk.net.dh',
     www_root    => '/var/www/nipap-wizard/app/static',
     try_files   => ['$uri', '@nipap-wizard'],
   }
@@ -362,15 +362,17 @@ node 'config.berlin.freifunk.net' {
     },
   }
 
+
+
   apt::key { 'nipap':
-    id     => '4481633C2094AABD',
+    id     => '58E66DF09A12C9D752FD924C4481633C2094AABD',
     source => 'https://spritelink.github.io/NIPAP/nipap.gpg.key',
   }
   apt::source { 'nipap':
     location => 'http://spritelink.github.io/NIPAP/repos/apt',
     release  => 'stable',
     repos    => 'main extra',
-    key      => '4481633C2094AABD',
+    key      => '58E66DF09A12C9D752FD924C4481633C2094AABD',
     require  => Apt::Key['nipap'],
   }
 
@@ -508,7 +510,24 @@ node 'config.berlin.freifunk.net' {
     ]
   }
 
-  class { 'postgresql::server': }
+  class { 'postgresql::server':
+    datadir => '/data/postgres',
+
+  }
+
+
+  postgresql::server::db { 'nipap':
+    user   => 'nipap',
+  password => 'nipap',
+  }
+
+  postgresql::server::db { 'wizard':
+    user   => 'wizard',
+  password => 'wizard',
+  }
+
+
+
 }
 
 node 'vpn03a' {
