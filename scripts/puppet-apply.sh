@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-puppet apply --verbose --modulepath=/root/berlin-puppet/puppet/modules \
-  puppet/manifests/site.pp
+puppet apply --verbose --show_diff --modulepath=/root/berlin-puppet/puppet/modules \
+  puppet/manifests/

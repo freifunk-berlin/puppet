@@ -5,7 +5,7 @@ documentation](https://docs.puppetlabs.com/) before you start.
 
 ## Tools
 
-We use [vagrant](https://www.vagrantup.com/) and
+We use [vagrant](https://www.vagrantup.com/) with
 [virtualbox](https://www.virtualbox.org/) for local testing.
 
 We use [librarian-puppet](http://librarian-puppet.com/) to manage the puppet
@@ -30,7 +30,7 @@ machine (vm). For example you could start the monitor vm:
 vagrant up monitor
 ```
 
-To stop a maschine use the `halt` command, e.g.:
+To stop a machine use the `halt` command, e.g.:
 
 ```
 vagrant halt monitor
@@ -105,3 +105,5 @@ http://wiki.freifunk.net/StartSSL
 
 Please try to deploy secure configurations. Take a look at the
 [bettercrypto](https://bettercrypto.org/) project for reference.
+
+
