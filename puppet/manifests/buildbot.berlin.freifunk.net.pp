@@ -26,8 +26,6 @@ node 'buildbot.berlin.freifunk.net' {
   class { 'collectd::plugin::swap': }
 
   file { [
-    '/usr/local/src/www',
-    '/usr/local/src/www/htdocs',
     '/usr/local/src/www/htdocs/buildbot',
     '/usr/local/src/www/htdocs/buildbot/unstable',
     '/usr/local/src/www/htdocs/buildbot/stable',
@@ -35,6 +33,7 @@ node 'buildbot.berlin.freifunk.net' {
     ensure  => directory,
     owner   => 'www-data',
     group   => 'buildbot',
+    mode    => '0755',
     recurse => true,
     before  => Class['nginx']
   }
