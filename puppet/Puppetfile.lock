@@ -1,13 +1,13 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
-    puppet-collectd (11.3.0)
+    puppet-collectd (11.4.0)
       puppet-epel (>= 3.0.0, < 4.0.0)
       puppetlabs-apt (>= 2.2.0, < 8.0.0)
       puppetlabs-concat (>= 4.1.0, < 7.0.0)
       puppetlabs-python_task_helper (>= 0.2.0, < 1.0.0)
       puppetlabs-stdlib (>= 4.25.0, < 7.0.0)
-    puppet-epel (3.0.0)
+    puppet-epel (3.0.1)
     puppet-letsencrypt (5.0.0)
       puppetlabs-inifile (>= 2.0.0, < 4.0.0)
       puppetlabs-stdlib (>= 4.13.1, < 7.0.0)
@@ -100,7 +100,7 @@ GIT
 GIT
   remote: https://github.com/freifunk-berlin/puppet-uwsgi
   ref: master
-  sha: 4a37ff2b45e2b65c9e70ff27ac7eaa05b2bf8dc3
+  sha: 65aaa584e70006cf9fe4588a8e6c48efa100690a
   specs:
     uwsgi (1.3.2)
       puppetlabs-stdlib (>= 3.2.0)
@@ -118,7 +118,7 @@ DEPENDENCIES
   ff_base (>= 0)
   files (>= 0)
   php_fpm (>= 0)
-  puppet-collectd (= 11.3.0)
+  puppet-collectd (= 11.4.0)
   puppet-letsencrypt (= 5.0.0)
   puppet-nginx (= 1.1.0)
   puppet-python (= 4.0.0)

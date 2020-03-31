@@ -5,7 +5,7 @@ mod 'puppetlabs/apt', '6.3.0'
 mod 'puppetlabs/ntp', '8.2.0'
 mod 'puppetlabs/vcsrepo', '3.1.0'
 mod 'puppetlabs/postgresql', '6.4.0'
-mod 'puppet/collectd', '11.3.0'
+mod 'puppet/collectd', '11.4.0'
 mod 'puppet/nginx', '1.1.0'
 mod 'puppet/unattended_upgrades', '4.0.0'
 mod 'puppet/python', '4.0.0'
@@ -14,29 +14,38 @@ mod 'puppet/letsencrypt', '5.0.0'
 mod 'puppetlabs/accounts', '6.1.0'
 
 mod 'ff_base',
-  :git => 'https://github.com/freifunk-berlin/ff_base.git'
+  :git => 'https://github.com/freifunk-berlin/ff_base.git',
+  :ref => 'master'
+
 mod 'rrdcached',
   :git => 'https://github.com/freifunk-berlin/puppet-rrdcached.git',
-  :ref => 'e7a8e84cfc149c39b4f58c9b3b5a234f3a7afc5b'
+  :ref => 'master'
+
 mod 'php_fpm',
   :git => 'https://github.com/freifunk-berlin/php_fpm.git',
   :ref => 'master'
+
 mod 'files',
   :git => 'https://github.com/freifunk-berlin/puppet-files',
-  :ref => 'd07aa6402b657b5b8911684315feeff95321b272'
+  :ref => 'master'
+
 mod 'vpn03',
-  :git => 'https://github.com/rtznprmpftl/puppet-vpn03'
+  :git => 'https://github.com/rtznprmpftl/puppet-vpn03',
+  :ref => 'master'
+
 mod 'tunneldigger',
   :git => 'https://github.com/freifunk-berlin/puppet-tunneldigger',
-  :ref => '7ebc1327b47ce7d34b1351186839f09d3fce08da'
+  :ref => 'master'
+
 mod 'communitytunnel',
   :git => 'https://github.com/freifunk-berlin/puppet-communitytunnel',
-  :ref => '90eb87be58284c86d66b053a4e7cebca2a24968c'
+  :ref => 'master'
+
 mod 'bbbdigger',
   :git => 'https://github.com/freifunk-berlin/puppet-bbbdigger',
-  :ref => '3ee15a5804a8e6bc8b458b88f8e0bc797a531e4a'
+  :ref => 'master'
 
-# TODO: uwsgi module not compatible with systemd, no update available
 mod 'uwsgi',
-  :git => 'https://github.com/freifunk-berlin/puppet-uwsgi'
+  :git => 'https://github.com/freifunk-berlin/puppet-uwsgi',
+  :ref => 'master'
 
