@@ -64,35 +64,35 @@ GIT
 
 GIT
   remote: https://github.com/freifunk-berlin/puppet-bbbdigger
-  ref: 3ee15a5804a8e6bc8b458b88f8e0bc797a531e4a
+  ref: master
   sha: 3ee15a5804a8e6bc8b458b88f8e0bc797a531e4a
   specs:
     bbbdigger (0.0.1)
 
 GIT
   remote: https://github.com/freifunk-berlin/puppet-communitytunnel
-  ref: 90eb87be58284c86d66b053a4e7cebca2a24968c
-  sha: 90eb87be58284c86d66b053a4e7cebca2a24968c
+  ref: master
+  sha: 4c34b78c85d2f58efc1fb8ae060a799cec8f2c25
   specs:
     communitytunnel (0.0.1)
 
 GIT
   remote: https://github.com/freifunk-berlin/puppet-files
-  ref: d07aa6402b657b5b8911684315feeff95321b272
-  sha: d07aa6402b657b5b8911684315feeff95321b272
+  ref: master
+  sha: 1580bb42e7590279e37ec28bbbd1d4375823dd5a
   specs:
     files (0.0.1)
 
 GIT
   remote: https://github.com/freifunk-berlin/puppet-rrdcached.git
-  ref: e7a8e84cfc149c39b4f58c9b3b5a234f3a7afc5b
+  ref: master
   sha: e7a8e84cfc149c39b4f58c9b3b5a234f3a7afc5b
   specs:
     rrdcached (0.0.1)
 
 GIT
   remote: https://github.com/freifunk-berlin/puppet-tunneldigger
-  ref: 7ebc1327b47ce7d34b1351186839f09d3fce08da
+  ref: master
   sha: 7ebc1327b47ce7d34b1351186839f09d3fce08da
   specs:
     tunneldigger (0.0.1)
