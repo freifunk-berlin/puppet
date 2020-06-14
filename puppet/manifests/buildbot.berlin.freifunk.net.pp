@@ -34,7 +34,6 @@ node 'buildbot.berlin.freifunk.net' {
     owner   => 'www-data',
     group   => 'buildbot',
     mode    => '0755',
-    recurse => true,
     before  => Class['nginx']
   }
   class { 'letsencrypt':
