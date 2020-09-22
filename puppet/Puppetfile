@@ -1,17 +1,17 @@
 forge "https://forgeapi.puppetlabs.com"
 
-mod 'puppetlabs/stdlib', '6.3.0'
-mod 'puppetlabs/apt', '7.4.2'
-mod 'puppetlabs/ntp', '8.3.0'
-mod 'puppetlabs/vcsrepo', '3.1.0'
-mod 'puppetlabs/postgresql', '6.5.0'
-mod 'puppet/collectd', '12.1.0'
-mod 'puppet/nginx', '1.1.0'
-mod 'puppet/unattended_upgrades', '5.0.0'
+mod 'puppet/collectd', '12.2.0'
+mod 'puppet/letsencrypt', '6.0.0'
+mod 'puppet/nginx', '2.0.0'
 mod 'puppet/python', '4.1.1'
+mod 'puppet/unattended_upgrades', '5.1.0'
+mod 'puppetlabs/accounts', '6.2.0'
+mod 'puppetlabs/apt', '7.6.0'
+mod 'puppetlabs/ntp', '8.4.0'
+mod 'puppetlabs/postgresql', '6.7.0'
+mod 'puppetlabs/stdlib', '6.4.0'
+mod 'puppetlabs/vcsrepo', '3.1.1'
 mod 'thias/sysctl', '1.0.6'
-mod 'puppet/letsencrypt', '5.0.0'
-mod 'puppetlabs/accounts', '6.1.1'
 
 mod 'ff_base',
   :git => 'https://github.com/freifunk-berlin/ff_base.git',
