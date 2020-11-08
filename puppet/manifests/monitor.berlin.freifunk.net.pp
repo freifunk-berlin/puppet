@@ -27,6 +27,9 @@ node 'monitor' {
   class { 'collectd::plugin::unixsock':
     socketperms => '0666',
   }
+  class { 'collectd::plugin::write_prometheus':
+    port => 9103,
+  }
 
   # rrdcached configuration
   class { 'rrdcached':
@@ -50,6 +53,9 @@ node 'monitor' {
     index_files => ['index.php'],
     access_log  => '/dev/null',
     error_log   => '/dev/null',
+    ssl         => true,
+    ssl_cert    => '/etc/letsencrypt/live/monitor.berlin.freifunk.net/fullchain.pem',
+    ssl_key     => '/etc/letsencrypt/live/monitor.berlin.freifunk.net/privkey.pem',
   }
   nginx::resource::location { 'php':
     ensure               => present,
@@ -58,17 +64,39 @@ node 'monitor' {
     server               => 'monitor.berlin.freifunk.net',
     fastcgi              => 'unix:/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
     fastcgi_split_path   => '^(.+?\.php)(/.*)$',
+        ssl => true,
     location_cfg_prepend => {
       fastcgi_param => 'PATH_INFO $fastcgi_path_info',
     }
   }
-
+  nginx::resource::location { '/.well-known':
+    ensure    => present,
+    server    => 'monitor.berlin.freifunk.net',
+    www_root  => '/usr/local/src/www/htdocs',
+    autoindex => 'off',
+    ssl => true,
+  }
   # php-fpm configuration (nginx backend)
   class { 'php_fpm': }
   php_fpm::pool { 'monitor.berlin.freifunk.net':
     listen => '/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
   }
 
+  class { 'letsencrypt':
+    unsafe_registration => true,
+    package_ensure      => 'latest',
+  }
+  letsencrypt::certonly { 'monitor.berlin.freifunk.net':
+    domains              => [
+      'monitor.berlin.freifunk.net',
+    ],
+    plugin               => 'webroot',
+    webroot_paths        => [
+      '/usr/local/src/www/htdocs',
+    ],
+    manage_cron          => true,
+    cron_success_command => '/bin/systemctl reload nginx.service',
+  }
   # root directory for monitor.berlin.freifunk.net
   file { ['/srv/www']:
     ensure  => directory,
@@ -112,4 +140,22 @@ node 'monitor' {
     source  => 'puppet:///modules/files/kmodem_types.db',
     require => Class['collectd'],
   }
+
+class { 'prometheus':
+  manage_prometheus_server => true,
+  scrape_configs           => [
+    {
+      'job_name'        => 'collectd',
+      'scrape_interval' => '10s',
+      'scrape_timeout'  => '10s',
+      'honor_timestamps'=> false,
+      'static_configs'  => [
+        {
+          'targets' => ['localhost:9103'],
+        }
+      ],
+    },
+
+  ]
 }
+  }
