@@ -27,8 +27,9 @@ node 'monitor' {
   class { 'collectd::plugin::unixsock':
     socketperms => '0666',
   }
-  class { 'collectd::plugin::write_prometheus':
-    port => 9103,
+
+  class { 'collectd::plugin::syslog':
+    log_level => 'err'
   }
 
   # rrdcached configuration
@@ -40,11 +41,20 @@ node 'monitor' {
   }
 
   # nginx configuration
-  class { 'nginx':
+  file { '/var/nginx' :
+    ensure => 'directory',
+    group  => 'root',
+    mode   => '0644',
+  }
+
+  class { '::nginx':
     confd_purge     => true,
     server_purge    => true,
     http_access_log => '/dev/null',
     nginx_error_log => '/dev/null',
+    client_body_temp_path => '/var/nginx/client_body_temp',
+    proxy_temp_path       => '/var/nginx/proxy_temp',
+    require               => File['/var/nginx'],
   }
   nginx::resource::server { 'monitor.berlin.freifunk.net':
     ensure      => present,
@@ -64,7 +74,7 @@ node 'monitor' {
     server               => 'monitor.berlin.freifunk.net',
     fastcgi              => 'unix:/var/run/php-fpm-monitor.berlin.freifunk.net.sock',
     fastcgi_split_path   => '^(.+?\.php)(/.*)$',
-        ssl => true,
+    ssl                  => true,
     location_cfg_prepend => {
       fastcgi_param => 'PATH_INFO $fastcgi_path_info',
     }
@@ -74,7 +84,7 @@ node 'monitor' {
     server    => 'monitor.berlin.freifunk.net',
     www_root  => '/usr/local/src/www/htdocs',
     autoindex => 'off',
-    ssl => true,
+    ssl       => true,
   }
   # php-fpm configuration (nginx backend)
   class { 'php_fpm': }
@@ -141,21 +151,4 @@ node 'monitor' {
     require => Class['collectd'],
   }
 
-class { 'prometheus':
-  manage_prometheus_server => true,
-  scrape_configs           => [
-    {
-      'job_name'        => 'collectd',
-      'scrape_interval' => '10s',
-      'scrape_timeout'  => '10s',
-      'honor_timestamps'=> false,
-      'static_configs'  => [
-        {
-          'targets' => ['localhost:9103'],
-        }
-      ],
-    },
-
-  ]
 }
-  }
