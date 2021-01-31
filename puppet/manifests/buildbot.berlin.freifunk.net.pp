@@ -43,12 +43,23 @@ node 'buildbot.berlin.freifunk.net' {
 
   letsencrypt::certonly { 'buildbot.berlin.freifunk.net':
     domains              => [
-      'buildbot.berlin.freifunk.net',
-      'firmware.berlin.freifunk.net',
+      'buildbot.berlin.freifunk.net'
     ],
     plugin               => 'webroot',
     webroot_paths        => [
       '/usr/local/src/www/htdocs',
+      '/usr/local/src/www/htdocs/buildbot',
+    ],
+    manage_cron          => true,
+    cron_success_command => '/bin/systemctl reload nginx.service',
+  }
+
+  letsencrypt::certonly { 'firmware.berlin.freifunk.net':
+    domains              => [
+      'firmware.berlin.freifunk.net',
+    ],
+    plugin               => 'webroot',
+    webroot_paths        => [
       '/usr/local/src/www/htdocs/buildbot',
     ],
     manage_cron          => true,
@@ -126,7 +137,7 @@ node 'buildbot.berlin.freifunk.net' {
     ensure   => latest,
     provider => git,
     owner    => 'buildbot',
-    source   => 'https://github.com/freifunk-berlin/buildbot',
+    source   => 'https://github.com/Freifunk-Spalter/buildbot.git',
     require  => [
       Package['git']
     ]
