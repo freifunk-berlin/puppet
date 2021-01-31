@@ -2,16 +2,15 @@ forge "https://forgeapi.puppetlabs.com"
 
 mod 'puppet/collectd', '12.2.0'
 mod 'puppet/letsencrypt', '6.0.0'
-mod 'puppet/nginx', '2.1.1'
-mod 'puppet/python', '4.1.1'
+mod 'puppet/nginx', '2.1.1' # V3 needs puppet 6.1
+mod 'puppet/python', '5.0.0'
 mod 'puppet/unattended_upgrades', '5.1.0'
 mod 'puppetlabs/accounts', '6.4.0'
 mod 'puppetlabs/apt', '7.7.0'
 mod 'puppetlabs/ntp', '8.5.0'
-mod 'puppetlabs/postgresql', '6.7.0'
-mod 'puppetlabs/vcsrepo', '3.1.1'
+mod 'puppetlabs/postgresql', '6.8.0'
+mod 'puppetlabs/vcsrepo', '3.2.0'
 mod 'thias/sysctl', '1.0.6'
-mod 'puppet/prometheus', '10.2.0'
 
 mod 'ff_base',
   :git => 'https://github.com/freifunk-berlin/ff_base.git',
