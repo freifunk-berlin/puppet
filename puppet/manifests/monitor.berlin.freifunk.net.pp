@@ -20,6 +20,21 @@ node 'monitor' {
   collectd::plugin::network::listener { '*':
     port => 25826,
   }
+
+  class { 'collectd::plugin::cpu': }
+  class { 'collectd::plugin::df': }
+  class { 'collectd::plugin::disk':
+    disks          => ['vda', 'vdb'],
+    ignoreselected => false,
+  }
+  class { 'collectd::plugin::interface':
+    interfaces     => ['ens3'],
+    ignoreselected => false,
+  }
+  class { 'collectd::plugin::load': }
+  class { 'collectd::plugin::memory': }
+  class { 'collectd::plugin::processes': }
+  class { 'collectd::plugin::swap': }
   class { 'collectd::plugin::rrdcached':
     daemonaddress => 'unix:/var/run/rrdcached.sock',
     datadir       => '/var/lib/collectd/rrd',
@@ -32,6 +47,9 @@ node 'monitor' {
     log_level => 'err'
   }
 
+  class { 'collectd::plugin::write_prometheus':
+    port => 9103,
+  }
   # rrdcached configuration
   class { 'rrdcached':
     restrict_writes => true,
