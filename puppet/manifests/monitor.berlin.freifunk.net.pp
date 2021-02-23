@@ -20,7 +20,14 @@ node 'monitor' {
   collectd::plugin::network::listener { '*':
     port => 25826,
   }
-
+  class { 'collectd::plugin::network':
+    forward     => true,
+    reportstats => true,
+    servers     => { '168.119.101.228' => {
+      'port' => 25826
+    },
+    },
+  }
   class { 'collectd::plugin::cpu': }
   class { 'collectd::plugin::df': }
   class { 'collectd::plugin::disk':
