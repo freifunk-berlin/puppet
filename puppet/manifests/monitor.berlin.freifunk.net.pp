@@ -111,6 +111,13 @@ node 'monitor' {
     autoindex => 'off',
     ssl       => true,
   }
+
+  nginx::resource::location { 'git':
+    location => '~ /\.git',
+    server    => 'monitor.berlin.freifunk.net',
+    location_deny => ['all'],
+    ssl       => true
+  }
   # php-fpm configuration (nginx backend)
   class { 'php_fpm': }
   php_fpm::pool { 'monitor.berlin.freifunk.net':
