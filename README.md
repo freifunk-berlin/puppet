@@ -3,6 +3,8 @@
 Puppet is a configuration management tool. Please take a look at the [puppet
 documentation](https://docs.puppetlabs.com/) before you start.
 
+Currently we migrate to ansible. Please add your configuration to the ansible-repository.
+
 ## Tools
 
 We use [vagrant](https://www.vagrantup.com/) with
